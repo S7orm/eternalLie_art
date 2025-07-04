@@ -1,0 +1,300 @@
+* {
+  user-select: none;
+  -webkit-user-select: none; /* For Safari */
+  -ms-user-select: none; /* For older Edge */
+}
+body, h1, h2, h3, h4, h5, h6, p, ul, li, fieldset, form, label, legend, table, caption, tr, th, td { vertical-align:top; margin: 0; padding: 0; border: 0; outline: 0; }
+body {
+    font-size: 1.5dvh;
+    line-height: 2dvh;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    position: fixed; 
+    box-sizing: border-box;
+    font-family: "Bookman Old Style", sans-serif; ;
+    background-color: black;
+    color: #ebebeb;
+    overflow: hidden;
+}
+.rotate-message{
+    width: 50dvw;  /* Half the width of the viewport */
+    height: 50dvw; /* Half the height of the viewport */
+    transform: translate(50%, 50%); /* Center it using offset */
+    padding: 4dvw;
+    border: 0.4dvw groove white;
+    font-size: 4dvw;
+    line-height: 6dvw;
+    border-radius: 15%;
+}
+@media screen and (orientation: portrait) {
+
+    .game-container {
+        display: none; /* Hide the game in portrait mode */
+    }
+
+    .rotate-message {
+        display: block; /* Show the rotate message */
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .rotate-message {
+        display: none; /* Hide the warning in landscape */
+    }
+    .game-container {
+        display: block; 
+    }
+}
+
+img {
+    -webkit-user-drag: none;
+}
+div{
+    box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+span{
+    display: inline-block;
+}
+ul{
+    list-style: none;
+  padding: 0;
+}
+button {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 1.25dvw;
+  line-height: 1.5dvw;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.5dvw;
+  background-color: black;
+  color: white;
+  user-select: none;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}                                           
+button:active {
+  transform: translate(4px, 4px);
+    z-index:50;
+}
+button:not(:active){
+  transition-duration: 0s; /* Instantly revert back */
+}
+                                                                                       /*------BigBox-----*/
+
+#mainWrapper{
+    border: 0.1dvw solid transparent;
+    border-image:  url(../images/border6.png) 30% round;
+    
+    border-image-width: 30% 8%;
+    padding-top: 2.9dvh;
+    padding-left: 1dvw;
+    padding-right: 1dvw;
+    height: 75dvh;
+}
+.bigBox{
+    display: none;
+    width: 97dvw;
+    height: 69dvh;
+}
+
+
+.descriptionBox {
+    display: none;  
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    background-color: #FAF9F6;
+    color: black;
+    padding: 0.1dvw;
+    width: 15dvw;
+    font-size: 1.25dvw;
+    line-height: 3dvh;
+    text-align: center;
+    z-index: 50;
+    white-space: normal;
+}
+.craftDescription{
+    top: 100%;
+    left: 0%;
+    width: 28dvw;
+}
+    .madDescription {
+        width: 10dvw;
+        left: 0;
+    }
+.lockDesc{
+    width: 10dvw;
+}
+    .descriptionBox.show {
+        display: block;
+    }
+    .desc{
+        min-width: 10dvw;
+        clear: left;
+    }
+    .costs{
+        min-width: 3dvw;
+    }
+    
+    @keyframes flash {
+    0% { background-color: black; }
+    50% { background-color: white; }
+    100% { background-color: black; }
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+    #eventBox{
+        position: absolute;
+        left: 33dvw;
+        top: 27dvh;
+        z-index: 50;
+        width: 33dvw;
+        height: 69dvh;
+        background-color: black;
+        border: 0.3dvw solid white;
+        border-radius: 15%;
+        color: #ebebeb;
+        display: block; 
+    }
+    #eventImage{
+        display: block;
+        border: 0.2dvw solid black;
+        width: auto;
+        height: 25dvh;
+        margin: auto;
+        margin-top: 2dvh;
+    }
+    #eventTitle{
+        font-size: 4dvh;
+        line-height: 5dvh;
+        text-align: center;
+        min-width: 33dvw;
+        clear: left;
+    }
+    #eventBoxText{
+        text-indent: 20px;
+        margin: 2dvw;
+        font-size: 1.25dvw;
+        line-height: 1.5dvw;
+        width: 28dvw;
+        clear: left;
+        color: #ebebeb;
+    }
+    #closeEventButton{
+          position: absolute;
+          top: 0.8dvh; 
+          right: 1.5dvw; 
+          background-color: transparent;
+          border: none;
+          color: red;
+          font-size: 3dvw;
+          line-height: 2.5dvw;
+          padding: 1dvw;
+          font-weight: bold;
+          cursor: pointer;
+    }
+    @keyframes yess {
+  0% {
+    border-color: #FFF44F; 
+    background-color: #0F52BA;
+    color: #FFF; 
+    font-family: Arial, Helvetica, sans-serif; 
+  }
+  25% {
+    border-color: #FF6EC7; 
+    background-color: #4B0082;
+    color: #FFD700; 
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+  }
+  50% {
+    border-color: #00FFFF; 
+    background-color: #32CD32; 
+    color: #000; 
+    font-family: 'Courier New', Courier, monospace; 
+  }
+  75% {
+    border-color: #DA70D6; 
+    background-color: #8A2BE2; 
+    color: #FF4500; 
+    font-family: 'Lucida Console', Monaco, monospace; 
+  }
+  100% {
+    border-color: #FFD700; 
+    background-color: #000; 
+    color: #FFF; 
+    font-family: Arial, Helvetica, sans-serif; 
+  }
+}
+
+.groovy-border {
+}
+    .eventButtonsLeft{
+        position: absolute;
+        bottom: 4%;
+        left: 12%;
+        font-size: 2dvh;
+        min-width: 10dvw;
+        min-height: 5dvh;
+        border: 0.1dvw groove white;
+        font-weight: bold;
+        }
+    .eventButtonsRight{
+        position: absolute;
+        bottom: 4%;
+        right: 12%;
+        font-size: 2dvh;
+        min-width: 10dvw;
+        min-height: 5dvh;
+        border: 0.1dvw groove white;
+        font-weight: bold;
+        }
+    #yes{
+        margin-left: 3dvw;
+        float: left;
+        clear: left;
+        font-size: 8dvh;
+        min-width: 15dvw;
+        min-height: 10dvh;
+        border: 0.5dvw groove white;
+        font-weight: bold;
+        animation: yess 2s infinite; /* Adjust animation duration as needed */
+    }
+    
+    #no{
+        float: right;
+        margin-top: 5dvh;
+        margin-right: 3dvw;
+        font-size: 2dvh;
+        min-width: 5dvw;
+        min-height: 3dvh;
+        border: 0.1dvw solid darkslategrey;
+        
+    }
+   
+#footer{
+    position: fixed;
+    float: right;
+    bottom: 5dvh;
+    right: 5dvw;
+    width: 10dvw;
+    text-align: left;
+}
+.disable-events {
+  pointer-events: none;
+}
+
+

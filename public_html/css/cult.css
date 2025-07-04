@@ -1,0 +1,311 @@
+
+                                                                               /*------Cult-----*/
+#cult{
+    display: none;
+}
+                                                                               /*------Cultists-----*/
+#left{
+    float: left;
+    clear: left;
+    font-size: 3dvh;
+    line-height: 3dvh;
+    height: 69dvh;
+    min-width: 24dvw;
+    padding:1dvw;
+}
+#chosen{
+    font-size: 5dvh;
+    line-height: 6dvh;
+}
+#meeting{
+    font-size: 2dvh;
+    line-height: 2dvh;
+}
+#altarRoomTab{
+      cursor: pointer;
+      color: black;
+      font-weight: bold;
+    background-color: lightblue;
+    margin: 2dvh;
+    padding-left: 1dvw;
+    padding-right: 1dvw;
+    border-radius: 20px;
+    border: 0.1dvw solid white;
+}
+    .cultWraps{
+        display: none;
+        clear: left;
+        line-height: 6dvh;
+        min-height: 6dvh;
+        border-bottom: 0.25dvh solid white;
+        position: relative;
+    }
+
+        .ids{
+            display: block;
+            font-weight: bold;
+            width: 15dvw;
+            float: left;
+            text-align: right;
+        }
+    .number{
+            text-align: right;
+            min-width: 5dvw;
+            float: right;
+            font-weight: bold;
+        }   
+                                                                                       /*------Vault-----*/
+    #center{
+    padding-top: 1dvh;
+    float: left;
+    font-size: 3dvh;
+    line-height: 5dvh;
+    height:69dvh;
+    min-width: 40dvw;
+    width: 40dvw;
+    }
+    #vault{
+        float: left;
+        min-width: 40dvw;
+        width: 40dvw;
+        display: flex;
+        flex-wrap: wrap;
+    }
+        .vaultWraps{
+            display: none;
+            margin: 0.5dvw;
+            min-width: 12dvw;
+            height:25dvh;
+            text-align: center;
+            font-size: 3dvh;
+            line-height: 3dvh;
+            position: relative;
+            border: 0.1dvw solid white;
+            background-color: black;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        .vaultText{
+            position: absolute;
+            top: 1dvh;
+            left: 1dvw;
+            width: 10dvw;
+            height: 4dvh;
+            display: block;
+            margin: 0 auto;
+        }
+        .vaultPng{
+            position: absolute;
+            top: 5dvh;
+            left: 2dvw;
+            width: 8dvw;
+            height: 8dvw;
+            display: block;
+            margin: 0 auto;
+        }
+        .vaultNum{
+            position: absolute;
+            bottom: 0.2dvh;
+            left: 1dvw;
+            width: 10dvw;
+            height: 3dvh;
+            display: block;
+            margin: 0 auto;
+        }
+                                                                                       /*------Crafts-----*/
+    #right{
+    float: right;
+    font-size: 2dvw;
+    line-height: 2dvw;
+    height:69dvh;
+    min-width: 30dvw;
+    padding-bottom: 10dvw; /* Add extra space on the right for the buffer */
+    box-sizing: content-box; /* Ensure padding doesn’t affect layout width */
+    }
+        .craftBox{
+            display: none;
+            width: 30dvw;
+            height: 69dvh;
+            background-color: transparent;
+            border: 2px solid white;
+            overflow: hidden;
+        }
+        .craftTitles{     
+            text-align: center;
+            font-size: 5dvh;
+            line-height: 8dvh;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        .craftWraps{
+            width: 28dvw;
+            height: 6dvh;
+            margin: 0.5dvw;
+            background-color: black;
+            border: 2px solid white;
+            position: relative;
+        }
+        .craftLabels{
+            text-align: center;
+            z-index: 2;
+            font-size: 3dvh;
+            min-width: 12dvw;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        .unlockText{
+            text-align: center;
+            font-size: 3dvh;
+            min-width: 12dvw;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+            clear: left;
+        }
+        .craftOneOff{
+            display: none;
+            width: 28dvw;
+            height: 6dvh;
+            margin: 0.5dvw;
+            background-color: black;
+            /*background-image: url("../images/oneOffs.jpg");*/
+            background-size: cover; /* or contain, depending on your needs */
+            background-repeat: no-repeat; /* prevents the image from repeating */
+            background-position: center; /* centers the image */
+            border: 2px solid white;
+            position: relative;
+        }
+        .craftPulse{
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            transform: scale(1);
+            animation: pulse 1s;
+        }
+        .craftLocks{
+            display: none;
+            width: 28dvw;
+            height: 6dvh;
+            margin: 0.5dvw;
+            /*background-image: url("../images/lock.jpg");*/
+            background-size: cover; /* or contain, depending on your needs */
+            background-repeat: no-repeat; /* prevents the image from repeating */
+            background-position: center; /* centers the image */
+            border: 2px solid white;
+            position: relative;
+        }
+            #sacrificeWrap{
+                    display: none;
+                    float: left;
+                    width: 24dvw;
+                    line-height: 5dvh;
+                    font-size: 2.8dvh;
+                    font-weight: bold;
+                    font-family: "Papyrus", "Arial", sans-serif;
+                    margin-right: 0;
+                    margin-bottom: 0;
+            }
+            #sacToggle {
+                display: none;
+                float: left;
+                border: 0.2dvw solid white;
+                border-radius: 5px;
+                font-size: 7dvh;
+                line-height: 4dvh;
+                width: 4dvw;
+                min-height: 6dvh;  
+                cursor: pointer;
+                margin-left: 0;
+                margin-top: 0.5dvw;
+                margin-bottom: 0.5dvw;
+            }
+            #sacrificeTypes{
+                margin-top: -0.5dvw;
+                margin-left: 4dvw;
+                display: none;
+            }
+            .sacrificeType{
+                    background-color: grey;
+                    border-radius: 0;
+                    float: left;
+                    height: 4.4dvh;
+                    width: 20dvw;
+                    border: 1px solid white;
+                    font-size: 2.25dvh;
+                    font-weight: bold;
+                    font-family: "Papyrus", "Arial", sans-serif;
+            }
+#boxWrap {
+    margin-top: 0.5dvh;
+  position: relative;
+}
+#box{
+    z-index: 2;
+}
+            #box-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: red;
+  z-index: 0; /* So that text is on top */
+  transition: width 0.1s linear;
+  border-radius: 0.5dvw;
+}
+            
+    #titheToggle {
+        min-width: 2.5dvh;
+        min-height: 2.5dvh;
+        background-color: red; /* Default color for "off" */
+        border-radius: 50%; /* Makes it round */
+        position: absolute;
+        right: 1dvw; 
+        top: 1dvh;
+    }
+    #pagesTitle{
+        margin-left: 2dvw;
+        margin-right: 1dvw;
+        min-width: 10dvw;
+    }
+/* Priests toggles 30dvw */
+#priestActions{
+    clear: left;
+    width: 28dvw;
+    height: 8dvw;
+    margin: 0.8dvw;
+    padding: 0.8dvw;
+    border: 0.1dvw groove white;
+    border-radius: 15px;
+    display: none;
+    justify-content: space-between;
+    background-color: #1B0A2A;
+}
+.priestToggleDivs{
+    width: 4.4dvw;
+    height: 6.4dvw;
+    border: 0.1dvw groove white;
+    border-radius: 15px;
+    background-color: black;
+}
+.priestToggleText{
+    width: 4dvw;
+    font-size: 1dvw;
+    line-height: 1.2dvw;
+    display: flex;
+    justify-content: center;
+    clear: left;
+}
+.priestToggleLights {
+    width: 1.5dvw;
+    min-width: 1.5dvw;
+    min-height: 1.5dvw;
+    margin-top: 0.5dvw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red; /* Default color for "off" */
+    border-radius: 50%; /* Makes it round */
+}
+
+.vaultPulse{
+    box-shadow: 0 0 0 0 #3A01DF inset;
+    animation: pulse 0.4s infinite;
+}

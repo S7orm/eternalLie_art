@@ -1,0 +1,313 @@
+
+                                                                               /*------Expeditions-----*/
+#expeditions{
+    display: none;
+    width: 100dvw;
+}
+    #world{
+        position: relative;
+        margin: 1dvw;
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: space-between;
+        align-content: flex-start; 
+        float: left;
+        width: 45dvw;
+        height: 67dvh;
+        background-color: transparent;
+        overflow-y: auto;
+        overflow-x: visible;
+        scrollbar-width: none;
+        padding-right: 20dvw; /* Add extra space on the right for the buffer */
+        box-sizing: content-box; /* Ensure padding doesn’t affect layout width */
+    }
+  #world::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+        #theWorld{
+            text-decoration: underline;
+            width: 46dvw;
+            line-height: 6dvh;
+            font-size: 5dvh;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        .worldWraps{
+            display: none;
+            margin-top: 1dvw;
+            width: 14dvw;
+            height:20dvh;
+            text-align: center;
+            font-size: 3dvh;
+            line-height: 3dvh;
+            position: relative;
+            border: 0.1dvw solid white;
+            border-radius: 0.5dvw;
+            background-color: black;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        .worldImg{
+            width: 100%;
+            border-top-left-radius: 0.5dvw;
+            border-top-right-radius: 0.5dvw;
+            height:14dvh;
+            position: absolute;
+            top: 0%; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .worldTxt{
+            display: block; /* Ensures the text is a block element */
+            position: absolute;
+            bottom: 0; /* Positions the text at the bottom */
+            width: 100%; /* Ensures text spans the full width */
+            height: 4dvh;
+            font-weight: bold;
+        }
+        .worldDescription{
+            top: 10%;
+            left: 90%;
+        }
+    #dreamEx{
+        overflow: hidden;
+        margin: 1dvw;
+        margin-left: -20dvw; /* Compensate to keep layout aligned */
+        display: none;
+        flex-wrap: wrap; 
+        justify-content: space-between;
+        align-content: flex-start; 
+        float: right;
+        width: 45dvw;
+        height: 67dvh;
+        background-color: transparent;
+        overflow-y: auto;
+        scrollbar-width: none;
+        padding-right: 4dvw; /* Add extra space on the right for the buffer */
+        box-sizing: content-box; /* Ensure padding doesn’t affect layout width */
+    }
+        #theDreaming{
+            text-decoration: underline;
+            width: 46dvw;
+            line-height: 6dvh;
+            font-size: 5dvh;
+            font-weight: bold;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+            .dreamExWraps{
+                display: none;
+                margin-top: 1dvw;
+                width: 14dvw;
+                height:20dvh;
+                text-align: center;
+                font-size: 3dvh;
+                line-height: 3dvh;
+                position: relative;
+                border: 0.1dvw solid white;
+                background-color: black;
+                font-weight: bold;
+                font-family: "Papyrus", "Arial", sans-serif;
+            }
+        .dreamExImg{
+            width: 100%;
+            border-top-left-radius: 0.5dvw;
+            border-top-right-radius: 0.5dvw;
+            height:14dvh;
+            position: absolute;
+            top: 0%; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .dreamExTxt{
+            display: block; /* Ensures the text is a block element */
+            position: absolute;
+            bottom: 0; /* Positions the text at the bottom */
+            width: 100%; /* Ensures text spans the full width */
+            height: 4dvh; /* Set height to 10dvh for the text */
+            font-weight: bold;
+        }
+
+        
+                                                                               /*------Sacrarium-----*/
+#sacrarium{
+        display: none;
+    }
+    #sacLeft{
+        float: left;
+        width: 46dvw;
+    }
+#bookshelf {
+  width: 46dvw;
+  height: 28dvh;
+  margin-top: 0.5dvh;
+  background-image: url('../images/relics/shelf.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 28dvh;
+  position: relative;
+  overflow-x: auto;
+}
+#shelf {
+  width: 40dvw;
+  height: 18dvh;
+  margin-left: 4dvw;
+  margin-top: 6dvh;
+  display: flex;
+  align-items: stretch;
+  gap: 1dvw;
+}
+.tome {
+  min-width: 4.4dvw;
+  height: 22dvh; 
+  padding-top: 5dvh;
+  padding-bottom: 5dvh;
+  padding-left: 0.6dvw;
+  padding-right: 1.2dvw;
+  background-image: url('../images/relics/tome.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.spine {
+  text-orientation: mixed;
+  font-size: 1dvw;
+  line-height: 1.2dvw;
+  color: black;
+  font-family: serif;
+  white-space: normal;
+}
+
+#godTitle{
+    line-height: 6dvh;
+    font-size: 2dvw;
+    width: 46dvw;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: "Papyrus", "Arial", sans-serif;
+}
+    #gods{
+        width: 46dvw;
+        height: 34dvh;
+        background-color: transparent;
+        overflow-y: auto;
+    }
+        .godsWraps{
+            border: 0.1dvw solid white;
+            /*display: none;*/
+            box-sizing: border-box;
+            min-width: 18dvw;
+            height: 6dvh;
+            margin: 0.4dvw;
+            position: relative;
+        }
+        .godTitles{
+            font-family: "Papyrus", "Arial", sans-serif;
+            font-size: 2.4dvh;
+            line-height: 4dvh;
+        }
+
+
+        #sacRight{
+            float: right;
+            width: 48dvw;
+        }
+    #relicTitle{
+        line-height: 8dvh;
+        font-size: 2dvw;
+        width: 48dvw;
+        font-weight: bold;
+        text-decoration: underline;
+        font-family: "Papyrus", "Arial", sans-serif;
+    }   
+    #relics{
+        display: flex;
+        flex-wrap: wrap; 
+        align-content: flex-start; 
+        width: 48dvw;
+        height: 61dvh;
+        background-color: transparent;
+        overflow-y: auto;
+    }
+        .relicWraps{
+            display: none;
+            border: 0.1dvw solid white;
+            border-radius: 0.5dvw;
+            font-family: "Papyrus", "Arial", sans-serif;
+            font-weight: bold;
+            text-align: center;
+            width: 12dvw;
+            height: 12dvw;
+            margin: 1dvw;
+            position: relative;
+        }
+
+        .relicImg{
+            width: 100%;
+            border-top-left-radius: 0.5dvw;
+            border-top-right-radius: 0.5dvw;
+            height:8dvw;
+            position: absolute;
+            top: 0%; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .relicTxt{
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Optionally center text horizontally */
+    text-align: center; /* Ensures multi-line text is centered */
+            position: absolute;
+            bottom: 0; 
+            width: 100%; 
+            height: 6dvh; 
+            font-weight: bold;
+            font-size: 1.5dvw;
+            line-height: 2dvw;
+        }
+#divinity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#divinityTitle {
+    text-align: center;
+    width: 90dvw;
+    font-size: 8dvh;
+    line-height: 10dvh;
+    margin: 3dvh;
+}
+
+.shardBuyBox {
+    width: 97dvw;
+    height: 58dvh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shardBuyWraps {
+    width: 15dvw;
+    height: 10dvh;
+    margin: 1dvh 3dvw;
+    position: relative;
+    font-size: 3dvh;
+    line-height: 4dvh;
+    cursor: pointer;
+    border: 0.1dvh groove white;
+    border-radius: 1dvh;
+}
+.shardBuy:hover {
+}
+.shardBuyText{
+    width: 100%;
+}
+.shardLvlTxt{
+    width: 9dvw;
+    float: left;
+}
+.shardBuyLevel{
+    width: 5dvw;
+    float: left;
+}

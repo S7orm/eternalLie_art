@@ -1,0 +1,239 @@
+ 
+/* AltarRoom */
+#altarRoom{
+  background-image: url('../images/rooms/grove.jpg');
+  background-size: 100% 100%;
+  height: 69dvh; 
+  width: 97dvw;
+}
+#altarRoomTitle{
+    line-height: 5dvh;
+    font-size: 4dvh;
+    width: 28dvw;
+    text-align: center;
+    text-shadow: 2px 2px 4px black;
+    float: left;
+}
+#altarLeft{
+    position: relative;
+    width: 17dvw;
+    float: left;
+    clear: left;
+}
+/* altar*/
+#altarDiv{
+    background-color: black;
+    width: 16dvw;
+    margin: 0.5dvw;
+    margin-bottom: 0;
+    height: 26dvh;
+    border: 0.1dvw groove white;
+    border-radius: 10px;
+    position: relative;
+}
+#altarText{
+    line-height: 3dvh;
+    font-size: 2.5dvh;
+    width: 16dvw;
+    text-align: center;
+}
+#altarImage{
+    width: 100%;
+    border-top-left-radius: 0.5dvw;
+    border-top-right-radius: 0.5dvw;
+    position: absolute;
+    top: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+    height: 70%;
+    object-fit: fill;
+}
+#currentAltarDiv{
+    width: 14dvw;
+    height: 20%;
+    font-size: 2dvh;
+    border: 0.1dvw groove white;
+    position: absolute;
+    bottom: 0;
+    float: left;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    text-align: center;      /* Ensures text is centered within the div */
+}
+#altarToggle{
+    border: 0.1dvw solid white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 3dvw;
+    min-width: 2dvw;
+    width: 2dvw;
+    height: 20%;
+    display: flex;           /* Enables flexbox layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;     /* Centers content vertically */
+    cursor: pointer;
+        }
+#altarOptions{
+    display: none;
+    width: 14dvw;
+    background-color: black;
+    margin-left: 0.5dvw;
+    z-index: 10;
+    border: 0.1dvw groove white;
+    position: absolute; 
+    top:  27dvh; 
+    left: 0;
+}
+.altarOptionWraps{
+    position: relative;
+    background-color: grey;
+    width: 14dvw;
+    height: 4dvh;
+    line-height: 4dvh;
+    font-size: 2dvh;
+    border: 0.1dvw groove white;
+    display: none;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    text-align: center;      /* Ensures text is centered within the div */
+}
+#altarRoomInfo{
+    margin-left: 0.5dvw;
+    margin-top: 2dvh;
+    padding: 0.5dvw;
+    font-size: 1dvw;
+    line-height: 1.5dvw;
+    border: 0.1dvw groove white;
+    width: 16dvw;
+    height: 30dvh;
+    background-color: black;
+}
+
+
+                    /* Style for the peg pool */
+#pegPoolColumn{
+    width: 12.6dvw;
+    float: left;
+}
+#adjacencyInfoBox {
+    border: 0.1dvh groove white;
+    margin-top: 0.4dvh;
+    padding-left: 0.4dvw;
+    background-color: black;
+    border-radius: 10px;
+    width: 12.6dvw;
+    height: 8dvw;
+}
+#devotion{
+    width: 100%;
+    font-size: 2dvh;
+    line-height: 2.8dvh;
+    text-decoration: underline;
+}
+#bonusLines{
+    float: left;
+    width: 6dvw;
+}
+#clearGrid{
+    background-color: lightblue;
+    border: 0.1dvw groove white;
+    margin-right: 0.4dvw;
+    font-size: 2dvh;
+    line-height: 2.5dvh;
+    width: 44%;
+    height: 44%;
+    min-width: 44%;
+    min-height: 44%;
+    color: black;
+    border-radius: 5px;
+    float: right;
+}
+#pegPool{
+    margin-top: 0.5dvw;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-content: flex-start; 
+    float: right;
+    width: 12.6dvw;
+    font-size: 1.5dvh;
+    line-height: 2dvh;
+}
+.pegPoolPeg {
+  background-color: black;
+  display: none;
+  height: 5.9dvw;    
+  width: 5.9dvw;
+  border: 0.1dvh solid #ccc; 
+  border-radius: 5px;  
+  text-align: center;
+}
+#altarPeg{
+    display: block;
+}
+#faithfulPeg{
+    display: block;
+}
+.peg-image {
+    height: 80%;
+    width: 80%;
+}
+
+/* Style for the peg label */
+.peg-label {
+  width: 70%;
+  float: left;
+  clear: left;
+  margin-left: 0.1dvw;
+}
+
+/* Style for the peg count */
+.peg-count {
+    float: right;
+width: 19%;
+    margin-right: 0.1dvw;
+}
+#gridFlex{
+    display: flex;
+    justify-content: left; 
+    align-items: center; /* Centers vertically */
+    height: 69dvh; /* Ensure the container spans the full viewport height */
+}
+#activeAltarGrid {
+   border: 0.5dvh groove black;
+   background-color: rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-columns: repeat(4, 15dvh); /* Adjust number of columns */
+  grid-template-rows: repeat(4, 15dvh); /* Adjust number of rows */
+  width:66dvh;
+}
+
+.hole {
+  border:  0.1dvh groove darkslategrey;
+  width: 15dvh;
+  height: 15dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.hole.blocked {
+    background-color: darkslategrey;
+    opacity: 100; /* Shows blocked holes as black */
+    cursor: not-allowed;
+}
+.pegInHole{
+    width: 100%;
+  height: 100%;
+}
+
+.peg {
+  background-color: black;
+  height: 100%;    
+  width: 100%; 
+   display: flex;  
+  justify-content: center;
+  align-items: center;
+}

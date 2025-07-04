@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <title>Eternal Lie</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/top.css">
+        <link rel="stylesheet" href="css/west.css">
+        <link rel="stylesheet" href="css/cult.css">
+        <link rel="stylesheet" href="css/room.css">
+        <link rel="stylesheet" href="css/other.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    </head>
+    <body>
+        <div class="rotate-message">Eternal Lie was designed for landscape mode. Please rotate your device.</div>
+        <div class='game-container'>
+        <div id="top">
+            <div id='topLeft'>
+            <img id='title' src="images/Title.png " alt="?"/>
+        </div>
+        <div id='statBox'>
+            <h2 id='name'>Dr. Enoch West</h2>
+        </div>
+            <img id='gear' src="images/gear.jpg" alt="menu"/>
+            <div id='menuBox'></div>
+            <div id='commentBox'>
+                <img id='topNyar' src="images/gods/nyar.jpg" alt="alt"/>
+                <h3 id='commentaryTitle'>Whispers in the Darkness</h3>
+                <div id='commentary'></div>
+            </div>
+            <div id='tabRow'>
+                <button class='tabs' id ="westTab" onpointerdown="changeTab('west')"> Professor West</button>
+                <button class='tabs' id ="cultTab" onpointerdown="changeTab('cult')">Cult</button>
+                <button class='tabs' id ="expeditionsTab" onpointerdown="changeTab('expeditions')">Expeditions</button>
+                <button class='tabs' id ="sacrariumTab" onpointerdown="changeTab('sacrarium')">Sacrarium</button>
+                <button class='tabs' id ="divinityTab" onpointerdown="changeTab('divinity')">Divinity</button>
+            </div>
+        </div>
+        <div id="mainWrapper">
+            <div id="eventBox"></div>
+            <div class="bigBox" id="west"></div>
+            <div class="bigBox" id="cult">
+                <div id='left'>
+                    <h2 id='chosen'>The Chosen</h2>
+                    <div><span id='meeting'>Meeting at: </span><button id="altarRoomTab">Moonlit Grove</button></div>
+                </div>
+                <div id='center'>
+                    <h2>The Obsidian Vault</h2>
+                    <div id='vault'></div>
+                </div>
+                <div id='right'></div>
+             </div>
+            <div class="bigBox" id='expeditions'>
+                <div id='world'>
+                    <h1 id='theWorld'>The World</h1>
+                </div>
+                <div id='dreamEx'>
+                    <h1 id="theDreaming">The Dreaming</h1>
+                </div>
+                </div>
+            <div class="bigBox" id="sacrarium"></div>
+            <div class="bigBox" id="divinity"></div>
+            <div class="bigBox" id='altarRoom'>
+                <span id='altarRoomTitle'>Moonlit Grove</span>
+                <div id="altarLeft">
+                    <div id='altarDiv'>
+                        <div id="altarText">Altar Stone</div>
+                            <img id='altarImage' src="images/altar/crate.jpg" alt="alt">
+                        <div id='currentAltarDiv'>Shipping Crate</div><div id='altarToggle'>&#9662;</div>
+                    </div>
+                    <div id="altarOptions"></div>
+                    <div id="altarRoomInfo"></div>
+                </div>
+                    <div id="pegPoolColumn">
+                    <div id="adjacencyInfoBox">
+                            <span id='devotion'>Devotion:</span>
+                        <div id='bonusLines'>
+                            <div>Love: <span id="loveBonus">0</span></div>
+                            <div>Terror: <span id="terrorBonus">0</span></div>
+                            <div>Gold: <span id="goldBonus">0</span></div>
+                        </div>
+                        <button id="clearGrid">Clear <br>Grid</button>
+                    </div>
+                    <div id="pegPool"></div>
+                </div>
+                <div id="gridFlex"><div id="activeAltarGrid"></div></div>
+            </div>
+        </div>
+        <div id="footer"><a href="help.html" target="_blank" rel="noopener noreferrer">Lost? Help page.</a></div> 
+        </div>
+        <script src="js/functional.js"></script>  
+        <script src="js/west.js"></script>   
+        <script src="js/cult.js"></script>   
+        <script src="js/expeditions.js"></script>   
+        <script src="js/sacrarium.js"></script>   
+        <script src="js/divinity.js"></script>  
+        <script src="js/penalties.js"></script> 
+        <script src="js/madness.js"></script> 
+        <script src="js/room.js"></script> 
+        <script src="js/time.js"></script> 
+        <script src="js/events.js"></script> 
+        <script src="js/save.js"></script> 
+    </body>
+</html>

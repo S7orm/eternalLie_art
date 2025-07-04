@@ -1,0 +1,308 @@
+
+                                                                               /*------WestBox-----*/
+#west{
+    display: block;
+
+}
+                                                                               /*------ActionBox-----*/
+    #actionBox{
+        width: 64dvw;
+        display: flex;
+        justify-content: space-evenly;
+        clear: left;
+        float: left;
+    }
+    .actionColumn{
+        margin: 0.5dvw;
+        float: left;
+        clear: left;
+        min-width: 12dvw;
+        width: 12dvw;
+        height: 69dvh;
+    }
+    .actionLocks{
+        display: none;
+        margin-top: 3dvh;
+        float: left;
+        clear: left;
+        min-width: 12dvw;
+        width: 12dvw;
+        min-height: 5dvw;  
+        bottom: 10px;
+        font-size: 1.25dvw;
+        white-space: initial;
+        border: 0.1dvw solid white;
+        border-radius: 5px;
+        text-align: center;
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 1dvw;
+    }
+    .actionWraps{
+        display: none;
+        border: 0.1dvw solid white;
+        border-radius: 15px;
+        margin-top: 1dvw;
+        float: left;
+        clear: left;
+        min-width: 12dvw;
+        width: 12dvw;
+        height: 12dvw;
+        min-height: 12dvw;  
+        text-align: center;
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .studypulse{
+        box-shadow: 0 0 0 0 #3A01DF inset;
+        animation: pulse 0.5s ;
+    }
+    @keyframes pulse {
+            0% {
+                    box-shadow: 0 0 0 0 #8258FA inset;
+            }
+
+            70% {
+                    box-shadow: 0 0 0 30px #210B61 inset;
+            }
+
+            100% {
+                    box-shadow: 0 0 0 0 #210B61 inset;
+            }
+    }
+    .actionPng{
+        position: absolute;
+        top: 1.4dvw;
+        left: 2dvw;
+        width: 8dvw;
+        height: 8dvw;
+        display: block;
+        margin: 0 auto;
+    }
+        .actionText{
+        position: absolute;
+        bottom: 10px;
+        font-size: 1.5dvw;
+        display: block;
+        margin: 0 auto;
+        min-width: 12dvw;
+    }
+    #book ~ .actionPng {
+        top: 3dvw; 
+    }
+    #studyProgress{
+        position: absolute;
+        bottom: 0.2dvw;
+        left: 0dvw;
+        width: 0%;
+        height: 0.5dvh;
+        background-color: red;
+    }
+    #chantWrap{
+    }
+    #chant{
+    }
+    #chant:active{
+            background-color: blue;
+    }
+    .chantPulse{
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+        animation: pulse 16s infinite;
+    }
+    #chantToggle {
+        display: none;
+        width: 2dvh;
+        min-width: 2dvh;
+        min-height: 2dvh;
+        background-color: red; /* Default color for "off" */
+        border-radius: 50%; /* Makes it round */
+        float: right;
+        position: relative;
+        right: 0.5dvw; 
+    }
+                                                                                   /*------Dream-----*/
+    #dreamWrap{
+        z-index: 15;
+        margin-bottom: 0;
+    }
+        .dreamPulse{
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            transform: scale(1);
+            animation: pulse 8s infinite;
+        }
+    #dreamToggle {
+        display: none;
+        width: 2dvh;
+        min-width: 2dvh;
+        min-height: 2dvh;
+        background-color: red; /* Default color for "off" */
+        border-radius: 50%; /* Makes it round */
+        float: right;
+        position: relative;
+        right: 0.5dvw; 
+    }
+        #dreamTimer {
+                    display: none;
+                    position: absolute;
+                    top: 0dvh;
+                    left: 50%; 
+                    text-align: center;
+                    transform: translateX(-50%); 
+                    line-height: 8dvw;
+                    font-size: 8dvw;
+                    color: #4B0082;
+                    animation: dreamTimerpulse 2s infinite alternate;
+                }
+        @keyframes dreamTimerpulse {
+            0% {
+                display: block;
+                z-index: 1;
+                opacity: 1;
+            }
+            100% {
+                z-index: 20;
+                    color: #7F00FF;
+                opacity: 0.80; /* Adjust opacity as needed */
+            }
+        }
+
+        #dreamChosen{
+            display: none;
+            font-size: 1.5dvw;
+            line-height: 3dvw;
+            float: left;
+            clear: left;
+            min-width: 9.6dvw;
+            width: 9.6dvw;
+            min-height: 3dvw;  
+            border: 0.1dvw solid white;
+            border-radius: 5px;
+            text-align: center;
+            background-color: black;
+            cursor: pointer;
+        }
+
+        #dreamDropBtn {
+            display: none;
+            border: 0.1dvw solid white;
+            border-radius: 5px;
+            font-size: 2dvw;
+            min-width: 2dvw;
+            width: 2dvw;
+            min-height: 3dvw;  
+            cursor: pointer;
+        }
+        #dreamChoices{
+            display: none;
+        }
+        .dreamChoice {   
+            display:none;
+            margin-left: 1dvw;
+            font-size: 1dvw;
+            line-height: 2dvw;
+            float: left;
+            clear: left;
+            min-width: 11dvw;
+            width: 11dvw;
+            min-height: 2dvw;  
+            border: 0.1dvw solid white;
+            border-radius: 5px;
+            text-align: center;
+            background-color: black;
+            cursor: pointer;
+        }
+        #dreamChoices a:hover {
+            background-color: #ddd;
+        }
+.disable-all-events * {
+    pointer-events: none;
+    user-select: none;
+}
+    #preachWrap{
+
+    }
+        #preach{
+        }
+        #preachText{
+            width: 10dvw;
+        }
+        #preachWrapCost{
+            position: absolute;
+            bottom: 10px;
+            right: 1dvw;
+            width: 2dvw;
+        }
+        #preach:active{
+                background-color: blue;
+
+        }
+        .preachPulse{
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            animation: pulse 10s infinite;
+        }
+    .actionUpgradeWraps{
+        display: none;
+        font-size: 1.25dvw;
+        margin-top: 1dvw;
+        padding: 0.25dvw;
+        float: left;
+        clear: left;
+        min-width: 12dvw;
+        width: 12dvw;
+        min-height: 4dvw;  
+        border: 0.1dvw solid white;
+        border-radius: 5px;
+        text-align: center;
+        background-color: black;
+        position: relative;
+        white-space: normal;
+    }
+                                                                                   /*------MadActionBox-----*/
+    #madActionBox{
+        display: none;
+        float: right;
+        width: 32dvw;
+        height: 68dvh;
+        overflow-y: auto;
+        background-color: #380B61;
+        border: 0.2dvw solid #8A0886;
+        z-index: 15;
+    }
+    #madTitle{
+        font-size: 3dvh;
+        line-height: 5dvh
+    }
+    .madActionWraps{
+        display: none;
+        position: relative;
+        float: left;
+        padding-top: 0.5dvh;
+        min-width: 8dvw;
+        width: 8dvw;
+        min-height: 8dvw;    
+        border: 0.1dvw solid white;
+        border-radius: 5px;
+        margin: 1dvw;
+        background-color: black;
+    }
+    .madTitle{
+        width: 8dvw;
+        
+        display: block;
+    }
+    .madActionPng{
+        clear: left;
+        width: 6dvw;
+        height: 6dvw;
+        display: block;
+        margin: 0 auto;
+    }
+
+.madActPulse{
+    box-shadow: 0 0 0 0 #3A01DF inset;
+    animation: pulse 0.4s infinite;
+}
