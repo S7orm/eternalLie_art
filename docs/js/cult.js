@@ -5,9 +5,9 @@ let cult = {
         faithful:{
             string: 'Faithful',
             description:["Men, women who have heard the call. They provide Love, Terror and Gold and increase the Cult's capacity for emotions. "],
-            current: 100,
-            purchased: 100,
-            unplaced: 100,
+            current: 0,
+            purchased: 0,
+            unplaced: 0,
             placed: 0,
             ticCounter: [0, 8],
             outMultipliers: [1.4, 0.8, 0.4],//love, terror, gold
@@ -16,8 +16,8 @@ let cult = {
         chanters:{
             string: 'Chanters',
             description: ["Given scraps of writing from the Book, these cultists chant endlessly. They increase Love, the Cult's capacity for Love, and add to West's Charm."],
-            current: 010,
-            unplaced: 010,
+            current: 0,
+            unplaced: 0,
             placed: 0,
             ticCounter: [0, 8],
             outMultiplier: 0.8,
@@ -29,8 +29,8 @@ let cult = {
             string: 'Sentinels',
             cost: ['charm', 25],
             description:["Silent and dangerous, Sentinels increase Terror in the Faithful, the Cult's Capacity for Terror, and assist in Expeditions."],
-            current: 010,
-            unplaced: 010,
+            current: 0,
+            unplaced: 0,
             placed: 0,
             ticCounter: [0, 8],
             outMultiplier: 0.8,
@@ -41,8 +41,8 @@ let cult = {
         priests:{
             string: 'Priests',
             description: ['Dedicated followers gifted a dangeous Tome, they can do many things.'],
-            current: 8,
-            unplaced: 8,
+            current: 0,
+            unplaced: 0,
             placed: 0,
             altar: false,
             vaultActions: false,
@@ -98,7 +98,7 @@ let vault = {
             callString: 'love',
             string: 'Love',
             description: ['Idolatry, like true Love, is a potent tool.'],
-            current: 10000000,
+            current: 0,
             unlocked: true,
             unlock: ['vision', 10]
         },
@@ -106,7 +106,7 @@ let vault = {
             callString: 'terror',
             string: 'Terror',
             description: ['While Love helps, Terror is essential.'],
-            current: 1000000,
+            current: 0,
             unlocked: true,
             unlock: ['vision', 10]
         },
@@ -114,7 +114,7 @@ let vault = {
             callString: 'gold',
             string: 'Gold',
             description: ['Gold always has its purpose.'],
-            current:1000000000,
+            current:0,
             unlocked: true,
             unlock: ['vision', 10]
         },
@@ -122,14 +122,14 @@ let vault = {
             callString: 'flesh',
             string: 'Flesh',
             description: ['The Natives used every part of the buffalo.'],
-            current: 10000,
+            current: 0,
             unlocked: false
         },
         tomes:{
             callString: 'tomes',
             string: 'Tome',
             description: ['Found in forgotten places, these can be given to the Faithful to convert them into Priests.'],
-            current: 10,
+            current: 0,
             unlocked: false,
           active: false,
             pageCounter: 0,
@@ -140,7 +140,7 @@ let vault = {
             callString: 'ichor',
             string: 'Ichor',
             description: ['Concentrated Essence of Life itself.'],
-            current: 10,
+            current: 0,
             unlocked: false
         },
         tyog:{

@@ -8,14 +8,14 @@ let stats = {
         callString: 'vision',
         string: 'Vision',
         description: 'The key to unlocking the mysteries of the universe.',
-        current: 10000000,
+        current: 0,
         unlocked: true
     },
     charm: {//cultist max//
         callString: 'charm',
         string: 'Charm',
         description: 'With enough Charisma, West can convince people of anything.',
-        current: 1000000,
+        current: 0,
         unlocked: false,
           active: false,
         unlock: ['vision', 1]
@@ -35,7 +35,7 @@ let stats = {
         callString: 'radiance',
         string: 'Radiance',
         description: 'A reward from the Outer Gods, probably',
-        current: 10000,
+        current: 0,
         unlocked: false,
           active: false,
         unlock: ['radiance', 1]
