@@ -90,10 +90,12 @@ function pegPoolInit(){
         const pegDiv = document.createElement("div");
         pegDiv.className = "pegPoolPeg";
         pegDiv.id = `${name}Peg`;
+        
+        const img = document.createElement("img");
+        img.src = `images/meeple/${name}.jpg`;
+        img.className = "peg-image";
+        img.alt = name.charAt(0).toUpperCase() + name.slice(1);
 
-        const text = document.createElement("div");
-        text.className = "peg-image";
-        text.textContent = name.charAt(0).toUpperCase() + name.slice(1);
         const label = document.createElement("div");
         label.className = "peg-label";
         label.textContent = name.charAt(0).toUpperCase() + name.slice(1);
@@ -102,7 +104,7 @@ function pegPoolInit(){
         count.className = "peg-count";
         count.id = `${name}Unplaced`;
 
-        pegDiv.append(text, label, count);
+        pegDiv.append(img, label, count);
         pegPool.appendChild(pegDiv);
     });
 }
@@ -280,10 +282,11 @@ function dropPeg(event, row, col) {
         // Start dragging if it isn't a double-tap.
         startDrag(e, pegType, targetHole.id);
     });
-        const text = document.createElement('div');
-        text.classList.add('pegInHole');
-        text.textContent = cult[pegType]?.string || "Altar";
-        pegDiv.appendChild(text);
+        const img = document.createElement('img');
+        img.src = `images/meeple/${pegType}.jpg`;
+        img.classList.add('pegInHole');
+        img.alt = cult[pegType]?.string || "Altar";
+        pegDiv.appendChild(img);
         targetHole.appendChild(pegDiv);
         gridState[targetHole.id] = pegType;
 
