@@ -79,7 +79,7 @@ let godKeys = Object.keys(gods);
 function makeSacrarium(){
     document.getElementById('sacrarium').innerHTML =
             "<div id='sacLeft'>" +
-            "<div id='bookshelf'><div id='shelf'></div></div>" +
+            //"<div id='bookshelf'><div id='shelf'></div></div>" +
             "<h2 id='godTitle'>Invoke the Old Ones</h2>" +
             "<div id='gods'>" +
             "</div></div>" +
