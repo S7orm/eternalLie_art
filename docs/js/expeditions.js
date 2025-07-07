@@ -252,11 +252,11 @@ function wax(){
         world.wax.kult = false;
         gods.shub.unlocked = true;
         document.getElementById('shubWrap').style.display='block';
-            vault.tyog.unlocked = true;
-            document.getElementById('tyogWrap').style.display = 'block';
+           // vault.tyog.unlocked = true;
+     //       document.getElementById('tyogWrap').style.display = 'block';
 //        terrorCrafts.mass.unlocked = true;
 //            document.getElementById('massWrap').style.display='block';
-        eventBox('images/eventImages/mummy.jpg', "The Mummy.", "West finds T'yog propped up in a corner, bandaged arms raised to amuse the foolish. Petrified by dread Ghatanothoa in Ancient Mu, it is only with the Scroll that he may be freed. T'yog gratefully offers service as a High Priest, capable of specialized rituals and the blessing of his patron. (T'yog Rituals in Cult, Shub-Niggurath in Sacrarium)");
+        eventBox('images/eventImages/mummy.jpg', "The Mummy.", "West finds T'yog propped up in a corner, bandaged arms raised to amuse the foolish. Petrified by dread Ghatanothoa in Ancient Mu, it is only with the Scroll that he may be freed. T'yog gratefully offers service as a High Priest, capable of specialized rituals and the blessing of his patron. (Shub-Niggurath in Sacrarium)");
         }
     world.wax.cost = Math.ceil(world.wax.cost * 1.4);
     document.getElementById('waxCost').innerHTML = world.wax.cost;
