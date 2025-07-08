@@ -165,7 +165,7 @@ function scribes(tics) {
 let ticC = {
   healthCounter: [0, 4],
   terrorCounter: [0, 4],
-  gridCounter: [0, 4]
+  gridCounter: [2, 8]
 };
 function healthCheck(){
     if(ticC.healthCounter[0] < ticC.healthCounter[1]){

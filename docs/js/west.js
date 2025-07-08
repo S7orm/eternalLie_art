@@ -71,7 +71,7 @@ let actions = {
     study: {
         string: 'Study Tome',
         description: ['Research into Abyssal Horrors.', 'Cost: Sanity', 'Benefit: Vision'],
-        level: 1.4,
+        level: 1.2,
         madnessChance: 0.88,
         unlocked: true,
         purchased: true
@@ -79,7 +79,7 @@ let actions = {
     chant: {
         string: 'Chant',
         description: ['Reciting arcane passages imbues West with unearthly Charm', 'Cost: Sanity', 'Benefit: Charm'],
-        level: 1.4,
+        level: 1.2,
         madnessChance: 0.88,
         toggleBool: false,//for dom
         toggle: false,
@@ -141,7 +141,7 @@ function study(){
     if (width >= 100) {
         let madChance = Math.random();   
         if(madChance <= actions.study.madnessChance){
-             numberChange('stats', 'madness', Math.floor(actions.study.level) , '#FE2EF7', 'blue');  
+             numberChange('stats', 'madness', actions.study.level , '#FE2EF7', 'blue');  
             }
          numberChange('stats', 'vision', actions.study.level , '#40E0D0', 'red'); 
          numberChange('stats', 'health',  -1 , 'blue', 'red');  
@@ -175,7 +175,7 @@ function chantTimer(){
     var intervalId = null;
      let temp =  document.getElementById('chantWrap');
      document.getElementById('chantWrap').onpointerenter = function() {//calls chant every 400 mics
-        intervalId = setInterval(chant, 400);
+        intervalId = setInterval(chant, 800);
         if(userInteracted === true){
         plays(chanting);
     }
