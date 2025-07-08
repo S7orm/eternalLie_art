@@ -322,7 +322,7 @@ function removeMouseWheelListener(element) {
 function scrollDiv(event, element) {
   event.preventDefault();
   const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-  element.scrollTop -= delta * 1; // Adjust the scrolling speed as needed
+  element.scrollTop -= delta * 8; // Adjust the scrolling speed as needed
 }
 
 

@@ -193,7 +193,7 @@
     }
         .godsWraps{
             border: 0.1dvw solid white;
-            /*display: none;*/
+            display: none;
             box-sizing: border-box;
             min-width: 18dvw;
             height: 6dvh;
