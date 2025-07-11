@@ -6,7 +6,7 @@
  * 
  */
 let permanentChanges = {
-    totalShards: 1000,
+    totalShards: 0,
     immortality: false,
     mist: false
 };
