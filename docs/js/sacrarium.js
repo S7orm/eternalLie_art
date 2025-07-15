@@ -103,7 +103,7 @@ makeSacrarium();
 
 
 function rhan(){
-    if(cult.innocents.current >= gods.rhan.cost){
+    if(cult.innocents.current >= gods.rhan.cost && madMin(248) && cult.priests.current >0){
         numberChange('cult', 'innocents', -gods.rhan.cost, 'blue', 'red');
         numberChange('stats', 'radiance', 8, 'blue', 'red');
         numberChange('stats', 'madness', 44, 'blue', 'red');
