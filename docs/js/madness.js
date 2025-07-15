@@ -229,9 +229,9 @@ function madCheck(){
                 madBools[0] = true;
                 comment('Do not listen to the fools who say you must keep your Madness in check. (high Madness increases Madness and Terror)', 'pink');
             }else if(stats.madness.current >= (stats.madness.madCap * 2/3) && madBools[0] === true){
-                    let tempMad = Math.sqrt(Math.max(1, (stats.madness.current - ((2/3)*stats.madness.madCap))/8));// scaling of madness to current madness
+                    let tempMad = (madness - (2/3) * madCap) * 0.12;// scaling of madness to current madness
                     numberChange("stats", "madness", tempMad, "red");
-                    numberChange("vault", "terror", tempMad, "red");
+                    numberChange("vault", "terror", (tempMad * 2), "red");
             }else if(stats.madness.current < (stats.madness.madCap /2) && madBools[0] === true){
                 madBools[0] = false;
             }
