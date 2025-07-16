@@ -75,6 +75,11 @@ function numberChange(parent, stat, change, pColor, nColor) {
         document.getElementById('convertChanterCost').innerHTML =  loveCrafts.convertChanter.cost;
         terrorCrafts.convertsentinel.cost = Math.max(cult.sentinels.current * terrorCrafts.convertsentinel.multiplier, 48);
         document.getElementById('convertsentinelCost').innerHTML =  terrorCrafts.convertsentinel.cost;
+        //adding capacities
+        document.getElementById('faithfulDesc').innerHTML = cult.faithful.description + "Faithful Love and Terror Capacity: " + (cult.faithful.current + cult.hybrids.current) * 16;
+        document.getElementById('chantersDesc').innerHTML = cult.chanters.description + "Chanter Love Capacity: " + (cult.chanters.current * (cult.faithful.current + cult.hybrids.current)) * 16;
+        document.getElementById('sentinelsDesc').innerHTML = cult.sentinels.description + "Sentinels Terror Capacity: " + (cult.sentinels.current * (cult.faithful.current + cult.hybrids.current)) * 16;
+
         // Call the new peg logic function
         numberChangePeg(stat, change);
     } else if (parent === 'vault') {

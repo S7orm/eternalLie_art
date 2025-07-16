@@ -4,7 +4,7 @@
 let cult = {
         faithful:{
             string: 'Faithful',
-            description:["Men, women who have heard the call. They provide Love, Terror and Gold and increase the Cult's capacity for emotions. "],
+            description:["Men, women who have heard the call. They provide Love, Terror and Gold. "],
             current: 0,
             purchased: 0,
             unplaced: 0,
@@ -15,7 +15,7 @@ let cult = {
         },
         chanters:{
             string: 'Chanters',
-            description: ["Given scraps of writing from the Book, these cultists chant endlessly. They increase Love, the Cult's capacity for Love, and add to West's Charm."],
+            description: ["Given scraps of writing from the Book, these cultists chant endlessly. They increase Love and add to West's Charm."],
             current: 0,
             unplaced: 0,
             placed: 0,
@@ -28,7 +28,7 @@ let cult = {
         sentinels:{
             string: 'Sentinels',
             cost: ['charm', 25],
-            description:["Silent and dangerous, Sentinels increase Terror in the Faithful, the Cult's Capacity for Terror, and assist in Expeditions."],
+            description:["Silent and dangerous, Sentinels increase Terror in the Faithful and assist in Expeditions."],
             current: 0,
             unplaced: 0,
             placed: 0,
