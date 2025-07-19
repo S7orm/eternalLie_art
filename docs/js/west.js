@@ -831,7 +831,7 @@ function fiction(){//??
         
 let madActIntervalId; // Specific name for the interval
 let madActFrequency = 1; // Frequency starts at 1 iteration per second
-
+let stopHandler;
 function startMadActLoop(madAction) {
     let stat = madActions[madAction].costStat;
     let current;
@@ -851,17 +851,17 @@ function startMadActLoop(madAction) {
         }
         madActFrequency++; // Increase frequency each loop
     }, 800);
+    stopHandler = () => stopMadActLoop(madAction);
     document.getElementById(madAction + "Wrap").classList.add("madActPulse");
-    document.addEventListener('pointerup', () => stopMadActLoop(madAction, madActIntervalId), { once: true });
-    document.getElementById(madAction + "Wrap").addEventListener('pointerleave', () => stopMadActLoop(madAction, madActIntervalId), { once: true });
-
+    document.addEventListener('pointerup', stopHandler, { once: true });
+    document.getElementById(madAction + "Wrap").addEventListener('pointerleave', stopHandler, { once: true });
     }
 }
 
 function stopMadActLoop(madAction) {
     clearInterval(madActIntervalId); // Stop the interval
-    document.removeEventListener('pointerup');
-    document.getElementById(madAction + "Wrap").removeEventListener('pointerleave');
+    document.removeEventListener('pointerup', stopHandler);
+    document.getElementById(madAction + "Wrap").removeEventListener('pointerleave', stopHandler);
     document.getElementById(madAction + "Wrap").classList.remove("madActPulse");
 }
 
