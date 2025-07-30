@@ -167,10 +167,10 @@
             height: 6dvh;
             margin: 0.5dvw;
             background-color: black;
-            /*background-image: url("../images/oneOffs.jpg");*/
-            background-size: cover; /* or contain, depending on your needs */
-            background-repeat: no-repeat; /* prevents the image from repeating */
-            background-position: center; /* centers the image */
+            background-image: url("../images/oneOffs.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
             border: 2px solid white;
             position: relative;
         }
@@ -184,10 +184,10 @@
             width: 28dvw;
             height: 6dvh;
             margin: 0.5dvw;
-            /*background-image: url("../images/lock.jpg");*/
-            background-size: cover; /* or contain, depending on your needs */
-            background-repeat: no-repeat; /* prevents the image from repeating */
-            background-position: center; /* centers the image */
+            background-image: url("../images/lock.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center; 
             border: 2px solid white;
             position: relative;
         }
