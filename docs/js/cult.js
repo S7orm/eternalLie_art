@@ -826,7 +826,7 @@ function box() {
 
 function pits(){
     if(cult.innocents.current >=  terrorCrafts.breedingPits.cost && vault.terror.current >= 444 && madMin(444)){
-        numberChange('cult', 'innocents', - terrorCrafts.breedingPits.cost, 'blue', 'red');
+        numberChange('cult', 'innocents', -terrorCrafts.breedingPits.cost, 'blue', 'red');
         terrorCrafts.breedingPits.cost = terrorCrafts.breedingPits.cost * 2; 
         terrorCrafts.breedingPits.level++;
         document.getElementById('breedingPitsDesc').innerHTML = "Current stock produces an Innocent every " + Math.ceil(40/terrorCrafts.breedingPits.level) + " seconds.";

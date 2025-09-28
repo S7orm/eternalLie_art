@@ -138,6 +138,7 @@
             font-family: "Papyrus", "Arial", sans-serif;
         }
         .craftWraps{
+            display: none;
             width: 28dvw;
             height: 6dvh;
             margin: 0.5dvw;
@@ -180,7 +181,6 @@
             animation: pulse 1s;
         }
         .craftLocks{
-            display: none;
             width: 28dvw;
             height: 6dvh;
             margin: 0.5dvw;

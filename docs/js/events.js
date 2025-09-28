@@ -1,5 +1,5 @@
 function test(){
-    window.console.log(stats.madness.madCap);
+    nyar();
 }
 function eventBox(imageSource, title, text){
     let box = document.getElementById('eventBox');
