@@ -1542,9 +1542,6 @@ function makeDreamChoices(){
 "<button class='dreamChoice' id='" + dreamKeys[i] + "Choice' onpointerdown='dreamChoice(\"" + dreamKeys[i] + "\")'>" + dreamChoices[dreamKeys[i]].string + "</button>";
     }
 };
-        
-        
-        
 let statKeys = Object.keys(stats);
 let actionKeys = Object.keys(actions);     
 let madKeys = Object.keys(madActions);
