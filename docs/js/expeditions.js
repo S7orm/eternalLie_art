@@ -11,102 +11,159 @@ Oriab
         
 let world = {
   crypt: {//unlocked by expeditions
-      string: 'Desolate Crypt',
-      description: ['Rifle through the bones of the dead seeking tomes of power. Madness Minimum: 44 ', ' Cost: Gold ', ' Benefits: ?'],
-      description2: ['Less interesting crypts remain potentially profitable. Madness Minimum: 44 ', 'Cost: Gold ', 'Benefits: loose pages, Sentinals find Flesh'],
-      cost: 248,
+      string: 'Desolate Crypts',
+      description: ['Rifle through the bones of ancestors seeking Tomes of power. Madness Minimum: 44 ', ' Cost: Gold ', ' Benefits: ?'],
+      description2: ['There must be more. Madness Minimum: 44 ', 'Cost: Gold ', 'Benefits: information, loose pages, Sentinals find Flesh'],
+      description3: ['Less interesting crypts remain potentially profitable. Madness Minimum: 44 ', 'Cost: Gold ', 'Benefits: loose pages, Sentinals find Flesh'],
+      cost: 88,
       func: crypt,
-      unlocked: false,
-          active: false,
-      purchased: false
+      unlocked: true,
+      purchased: false,
+      permanent:true,
+      stage: 1
   },
-  tower: {//unlocked by expeditions
+  antiquarian: {//unlocked by expeditions
+      string: 'Antiquarian Shops',
+      description: ['The shady old shopkeep promises the unseen painting is worth the price. Madness Minimum: 88', 'Cost: Gold ', 'Benefit: ?'],
+      description2: ['Far down a hidden street, an old woman beckons West with a crooked finger. Madness Minimum: 88', 'Cost: Gold ', 'Benefit: ?'],
+      description3: ['West is intrigued as the callous shopkeep tries to hide the leaden case. Madness Minimum: 88', 'Cost: Sentinel 1, Gold ', 'Benefit: ?'],
+      description4: ['Rare books hide secrets hidden in code. Madness Minimum: 88', 'Cost: Gold ', 'Benefit: loose pages'],
+      cost: 248,
+      func: antiquarian,
+      unlocked: true,
+      purchased: false,
+      permanent:true,
+      stage: 1
+  },
+  tower: {
       string: 'Shunned Towers',
-      description: ['The locals know to avoid these old ruins at all costs. Madness Minimum: 88 ', ' Cost: Gold ', 'Benefit: ?'],
-      description2: ['The moldy bookcases still hold secrets for the patient and careful.', 'Cost: Gold ', 'Benefit: loose pages and slightly improved Study.'],
+      description: ['The locals avoid these old ruins at all costs. Madness Minimum: ', ' Cost: Gold ', 'Benefit: ?'],
+      description2: ['Hidden experiments gone wrong still yield secrets. Madness Minimum: ', 'Cost: Gold ', 'Benefit: ?'],
+      description3: ["Potentially there are labs From Beyond. Madness Minimum: ", 'Cost: Gold ', 'Benefit: ?'],
+      description4: ['The moldy bookcases still hold secrets for the patient. Madness Minimum: ', 'Cost: Gold ', 'Benefit: loose pages.'],
+      madMin: 164,
       cost: 484,
       func: tower,
-      loot: ['Shining Trapezohedron'],// unlocks dream expeditions
-      unlocks: ['kult'],
+      unlocked: true,
+      purchased: false,
+      permanent:true,
+      stage: 1
+  },
+  estate: {
+      string: 'Ancestral Estate',
+      description: ['Flashes of childhood dreams lure West to the attic. Madness Minimum: ', 'Cost: Gold ', 'Benefits: ?'],
+      description2: ['Returning to delve deeper. Madness Minimum: ', 'Cost: Gold ', 'Benefit: ?'],
+      description3: ['Family history links West to a sea captain named Marsh. Madness Minimum: ', 'Cost: Gold ', 'Benefit: ?'],
+      description4: ['Strange sightings in the hills invite investigation. Madness Minimum: ', 'Cost: Innocents 8, Gold ', 'Benefit: ?'],
+      description5: ['Rooting through the past. Madness Minimum: ', 'Cost: Gold ', 'Benefit: loose pages, Sentinals find Flesh'],
+      madMin: 88,
+      cost: 848,
+      func: estate,
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:true,
+      stage: 1
   },
   wax: {//unlocked by expeditions
       string: 'Wax Museum',
-      description: ['Something essential whispers from the basement. Madness Minimum: 88 ', 'Cost: Gold ', 'Benefit: ?'],
-      description2: ['So many innocents wandering the halls. Madness Minimum: 88 ', 'Cost: Gold ', 'Benefit: Innocents'],
+      description: ['Something essential whispers from the basement. Madness Minimum: ', 'Cost: Gold ', 'Benefit: ?'],
+      description2: ['So many innocents wandering the halls. Madness Minimum: ', 'Cost: Gold ', 'Benefit: Innocents'],
+      madMin: 164,
       cost: 848,
-      unlocks: ['Rhan-Tegoth'],
       func: wax,
       unlocked: false,
-          active: false,
       purchased: false,
-      kult: false
+      permanent:true,
+      kult: false,
+      stage: 1
   },
   desert: {//unlocked by 
       string: 'Desert Fastness',
-      description: ['Buried tombs hide passages into Darkness.  Madness Minimum: 848 ', ' Cost: Gold ', 'Benefit: ?'],
-      description2: ['Nothing', 'Cost: Gold ', 'Benefit: nothing'],
-      cost: 4848,
+      description: ["Whispers push West into the deep desert searching for... searching. Madness Minimum: 248", 'Cost: Gold ', 'Benefit: ?'], 
+      description2: ['Buried ruins rise and fall in the shifting sands.  Madness Minimum: 248 ', ' Requirement: 8 Sentinels Cost: Gold ', 'Benefit: ?'],
+      description3: ["Mirages of ancient cities and lost wisdom taunt and mock the seeker.", 'Cost: Gold ', 'Benefit: loose pages, Vision'],
+      cost: 2484,
       func: desert,
-      loot: ['gates'],
-      unlocks: ['Yig', 'Nyarlathotep'],
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:true,
+      stage: 1
   },
-  estate: {//unlocked by expeditions unlocks reef
-      string: 'Ancestral Estate',
-      description: ['Flashes of childhood horrors demand a return. Madness Minimum: 888 ', 'Cost: Gold ', 'Benefits: ?'],
-      description2: ['Family is so important. Madness Minimum: 888 ', 'Cost: Gold ', 'Benefit: loose pages'],
-      cost: 8484,
-      func: estate,
+  mound: { //unlocked by eibon
+      string: 'The Mound',
+      description: ["Sealed for centuries, only T'yog still remembers how to pass through the stone unhindered. Madness Minimum: 484 ", "Requires: T'yog, 8 Sentinels, Cost: Gold ", "Benefit?"],
+      cost: 2484,
+      func: mound,
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:false
   },
-  passage: { //unlocked by eibon
-      string: 'Stone Passage',
-      description: ["Sealed for centuries, it may only be opened with the Scroll of T'yog. Madness Minimum: 888 ", ' Cost Gold ', "Benefit?"],
-      description2: ["K'n-yan does not welcome strangers but the secrets to be had are worth the risk. Madness Minimum: 888 ", ' Cost Gold ', 'Benefit: loose pages'],
-      cost: 8484,
-      func: passage,
-      unlocked: true,
-      purchased: false
+  tsath: { //unlocked by mound
+      string: 'Tsath',
+      description: ["T'yog believes he can make the right kind of introduction to the secretive K'n-yan. Madness Minimum: ", 'Requires: 16 Sentinels, Cost: Gold ', "Benefit?"],
+      description2: ["Returning empty handed seems rude. Madness Minimum: ", 'Requires: 8 Sentinels, Cost: 1 Tome, Gold ', "Benefit?"],
+      description3: ["They happily offer to trade Visions. Madness Minimum: ", 'Requires: 4 Sentinels, Cost: Vision 8448 Gold ', "Benefit?"],
+      description4: ["West must find a way to repay the kindness of the K'n-yan. Madness Minimum: ", 'Cost: Ichor 16, Gold ', "Benefit?"],
+      description5: ["The K'n-yan still have much to teach West. Madness Minimum: ", 'Cost: Gold ', "Benefit: increased Health, loose pages"],
+      madMin: 248,
+      cost: 4884,
+      func: tsath,
+      unlocked: false,
+      purchased: false,
+      permanent:true,
+      stage: 1
+  },
+  yoth: {  //unlocked by mound
+      string: 'Dead Yoth',
+      description: ["The former home of a reptilian race, it lies abandoned. Madness Minimum: 484 ", 'Requires: 8 Sentinels, Cost: Gold ', "Benefit?"],
+      cost: 8448,
+      func: yoth,
+      unlocked: false,
+      purchased: false,
+      permanent:false
+  },
+  nkai: {  //unlocked by yoth
+      string: "Lightless N'kai",
+      description: ["Even T'yog hesitates before stepping into lightless N'kai. Madness Minimum: 848 ", 'Cost: Gold ', "Benefit?"],
+      cost: 48484,
+      func: nkai,
+      unlocked: false,
+      purchased: false,
+      permanent:false
   },
   reef: {//unlocked by estate bc innsmouth
       string: 'Coral Reef',
-      description: ['Things from the Deep meet here for commerce with the surface. Madness Minimum: 888 ', ' Cost: Flesh ', 'Benefit ?'],
-      description2: ['Dagon offers a darker sort of trade. Madness Minimum: 888 ', 'Cost: Innocents ', 'Benefits: 1 Hybrid, Gold'],
+      description: ['Things from the Deep meet here for commerce with the surface. Madness Minimum: 484 ', ' Cost: Flesh ', 'Benefit ?'],
+      description2: ['Dagon offers a darker sort of trade. Madness Minimum: 484 ', 'Cost: Innocents ', 'Benefits: 1 Hybrid, Gold'],
       cost: 84,
       benefit: 1,
       func: reef,
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:true,
+      stage: 1
   }, 
   depths: {//unlocked by dagon
       string: 'Ocean Depths',
-      description: ["Swim through the dangerous ruins of R'lyeh to find a slumbering God. Madness Minimum: 4444 ", "Dagon's Blessing required, Cost: Hybrids ", "Benefit?"],
-      description2: ['Secrets abound for the daring. Madness Minimum: 4444 ', 'Cost: Hybrids  ', 'Benefit: loose pages, '],//lagh metal?
+      description: ["Swim through the dangerous ruins of R'lyeh to find a slumbering God. Madness Minimum: 484 ", "Dagon's Blessing required, Cost: Hybrids ", "Benefit?"],
+      description2: ['Secrets abound for the daring. Madness Minimum: 484 ', 'Cost: Hybrids  ', 'Benefit: loose pages, '],//lagh metal?
       cost: 16,
       func: depths,
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:true,
+      stage: 1
   },
-  ant: {//unlocked by kla dream
+  ant: {
       string: 'Antarctic Journey',
-      description: ['Only the truly foolish would dare the graveyard of an entire species. Madness Mininum: 444444', 'Requires 44 Sentinels Cost: Gold ', "Benefit:?"],
-      description2: ['N/A', 'Cost:   ', 'Benefit: N/A '],//lagh metal?
-      cost: 484848,
+      description: ['Only the truly foolish would dare the graveyard of an entire species. Madness Mininum: 848', 'Requires 44 Sentinels, Cost: Sentinels, Gold ', "Benefit:?"],
+      description2: ['A glimpse of something beyond the ancient pentagonal city Madness Mininum: 848', 'Requires 44 Sentinels, Cost: Gold ', 'Benefit: Darkness'],
+      cost: 848484,
       func: ant,
-      loot: ['Darkness'],
-      unlocks: [],
       unlocked: false,
-          active: false,
-      purchased: false
+      purchased: false,
+      permanent:true,
+      stage: 1
   }
 };
 let worldKeys = Object.keys(world);
@@ -114,29 +171,28 @@ function loadWorldExpeditions() {
     for (let i = 0; i < worldKeys.length; i++) {
         const worlds = document.getElementById('world');
         const button = document.createElement('button');
-        
-        // Create the image element
         const img = document.createElement('img');
-        img.src = `images/world/${worldKeys[i]}.jpg`; // Use the worldKeys variable for the image path
-        img.alt = world[worldKeys[i]].string; // Optional: alt text using world string
+        img.src = `images/world/${worldKeys[i]}.jpg`; 
+        img.alt = world[worldKeys[i]].string; 
         img.classList.add('worldImg');
-        
-        // Create a span for the text
         const textSpan = document.createElement('span');
         textSpan.textContent = world[worldKeys[i]].string;
         textSpan.classList.add('worldTxt');
-        
-        // Set attributes for the button
         button.classList.add('worldWraps');
-        const Id = worldKeys[i] + 'Wrap';
+        let Id="";
+        if(world[worldKeys[i]].permanent===true){
+            Id = worldKeys[i] + 'Wrap';
+        }else{
+            Id = worldKeys[i] + 'OneOff';
+        }
         button.id = Id;
-
-        // Append the image and text to the button
         button.appendChild(img);
         button.appendChild(textSpan);
-        
-        // Append the button to the world element
         worlds.appendChild(button);
+        if(world[worldKeys[i]].purchased=== true && world[worldKeys[i]].permanent=== false){
+        }else if(world[worldKeys[i]].unlocked === true && world[worldKeys[i]].permanent=== true){
+            document.getElementById(worldKeys[i] + "Wrap").style.display="block";
+        }
     }
 }
 loadWorldExpeditions();
@@ -148,11 +204,11 @@ loadWorldExpeditions();
 	//========================================= 
         
 function loosePages(cost){
-    let pages=Math.floor((cost*0.04) +(Math.random()*0.08* cost));
-        vault.tomes.pageCounter += pages;
+    let pages=Math.floor((cost*0.08) +(Math.random()*0.08* cost));
+        vault.tome.pageCounter += pages;
         comment("loose pages...(+ " + pages + " pages)");
-        document.getElementById('pages').innerHTML = Math.floor(vault.tomes.pageCounter);
-        if(vault.tomes.pageCounter >= vault.tomes.pagesNeeded){
+        document.getElementById('pages').innerHTML = Math.floor(vault.tome.pageCounter);
+        if(vault.tome.pageCounter >= vault.tome.pagesNeeded){
             comment('West has enough pages to assemble a Tome. (Fleshcrafts)', 'pink', 'purple');
         }
 }
@@ -164,165 +220,462 @@ function sentinelEx(){
             document.getElementById('fleshWrap').style.display = 'block';
             comment("Waste not, want not. (FleshCrafts unlocked in Obsidian Vault.)");
         }
-        let temp = Math.ceil(cult.sentinels.outMultiplier * (Math.max((Math.random() * cult.sentinels.current), 1))); //always flesh in a crypt
-        numberChange('vault', 'flesh', temp, 'red', 'red');
-        comment("The Sentinels found some Flesh +" + temp, "red");
+        let temp = Math.ceil(cult.sentinels.outMultiplier * (Math.max((Math.random() * (cult.sentinels.current/2) + cult.sentinels.current/2), 1))); //always flesh in a crypt
+        if(relics.amulet.unlocked===true){
+            if(cult.sentinels.current>0){
+                temp*=2;
+                numberChange("cult", "sentinels", -1, "", "red"); 
+                temp++;
+                numberChange('vault', 'flesh', temp, 'red', 'red');
+                comment("With the Hound to guide them, the Sentinels found more Flesh +" + temp + " (-1 Sentinel)", "red");
+            }else if(cult.innocents.current>0){
+                numberChange("cult", "innocents", -1, "", "red");
+                comment("The Hound was displeased there were no Sentinels left to play with. (-1 Innocent)");
+            }else{
+                numberChange("stats", "health", -88, "", "red");
+                comment("The Hound snaps at West for lack of toys to play with. (-88 Health)");
+            }
+        }else{
+            numberChange('vault', 'flesh', temp, 'red', 'red');
+            comment("The Sentinels found some Flesh +" + temp, "red");
         }
+    }
 }
+
 function crypt(){
     if(vault.gold.current > world.crypt.cost && madMin(44)){
+        buttonGlow("cryptWrap");
         numberChange('vault', 'gold', -world.crypt.cost, '', 'red');
         loosePages(world.crypt.cost);
         if(cult.sentinels.current >0){
             sentinelEx();
         }
-        if(world.crypt.purchased === false){
-            world.crypt.purchased = true;
-            vault.tomes.unlocked = true;
-            document.getElementById('tomesWrap').style.display='block';
-            document.getElementById('tomes').innerHTML = vault.tomes.current;
+        if(world.crypt.stage===1){
+            vault.tome.unlocked = true;
+            document.getElementById('tomeWrap').style.display='block';
+            document.getElementById('tome').innerHTML = vault.tome.current;
             comment('A unique find! (Professor West)', 'lightblue', 'crypt');
-            eventBox('images/eventImages/manuscript.jpg', 'Pnakotic Manuscripts', 'A unique find. Translation (West tab) will improve Studying and Mental Fortitude. More can be Forged in FleshCrafts.');
-            document.getElementById('pnakWrap').style.display='block';
-            actionUpgrades.study.pnak.unlocked = true;
-            document.getElementById('cryptWrap').style.backgroundColor='grey';
+            eventBox('images/eventImages/manuscript.jpg', 'Liber Damnatus', "Even with Sentinels to assist, it seemed like a futile endeavor to rummage through the bones of the dead. Ia!  In the tomb of a despised ancestor, still clutched in the corpse's final embrace, this Tome glows with power. (Translate Tomes in West tab.)");
+            document.getElementById('damnWrap').style.display='block';
+            actionUpgrades.study.damn.unlocked = true;
+            world.crypt.stage=2;
             document.getElementById('cryptDesc').innerHTML = world.crypt.description2[0];
             document.getElementById('cryptBenefit').innerHTML = world.crypt.description2[2];
+        }else if(world.crypt.stage===2){
+            world.estate.unlocked=true;
+            document.getElementById("estateWrap").style.display="block";
+            eventBox('images/world/estate.jpg', 'Ancestral Estates', "West's ancestors took their secrets with them when they died. Buried in layers of bone dust, inlaid case of brittle deeds looks authentic. (Ancestral Estate expedition unlocked, Sentinels find Flesh, loose pages acquired)");
+            world.crypt.stage=3;
+            document.getElementById('cryptDesc').innerHTML = world.crypt.description3[0];
+            document.getElementById('cryptBenefit').innerHTML = world.crypt.description3[2];
+            world.crypt.purchased = true;
+            document.getElementById('cryptWrap').style.backgroundColor='#301934';
         }
-
         world.crypt.cost = Math.ceil(world.crypt.cost * 1.4);
         document.getElementById('cryptCost').innerHTML= world.crypt.cost;
     }
 }
 
-function tower(){
-    if(vault.gold.current >= world.tower.cost && madMin(88)){
-        numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
-        loosePages(world.tower.cost);
-        if(world.tower.purchased === false){
-            world.tower.purchased = true;
-            relics.trap.unlocked = true;
-            dreamEx.pillar.dreamUnlocked = true;
-            document.getElementById('trapWrap').style.display='block';
+function antiquarian(){
+    if(vault.gold.current >= world.antiquarian.cost && madMin(88)){
+        buttonGlow("antiquarianWrap");
+        if(world.antiquarian.stage===1){
+            document.getElementById('antiquarianDesc').innerHTML = world.antiquarian.description2[0];
+            document.getElementById('antiquariancost').innerHTML = world.antiquarian.description2[1];
+            document.getElementById('antiquarianBenefit').innerHTML = world.antiquarian.description3[2];
             document.getElementById('sacrariumTab').style.display='block';
             domUnlocks.sacrarium = true;
-            setTimeout(function() {
-                document.getElementById('dreamEx').style.display = 'flex';
-            }, 2000);
-            dreamEx.pillar.unlocked = true;
-            dreamEx.plateau.unlocked = true;
-            dreamEx.zoog.unlocked = true;
-            document.getElementById('pillarWrap').style.display='block';
-            document.getElementById('plateauWrap').style.display='block';
-            document.getElementById('zoogWrap').style.display='block';
-            comment('Dream a little dream for me...', 'lightblue', 'blue');
-            eventBox('images/relics/trap.jpg', 'Shining Trapezohedron', "Its facets reveal the infinite Realms beyond. West catches a glimpse of what could be Unknown Kadath where the gods dwell, so they say. West's dreams are now filled with the search for that fabled locale. (Dream Expeditions unlocked. Trapezohedron placed in Sacrarium.)");
-            document.getElementById('towerWrap').style.backgroundColor='grey';
-            document.getElementById('towerDesc').innerHTML = world.tower.description2[0];
-            document.getElementById('towerBenefit').innerHTML = world.tower.description2[2];
+            relics.marceline.unlocked= true;
+            document.getElementById("marcelineWrap").style.display="block";
+            eventBox("images/relics/marceline.jpg", "Marceline ", "The subject is a woman of breathtaking beauty, whose hair waves in an unearthly breeze. The longer West looks, the more the landscape seems to show glimpses of unknown worlds. (Marceline painting in Sacrarium.)");
+            world.antiquarian.stage++;
+        }else if(world.antiquarian.stage===2){
+            document.getElementById('antiquarianDesc').innerHTML = world.antiquarian.description3[0];
+            document.getElementById('antiquariancost').innerHTML = world.antiquarian.description3[1];
+            document.getElementById('antiquarianBenefit').innerHTML = world.antiquarian.description3[2];
+            relics.viol.unlocked= true;
+            document.getElementById("violWrap").style.display="block";
+            document.getElementById("chantBenefit").innerHTML= "Benefits: Love and Charm";
+            eventBox("images/relics/viol.jpg", "Ia! The Viol of Erich Zahn!", "Lost these many years, Its strings still hum with emotional resonance. (Viol placed in Sacrarium)");
+            world.antiquarian.stage = 3;
+        }else if(world.antiquarian.stage === 3){
+            numberChange("cult", "sentinels", -1, "", ""); 
+            numberChange("vault", "flesh", 1, "", "");
+            document.getElementById('antiquarianDesc').innerHTML = world.antiquarian.description4[0];
+            document.getElementById('antiquariancost').innerHTML = world.antiquarian.description4[1];
+            document.getElementById('antiquarianBenefit').innerHTML = world.antiquarian.description4[2];
+            relics.amulet.unlocked=true;
+            document.getElementById("amuletWrap").style.display = "block";
+            eventBox("images/relics/amulet.jpg", "Hound Amulet", "Found sealed in a leaden casket, holding the amulet summons a deadly beast. West calls out its true name and the winged, snarling, creature screeches its acquiescence before turning on a nearby Sentinel and tearing out his throat. West silently accepts the price for the beast's aid. (-1 Sentinel, +1 Flesh, Sentinels find twice as much Flesh. One is lost to the Hound each trip, Hound Amulet in Sacrarium)");
+            world.antiquarian.stage = 4;
+            world.antiquarian.purchased = true;
+            document.getElementById('antiquarianWrap').style.backgroundColor='#301934';
+        }else{
+            loosePages(world.antiquarian.cost);
         }
-        actions.study.level+=0.4;
-        world.tower.cost = Math.ceil(world.tower.cost * 1.4);
-        document.getElementById('towerCost').innerHTML = world.tower.cost;
+        numberChange('vault', 'gold', -world.antiquarian.cost, 'yellow', 'red');
+        world.antiquarian.cost = Math.ceil(world.antiquarian.cost * 1.8);
+        document.getElementById('antiquarianCost').innerHTML = world.antiquarian.cost;
+    }
+}
+
+
+function towerUpdater(load){
+    if(!load){
+        buttonGlow("towerWrap");
+        loosePages(world.tower.cost);
+        sentinelEx();
+        world.tower.cost = Math.floor(world.tower.cost * 1.8);
+    }
+    document.getElementById("towerCost").innerHTML=world.tower.cost;
+    if(world.tower.stage===2 || world.tower.stage===3 || world.tower.stage===4){
+        document.getElementById("towerDesc").innerHTML=world.tower["description" + (world.tower.stage)][0];
+        document.getElementById("towerMadMin").innerHTML=world.tower.madMin;
+        document.getElementById("towercost").innerHTML=world.tower["description" + (world.tower.stage)][1];
+        document.getElementById("towerBenefit").innerHTML=world.tower["description" + (world.tower.stage)][2];
+    }
+}
+function tower(){
+    if(world.tower.stage===1){//syringe for early murder
+        if(vault.gold.current >= world.tower.cost && madMin(164)){
+            numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
+            document.getElementById('sacrariumTab').style.display='block';
+            domUnlocks.sacrarium = true;
+            relics.goldSyringe.unlocked = true;
+            document.getElementById('goldSyringeWrap').style.display = 'block';
+            terrorCrafts.syringe.unlocked= true;
+            document.getElementById("syringeWrap").style.display="block";
+            world.tower.stage=2;
+            world.tower.madMin=248;
+            eventBox("images/relics/goldSyringe.jpg", "Little Gold Syringe", "Inside a locked case is a little gold syringe. It appears harmless.(TerrorCrafts, Gold Syringe in Sacrarium");
+            towerUpdater(false);
+        }
+    }else if(world.tower.stage===2){
+        if(vault.gold.current >= world.tower.cost && madMin(248)){
+            numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
+            fleshCrafts.seance.unlocked= true;
+            document.getElementById("seanceWrap").style.display="block";
+            eventBox("images/eventImages/saltNotes.jpg", "Notes on Essential Salts", "Hidden in a false wall, these crumbling notes detail how to force secrets from the dust of the dead. (Séance in FleshCrafts)");
+            world.tower.stage=3;
+            world.tower.madMin=484;
+            towerUpdater(false);
+        }
+     }else if(world.tower.stage===3){
+        if(vault.gold.current >= world.tower.cost && madMin(484)){
+            numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
+            ichorCrafts.resonator.unlocked= true;
+            relics.resonatorRelic.unlocked = true;
+            document.getElementById('resonatorRelicWrap').style.display = 'block';
+            document.getElementById("resonatorLock").style.display="block";
+            eventBox("images/relics/resonatorRelic.jpg", "Pineal Resonator", "This mysterous blending of machine and Madness is a triumph of engineering.(IchorCrafts, Pineal Resonator in Sacrarium)");
+            world.tower.stage=4;
+            world.tower.madMin=848;
+            towerUpdater(false);
+        }
+     }else if(world.tower.stage===4){
+        if(vault.gold.current >= world.tower.cost && madMin(848)){
+            numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
+            relics.trap.unlocked = true;
+            document.getElementById('trapWrap').style.display='block';
+            actionUpgrades.study.sublimate.unlocked=true;
+            document.getElementById("sublimateWrap").style.display = "block";
+            eventBox('images/relics/trap.jpg', 'Shining Trapezohedron', "While West is transfixed by the vistas shown in the crystal's facets, another, hungrier presence stares back. (Sublimate unlocked in West tab, Trapezohedron placed in Sacrarium.)");
+            document.getElementById('towerWrap').style.backgroundColor='#301934';
+            world.tower.purchased = true;
+            world.tower.stage++;
+            world.tower.madMin=164;
+            towerUpdater(false);
+        }
+    }else{
+        if(vault.gold.current >= world.tower.cost && madMin(164)){
+            numberChange('vault', 'gold', -world.tower.cost, 'yellow', 'red');
+            towerUpdater(false);
+        }
+    }
+}
+
+function estateUpdater(load){
+    buttonGlow("estateWrap");
+    document.getElementById("estateDesc").innerHTML=world.estate["description" + (world.estate.stage)][0];
+    document.getElementById("estateMadMin").innerHTML=world.estate.madMin;
+    document.getElementById("estatecost").innerHTML=world.estate["description" + (world.estate.stage)][1];
+    if(load !== "load"){
+    loosePages(world.estate.cost);
+    sentinelEx();
+    world.estate.cost = Math.floor(world.estate.cost * 2.4);
+    }
+    document.getElementById("estateCost").innerHTML=world.estate.cost;
+    document.getElementById("estateBenefit").innerHTML=world.estate["description" + (world.estate.stage)][2];
+}
+function estate(){
+    if(world.estate.stage===1){
+        if(vault.gold.current >= world.estate.cost && madMin(world.estate.madMin)){
+            numberChange('vault', 'gold', -world.estate.cost, '', 'red');
+            world.estate.stage=2;
+            world.estate.madMin=164;
+            eventBox('images/relics/key.jpg', 'The Silver Key!', "West searches wildly, drawn as a moth to a flame to the box etched with sigils in the attic. Inside is the Silver Key and a tattered parchment. Touching the Key, West has a vision of what could only be unknown Kadath where the old Gods of Earth dance, so they say. West's dreams are now filled with the search for that fabled locale.  (Silver Key placed in Sacrarium, Dreaming is more effective, Dream Expeditions unlocked.");
+            actions.dream.level+=0.8;
+            relics.key.unlocked = true;
+            document.getElementById("keyWrap").style.display = "block";
+            domUnlocks.sacrarium = true;
+            document.getElementById('sacrariumTab').style.display='block';
+            dreamEx.pillar.dreamUnlocked=true;
+            setTimeout(function() {
+            document.getElementById('dreamEx').style.display = 'flex';
+            }, 2000);
+            comment('Dream a little dream for me...', 'lightblue', 'blue');
+            estateUpdater();
+        }
+    }else if(world.estate.stage===2){
+        if(vault.gold.current >= world.estate.cost && madMin(world.estate.madMin)){
+            numberChange('vault', 'gold', -world.estate.cost, '', 'red');
+            world.estate.stage=3;
+            world.estate.madMin=248;
+            eventBox('images/world/estate.jpg', 'Buried Secrets', "Beneath the facade of genteel society lies a monstrous creation. (Breeding Pits in FleshCrafts)'");
+            terrorCrafts.breedingPits.unlocked = true;
+            document.getElementById('breedingPitsWrap').style.display='block';
+            estateUpdater();
+        }
+    }else if (world.estate.stage===3){
+        if(vault.gold.current >= world.estate.cost && madMin(world.estate.madMin)){
+            numberChange('vault', 'gold', -world.estate.cost, '', 'red');
+            world.estate.stage=4;
+            world.estate.madMin=484;
+            eventBox('images/world/estate.jpg', 'Innsmouth Harbor', "An ornate metal anchor hidden in a false wall gives West a rare opportunity. (Coral Reef expedition unlocked)");
+            world.reef.unlocked = true;
+            document.getElementById('reefWrap').style.display='block';
+            estateUpdater();
+        }
+    }else if(world.estate.stage===4){
+        if(cult.innocents.current>=8 && vault.gold.current >= world.estate.cost && madMin(world.estate.madMin)){
+            numberChange("cult", "innocents", -8, "", "");
+            numberChange('vault', 'gold', -world.estate.cost, '', 'red');
+            ichorCrafts.brainJar.unlocked=true;
+            document.getElementById("brainJarLock").style.display = "block";
+            eventBox("images/eventImages/migo.jpg", "Mi-Go", "The winged crustaceans from Yuggoth are friendlier than they seem. They offer West one of their brain transport cylinders for study in exchange for only a few Innocents. (Brain Jars unlocked in IchorCrafts)");
+            world.estate.stage=5;
+            world.estate.madMin=88;
+            world.estate.purchased = true;
+            document.getElementById('estateWrap').style.backgroundColor='#301934';
+            estateUpdater();
+        }
+    }else{
+        if(vault.gold.current >= world.estate.cost && madMin(world.estate.madMin)){
+            estateUpdater();
+        }
     }
 }
 
 
 function wax(){
-    if(vault.gold.current > world.wax.cost && madMin(88)){
+    if(vault.gold.current > world.wax.cost && madMin(world.wax.madMin)){
+        buttonGlow("waxWrap");
         numberChange('vault', 'gold', -world.wax.cost, 'yellow', 'red');
-        if(world.wax.purchased === false){
+        if(world.wax.stage===1){
             document.getElementById('rhanWrap').style.display='block';
-            eventBox("images/relics/rhanRelic.jpg", "Rhan-Tegoth!", "She was hidden there, locked away in the basement, waiting as she had waited Eons in the frozen North. The Harbinger of the Gods, Rhan is the Vessel of Transmutation. (Rhan waits in the Sacrarium)");
+            eventBox("images/godsAppeased/rhanAppeased.jpg", "Rhan-Tegoth!", "She was hidden there, locked away in the basement, waiting as she had waited Eons in the frozen North. The Harbinger of the Gods, Rhan is the Vessel of Transmutation. (Rhan waits in the Sacrarium)");
             comment('Free her... feed her... She is the harbinger.');
-            document.getElementById('waxWrap').style.backgroundColor='grey';
             document.getElementById('waxDesc').innerHTML = world.wax.description2[0];
             document.getElementById('waxBenefit').innerHTML = world.wax.description2[2];
             document.getElementById('sacrariumTab').style.display='block';
             domUnlocks.sacrarium = true;
             gods.rhan.unlocked = true;
+            world.wax.stage++;
+            world.wax.madMin=44;
+            document.getElementById("waxMadMin").innerHTML=world.wax.madMin;
             world.wax.purchased = true;
-    }else{
-        let temp = Math.floor(Math.random() * world.wax.cost/400) + cult.sentinels.current;
-        numberChange('cult', 'innocents', temp, 'green', 'red');
-        comment("many visitors means many opportunities... (+" + temp + "Innocents)", "green");
-    }
-    if(world.wax.kult === true){
-        document.getElementById('waxWrap').style.backgroundColor='grey';
-        world.wax.kult = false;
-        gods.shub.unlocked = true;
-        document.getElementById('shubWrap').style.display='block';
-           // vault.tyog.unlocked = true;
-     //       document.getElementById('tyogWrap').style.display = 'block';
-//        terrorCrafts.mass.unlocked = true;
-//            document.getElementById('massWrap').style.display='block';
-        eventBox('images/eventImages/mummy.jpg', "The Mummy.", "West finds T'yog propped up in a corner, bandaged arms raised to amuse the foolish. Petrified by dread Ghatanothoa in Ancient Mu, it is only with the Scroll that he may be freed. T'yog gratefully offers service as a High Priest, capable of specialized rituals and the blessing of his patron. (Shub-Niggurath in Sacrarium)");
+            document.getElementById('waxWrap').style.backgroundColor='#301934';
+        }else if(world.wax.kult === true){
+            document.getElementById('waxWrap').style.backgroundColor='#301934';
+            document.getElementById('waxDesc').innerHTML = world.wax.description2[0];
+            document.getElementById('waxBenefit').innerHTML = world.wax.description2[2];
+            world.wax.madMin=44;
+            document.getElementById("waxMadMin").innerHTML=world.wax.madMin;
+            world.wax.kult = false;
+            vault.tyog.unlocked = true;
+            world.mound.unlocked=true;
+            document.getElementById("moundOneOff").style.display="block";
+            document.getElementById('tyogWrap').style.display = 'block';
+            eventBox('images/eventImages/mummy.jpg', "The Mummy.", "West finds T'yog propped up in a corner, bandaged arms raised to amuse the foolish. Petrified by dread Ghatanothoa in Ancient Mu, it is only with the Scroll that he may be freed. T'yog gratefully offers service as a High Priest, capable of specialized rituals. (T'yogCrafts unlocked, The Mound expedition unlocked.)");
+        }else{
+            document.getElementById('waxDesc').innerHTML = world.wax.description2[0];
+            document.getElementById('waxBenefit').innerHTML = world.wax.description2[2];
+            let temp = Math.ceil(Math.random() * world.wax.cost/400);
+            numberChange('cult', 'innocents', temp, 'green', 'red');
+            comment("many visitors means many opportunities... (+" + temp + "Innocents)", "green");
         }
     world.wax.cost = Math.ceil(world.wax.cost * 1.4);
     document.getElementById('waxCost').innerHTML = world.wax.cost;
     }
 }
 
+
 function desert(){
-    if(vault.gold.current >= world.desert.cost && madMin(848)){
-        numberChange('vault', 'gold', -world.desert.cost, 'yellow', 'red');
-        world.desert.purchased = true;
-        flashFade('desertWrap');
-        gods.nyar.unlocked = true;
-        document.getElementById('nyarWrap').style.display='block';
-            document.getElementById('sacrariumTab').style.display='block';
-            domUnlocks.sacrarium = true;
-        eventBox('images/world/desert.jpg', 'Hidden Passage', 'Having breached the ancient wall, West gazes into the depths and hears a faint piping. There is a flash like lightning and then laughter. (Nyarlathotep waits in the Sacrarium)');
-        loosePages(world.desert.cost);
+    if(world.desert.stage===1){
+        if(vault.gold.current >= world.desert.cost && madMin(248)){
+            numberChange('vault', 'gold', -world.desert.cost, 'yellow', 'red');
+            loosePages(world.desert.cost);
+            world.desert.cost=Math.floor(world.desert.cost * 1.8);
+            document.getElementById("desertCost").innerHTML=world.desert.cost;
+            buttonGlow("desertWrap");
+            gods.nyar.unlocked = true;
+            document.getElementById('nyarWrap').style.display='block';
+            eventBox('images/world/desert.jpg', 'Hidden Passage', 'Having breached the ancient wall, West gazes into the depths and hears a faint piping. There is a flash like lightning and then laughter. (Nyarlathotep waits in the Sacrarium)'); 
+            world.desert.stage=2;
+            document.getElementById('desertDesc').innerHTML = world.desert.description2[0];
+            document.getElementById('desertcost').innerHTML = world.desert.description2[1];
+            document.getElementById('desertBenefit').innerHTML = world.desert.description2[2];
+        }
+    }else if(world.desert.stage===2){
+        if(cult.sentinels.current>=8 && vault.gold.current >= world.desert.cost && madMin(248)){
+            numberChange('vault', 'gold', -world.desert.cost, 'yellow', 'red');
+            loosePages(world.desert.cost);
+            world.desert.cost=Math.floor(world.desert.cost * 1.8);
+            document.getElementById("desertCost").innerHTML=world.desert.cost;
+            fleshCrafts.crocBargain.unlocked=true;
+            document.getElementById("crocBargainWrap").style.display = "block";
+            eventBox('images/world/desert.jpg', 'Irem?', 'Opening trade with the ancient Crocodilian civilzation was perilous, but West is sure they have much to offer. (Crocodilian Bargains)');
+            document.getElementById('desertDesc').innerHTML = world.desert.description3[0];
+            document.getElementById('desertcost').innerHTML = world.desert.description3[1];
+            document.getElementById('desertBenefit').innerHTML = world.desert.description3[2];
+            world.desert.stage++;
+            world.desert.purchased=true;
+            document.getElementById('desertWrap').style.backgroundColor='#301934';
+        }
+    }else if(world.desert.stage>2){
+        if(vault.gold.current >= world.desert.cost && madMin(248)){
+            numberChange('vault', 'gold', -world.desert.cost, 'yellow', 'red');
+            loosePages(world.desert.cost);
+            numberChange("stats", "vision", world.desert.cost/8, "yellow", "");
+            world.desert.cost=Math.floor(world.desert.cost * 1.4);
+            document.getElementById("desertCost").innerHTML=world.desert.cost;
+        }
     }
 }
 
-function estate(){//unlocks reef bc innsmouth
-    if(vault.gold.current >= world.estate.cost && madMin(888)){
-        numberChange('vault', 'gold', -world.estate.cost, '', 'red');
-        world.estate.cost = Math.floor(world.estate.cost * 1.4);
-        document.getElementById('estateCost').innerHTML = world.estate.cost;
-        if(world.estate.purchased === false){
-            world.estate.purchased = true;
-            document.getElementById('estateWrap').style.backgroundColor='grey';
-            document.getElementById('estateDesc').innerHTML = world.estate.description2[0];
-            document.getElementById('estateBenefit').innerHTML = world.estate.description2[2];
-            eventBox('images/world/estate.jpg', 'Innsmouth Estate', "Mouldy and delapidated, West's childhood home brings back memories of Family secrets under the earth and what lies beyond the Reef. (Breeding Pits in FleshCrafts, Reef Expedition)'");
-            terrorCrafts.breedingPits.unlocked = true;
-            document.getElementById('breedingPitsWrap').style.display='block';
-            world.reef.unlocked = true;
-            document.getElementById('reefWrap').style.display='block';
-        }
-        loosePages(world.estate.cost);
-        sentinelEx();
-    }
-}
 //K’n-yan all dwelt in the great, tall city of Tsath Yoth valley of Do-Hna
-function passage(){
-    if(vault.gold.current >= world.passage.cost && madMin(888) && relics.tyog.unlocked === true){
-        numberChange('vault', 'gold', -world.passage.cost, '', 'red');
-        world.passage.cost = Math.floor(world.passage.cost * 1.4);
-        document.getElementById('passageCost').innerHTML = world.passage.cost;
-        if(world.passage.purchased === false){
-            world.passage.purchased = true;
-            document.getElementById('passageWrap').style.backgroundColor='grey';
-            document.getElementById('passageDesc').innerHTML = world.estate.description2[0];
-            document.getElementById('passageBenefit').innerHTML = world.estate.description2[2];
-            eventBox('images/world/passage.jpg', "N'kai", "The sealed stone melts with a wave of the Scroll of T'yog, revealing passages winding ever deeper into the Earth. Moving through the viscious realm of the K’n-yan, beneath the blood red plains of Yoth, West fearfully approaces lightless N'kai. Massive Tsathoggua sits lazily in the darkness there, mouth still agape for the sacrifice. (Tsathoggua in Sacrarium)");
-            gods.tsath.unlocked = true;
-            document.getElementById('tsathWrap').style.display = 'block';
-            document.getElementById('sacrariumTab').style.display='block';
-            domUnlocks.sacrarium = true;
-        }
-        loosePages(world.passage.cost);
+function mound() {
+    if (vault.gold.current >= world.mound.cost && cult.sentinels.current>=8 && madMin(484) && relics.scrollTyog.unlocked === true) {
+        world.mound.purchased = true;
+        flashFade("moundOneOff");
+        let gold=Math.floor((world.mound.cost/2) + (Math.random() * 8 * (world.mound.cost/4)));
+        numberChange("vault", "gold", gold, "", "");
+        eventBox("images/eventImages/passage.jpg", "The Entrance", "The rock face melts with a wave of the Scroll of T'yog, revealing a dark passage into the Earth. West reaches the bottom only to discover a cavern of unimaginable proportions. With rations running low, West sends out Sentinels to gather what they can before vowing to return better equipped. (Tsath and Yoth expeditions unlocked, Gold acquired: " + gold);
+        setTimeout(() => {
+            world.tsath.unlocked=true;
+            document.getElementById("tsathWrap").style.display="block";
+            world.yoth.unlocked=true;
+            document.getElementById("yothOneOff").style.display="block";
+        }, 800);
     }
 }
+
+
+function tsathUpdater(){
+    buttonGlow("tsathWrap");
+    document.getElementById("tsathDesc").innerHTML=world.tsath["description" + (world.tsath.stage)][0];
+    document.getElementById("tsathMadMin").innerHTML=world.tsath.madMin;
+    document.getElementById("tsathcost").innerHTML=world.tsath["description" + (world.tsath.stage)][1];
+    document.getElementById("tsathCost").innerHTML=world.tsath.cost;
+    document.getElementById("tsathBenefit").innerHTML=world.tsath["description" + (world.tsath.stage)][2];
+}
+function tsath(){
+    if(world.tsath.stage===1){
+        if (vault.gold.current >= world.tsath.cost && cult.sentinels.current>=16 && madMin(world.tsath.madMin)) {
+            numberChange("vault", "gold", -world.tsath.cost, "", "");
+            tyogCrafts.winnowing.unlocked=true;
+            document.getElementById("winnowingWrap").style.display="block";
+            tyogCrafts.riteSpring.unlocked=true;
+            document.getElementById("riteSpringWrap").style.display="block";
+            world.tsath.cost =Math.ceil( world.tsath.cost * 1.8);
+            world.tsath.stage++;
+            world.tsath.madMin=484;
+            tsathUpdater();
+            eventBox("images/world/tsath.jpg", "Tsath", "With a Sentinel honor guard, T'yog greets the K'n-yan in their ancient tongue; both facts impressing the strange cavern dwellers. In the days after, West learns much from the decadent people. (Rite of Spring?, The Winnowing?)"); 
+        }
+    }else if(world.tsath.stage===2){
+        if (vault.gold.current >= world.tsath.cost && cult.sentinels.current>=8 && madMin(world.tsath.madMin) && vault.tome.current>=1) {
+            numberChange("vault", "gold", -world.tsath.cost, "", "red");
+            numberChange("vault", "tome", -1, "", "red");
+            tomeCrafts.enscribe.unlocked = true;
+            document.getElementById('enscribeWrap').style.display='block';
+            world.tsath.cost =Math.ceil( world.tsath.cost * 1.8);
+            world.tsath.stage++;
+            world.tsath.madMin=484;
+            tsathUpdater();
+            eventBox("images/world/tsath.jpg", "Scribes", "Pleased at the gift, the K'n-yan leaders show West their Grand Library and the Scribes who filled it. (Scribes unlocked in TomeCrafts)");
+        }
+    }else if(world.tsath.stage===3){
+        if (vault.gold.current >= world.tsath.cost && cult.sentinels.current>=4 && madMin(world.tsath.madMin) && stats.vision.current>=8448) {
+            numberChange("vault", "gold", -world.tsath.cost, "", "red"); 
+            numberChange("stats", "vision", -8448, "", "red");
+            loveCrafts.dreamTheft.unlocked=true;
+            document.getElementById("dreamTheftLock").style.display="block";
+            tomeCrafts.trickApprentice.unlocked=true;
+            document.getElementById("trickApprenticeWrap").style.display = "block";
+            world.tsath.cost =Math.ceil( world.tsath.cost * 1.8);
+            world.tsath.stage++;
+            world.tsath.madMin=484;
+            tsathUpdater();
+            eventBox("images/world/tsath.jpg", "Telepathic Communion", "The K'n-yan scholars drain West of his Visions of the upper Earth, but teach West a rudimentary telepathy. (Krueger? in LoveCrafts, Apprentices unlocked in TomeCrafts)");
+        }
+    }else if(world.tsath.stage===4){
+        if (vault.gold.current >= world.tsath.cost && madMin(world.tsath.madMin) && vault.ichor.current>=8) {
+            numberChange("vault", "gold", -world.tsath.cost, "", "red");
+            numberChange("vault", "ichor", -8, "", "red");
+            altars.tulu.purchased=true;
+            document.getElementById('tuluWrap').style.display='flex';
+            world.tsath.cost =Math.ceil( world.tsath.cost * 1.8);
+            world.tsath.stage++;
+            world.tsath.purchased=true;
+            document.getElementById('tsathWrap').style.backgroundColor='#301934';
+            world.tsath.madMin=248;
+            tsathUpdater();
+            eventBox("images/altar/tulu.jpg", "Tulu Altar", "Composed of an alloy brought to Earth by Great Tulu himself, the Altar hums with invisble energies. (Tulu Altar in altar room -this relic which is dangerous to use.)");
+        }
+    }else if(world.tsath.stage===5){
+        if (vault.gold.current >= world.tsath.cost && madMin(world.tsath.madMin)) {
+            numberChange("vault", "gold", -world.tsath.cost, "", "red");
+            world.tsath.cost =Math.ceil( world.tsath.cost * 1.8);
+            stats.health.max+=88;
+            document.getElementById("healthDesc").innerHTML= "Health will drift up or down toward West's base Health, currently: " + Math.floor(stats.health.max);
+            comment("increased Health capacity");
+            loosePages(world.tsath.cost);
+        }
+    }
+}
+
+function yoth(){
+     if (vault.gold.current >= world.yoth.cost && cult.sentinels.current>=8 && madMin(484)) {
+        numberChange("vault", "gold", -world.yoth.cost, "", "red");
+        gods.yig.unlocked = true;
+        document.getElementById('yigWrap').style.display = 'block';
+        world.yoth.purchased=true;
+        flashFade('yothOneOff');
+        eventBox("images/world/yoth.jpg", "Yoth", "Beneath the heart of dead Yoth lie the looted vaults of Zin. At T'yog's reptilian hiss, a shrine to Yig, the prehuman snake diety, is revealed. West is sure that with more funding, the entrance to lightless N'kai would be found. (N'kai expedition unlocked, Yig in Sacrarium)"); 
+        world.nkai.unlocked=true;
+        document.getElementById("nkaiOneOff").style.display="block";
+    }
+}
+
+function nkai(){
+     if (vault.gold.current >= world.nkai.cost && cult.sentinels.current>=8 && madMin(848)) {
+        numberChange('vault', 'gold', -world.nkai.cost, '', 'red');
+        world.nkai.purchased=true;
+        eventBox('images/world/nkai.jpg',"N'kai","West fearfully approaches lightless N'kai and communes with the slippery things that dwell there. In an underground lake sits massive Tsathoggua, mouth still agape waiting lazily for the sacrifice. (Tsathoggua in Sacrarium)");
+        gods.tsathoggua.unlocked = true;
+        document.getElementById('tsathogguaWrap').style.display = 'block';
+        flashFade('nkaiOneOff');
+    }
+}
+
+
 function reef(){
-    if(world.reef.purchased === false){
-        if(vault.flesh.current >= world.reef.cost && madMin(888)){
+    if(world.reef.stage===1){
+        if(vault.flesh.current >= world.reef.cost && madMin(484)){
+            buttonGlow("reefWrap");
             numberChange('vault', 'flesh', -world.reef.cost, 'yellow', 'red');
             world.reef.cost = 2;
-            world.reef.purchased = true;
             gods.dagon.unlocked = true;
             document.getElementById('dagonWrap').style.display = 'block';
             document.getElementById('sacrariumTab').style.display='block';
@@ -331,35 +684,46 @@ function reef(){
             fleshCrafts.deepTrade.purchased = true;
             document.getElementById('deepTradeWrap').style.display = 'block';
             eventBox('images/world/reef.jpg', 'Coral Reef', 'Using the Emerald Soapstone, West summons the Deep Ones. They offer trade and passage to their master Dagon. (Dagon unlocked in sacrarium, Deep Trade in FleshCrafts)');
-            document.getElementById('reefWrap').style.backgroundColor='grey';
+            world.reef.stage=2;
             document.getElementById('reefDesc').innerHTML = world.reef.description2[0];
             document.getElementById('reefcost').innerHTML = world.reef.description2[1];
             document.getElementById('reefCost').innerHTML = world.reef.cost;
             document.getElementById('reefBenefit').innerHTML = world.reef.description2[2];
+            world.reef.purchased = true;
+            document.getElementById('reefWrap').style.backgroundColor='#301934';
         }
-    }else if(cult.innocents.current>world.reef.cost){
+    }else if(world.reef.stage>=2){
+        if(cult.innocents.current>world.reef.cost){
+            buttonGlow("reefWrap");
             numberChange('cult', 'innocents', -world.reef.cost, '', 'red');
             numberChange('vault', 'gold', (world.reef.cost * 88), 'yellow', 'red');
             cult.hybrids.unlocked = true;
             document.getElementById('hybridsWrap').style.display='block'; 
             document.getElementById('hybridsPeg').style.display='block';
-            comment("Hybrid children watch the sea... (+" + world.reef.benefit + " Hybrid, + " + (world.reef.cost * 88) + " Gold)");
-            world.reef.cost = world.reef.cost * 2;
+            world.reef.cost = Math.floor(world.reef.cost * 1.4);
             document.getElementById('reefCost').innerHTML = world.reef.cost + " Innocents";
-            document.getElementById('reefBenefit').innerHTML = world.reef.benefit + " Hybrid";
-            numberChange('cult', 'hybrids', world.reef.benefit, 'green', 'red');
-    }        
+            if(world.reef.stage>2){
+                numberChange('cult', 'hybrids', 2, 'green', 'red');
+                comment("Hybrid children watch the sea... (+2 Hybrids, + " + (world.reef.cost * 88) + " Gold)");
+            }else{
+                numberChange('cult', 'hybrids', 1, 'green', 'red');
+                comment("Hybrid children watch the sea... (+1 Hybrid, + " + (world.reef.cost * 88) + " Gold)");
+            }
+        }
+    }
 }
 
 
 function depths(){
-    if(cult.hybrids.current >= world.depths.cost && relics.dagonsBlessing.unlocked === true && madMin(4444)){
-        if(world.depths.purchased === false){
+    if(cult.hybrids.current >= world.depths.cost && relics.dagonsBlessing.unlocked === true && madMin(848)){
+        buttonGlow("depthsWrap");
+        if(world.depths.stage===1){
             world.depths.purchased = true;
-            document.getElementById('depthsWrap').style.backgroundColor='grey';
+            document.getElementById('depthsWrap').style.backgroundColor='#301934';
             gods.cth.unlocked = true;
             document.getElementById('cthWrap').style.display = 'block';
             eventBox('images/world/depths.jpg', "R'lyeh", "Despite the predations of sharks and other, less wholesome, creatures of the depths, West manages to find the sunken city. Swimming through its Cyclopean ruins, his essence is warped enough to catch the notice of the sleeper. (Cthulhu unlocked in Sacrarium)");
+            world.depths.stage++;
         }else{
             loosePages(8888);
         }
@@ -367,13 +731,23 @@ function depths(){
 }
 
 function ant(){
-    if(vault.gold.current >= world.ant.cost && cult.sentinels.current >=44 && madMin(444444)){
-        if(world.ant.purchased === false){
+    if(vault.gold.current >= world.ant.cost && cult.sentinels.current >=44 && madMin(2484)){
+        buttonGlow("antWrap");
+        if(world.ant.stage === 1){
             numberChange('vault', 'gold', -world.ant.cost, 'yellow', 'red');
-            numberChange('cult', 'sentinels', -44, '', 'red');
-            eventBox("images/world/ant.jpg", "Antarctica", "Gonna be a whole new reset mechanic here... someday...");
+            numberChange('cult', 'sentinels', -16, '', 'red');
+            eventBox("images/world/ant.jpg", "Antarctica", "Its existence concealed by fearful governments, the eons old city lies empty. Its inhabitants killed by their own creation. Arriving with knowledge both ancient and modern, West's Sentinels subdue a portion of the amorphous beast for study before fleeing. (-16 Sentinels, Shoggoth Farming in FleshCrafts)");
+            document.getElementById("antDesc").innerHTML=world.ant.description2[0];
+            document.getElementById("antBenefit").innerHTML=world.ant.description2[2];
+            world.ant.cost= Math.floor(world.ant.cost * 4);
+            document.getElementById("antCost").innerHTML= world.ant.cost;
+            fleshCrafts.shoggothFarm.unlocked=true;
+            document.getElementById("shoggothFarmLock").style.display = "block";
             world.ant.purchased = true;
-            document.getElementById('antWrap').style.backgroundColor='grey';
+            world.ant.stage++;
+            document.getElementById('antWrap').classList.add("pulsingDarkness");
+        }else if(world.ant.stage===2){
+            darkDevourerReset();
         }
     }
 }
@@ -388,8 +762,8 @@ let dreamEx = {
       cost: 8,
       visionCost: 84,
       func: pillar,
-      unlocked: false,
-          active: false,
+      unlocked: true,
+      active: false,
       purchased: false,
       dreamUnlocked: false//nested to avoid problems
           },
@@ -399,28 +773,28 @@ let dreamEx = {
       cost: 8,
       visionCost: 84,
       func: zoog,
-      unlocked: false,
-          active: false,
+      unlocked: true,
+      active: false,
       purchased: false
   },
   ulthar: {//unlocked by trap
       string: 'Ulthar',
-      description: ['Harm no cat in Ulthar.', ' Cost: 248 Vision, Radiance '],
-      cost: 24,
-      visionCost: 248,
+      description: ['Harm no cat in Ulthar.', ' Cost: 168 Vision, Radiance '],
+      cost: 16,
+      visionCost: 168,
       func: ulthar,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
-  plateau: {// Men of Leng satyrs who eat people
+  plateau: {
       string: 'Plateau of Leng',
-      description: ['Few return from the Plateau of Leng. Madness Minimum: 444 ', ' Cost: 484 Vision, Radiance '],
-      cost: 48,
-      visionCost: 484,
+      description: ['Few return from the Plateau of Leng. Madness Minimum: 248 ', ' Cost: 248 Vision, Radiance '],
+      cost: 24,
+      visionCost: 248,
       func: plateau,
-      unlocked: false,
-          active: false,
+      unlocked: true,
+      active: false,
       purchased: false
   },
   zar: {//unlocked by hsan
@@ -430,17 +804,17 @@ let dreamEx = {
       visionCost: 848,
       func: zar,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
-   cele: {//unlocked by hsan quadruples dream power white ship
+   cele: {
       string: 'Celephaïs',
       description: ['One of the largest cities in the Dreaming, its dreamer Kuranes reigns there eternally.', ' Cost: 848 Vision, Radiance '],
       cost: 84,
       visionCost: 848,
       func: cele,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
   thar: {//unlocked by white ship
@@ -450,7 +824,7 @@ let dreamEx = {
       visionCost: 848,
       func: thar,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
   xura: {//unlocked by white ship unlocks antart
@@ -460,7 +834,7 @@ let dreamEx = {
       visionCost: 484,
       func: xura,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
   sona: {//unlocked by white ship
@@ -470,17 +844,17 @@ let dreamEx = {
       visionCost: 2484,
       func: sona,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },  
-  dylath: {//unlocked by hsan
+  dylath: {//unlocked by yog-sothoth
       string: 'Dylath-Leen',
       description:['The largest port in the Dreaming. Madness Minimum: 888 ', ' Cost: 4848 Vision, Radiance '],
       cost: 484,
       visionCost:4848,
       func: dylath,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },
   kla: {//unlocked by 
@@ -490,7 +864,7 @@ let dreamEx = {
       func: kla,
       loot: ['nug', 'yeb', ''],
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   }, 
   basalt: {//unlocked by white ship /black ship
@@ -500,7 +874,7 @@ let dreamEx = {
       visionCost: 555,
       func: basalt,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },  
   moon: {//unlocked by black ship
@@ -510,29 +884,27 @@ let dreamEx = {
       visionCost: 8484,
       func: moon,
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },  
   kadath: {//unlocked by black ship
       string: 'Unknown Kadath',
-      description: ['not implemented ', 'Cost: Radiance '],
+      description: ['not implemented, but planned is the wooing of the minor gods of earth ', 'Cost: Radiance '],
       cost: 8484,
       visionCost: 84848,
       func: kadath,
-      loot: [''],
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   },  
-  throne: {//unlocked by jenkin
+  throne: {//unlocked by darkness
       string: "Throne of Azathoth",
-      description: ['Promises made by the murderous Brown Jenkin say it lies at the center of existence.', 'Cost: Radiance '],
-      cost: 8484,
-      visionCost: 84848,
+      description: ['Beyond the collapse of the self and the other, beyond Yog-Sothoth, beyond light and Darkness, lies the Throne.', 'Cost: Radiance '],
+      cost: 48484,
+      visionCost: 484848,
       func: throne,
-      loot: [''],
       unlocked: false,
-          active: false,
+      active: false,
       purchased: false
   }
 };
@@ -561,9 +933,12 @@ function loadDreamExpeditions() {
         // Append the image and text to the button
         button.appendChild(img);
         button.appendChild(textSpan);
-        
+        if(dreamEx[dreamExKeys[i]].unlocked === true && dreamEx[dreamExKeys[i]].purchased === false){
+            button.style.display='block';
+        };
         // Append the button to the world element
         dreamExDiv.appendChild(button);
+
     }
 }
  loadDreamExpeditions();
@@ -620,7 +995,7 @@ function ulthar(){
 }
 
 function plateau(){
-    if(stats.radiance.current>=dreamEx.plateau.cost && stats.vision.current >= dreamEx.plateau.visionCost  && madMin(444)){
+    if(stats.radiance.current>=dreamEx.plateau.cost && stats.vision.current >= dreamEx.plateau.visionCost  && madMin(248)){
         numberChange('stats', 'radiance', -dreamEx.plateau.cost, 'blue', 'red');
         numberChange('stats', 'vision', -dreamEx.plateau.visionCost, 'blue', 'red');
         dreamEx.plateau.purchased = true;
@@ -629,7 +1004,7 @@ function plateau(){
         setTimeout(() => {document.getElementById('desertWrap').style.display='block';}, 2000);
         document.getElementById('goulWrap').style.display = 'block';
         actionUpgrades.study.goul.unlocked = true;
-        numberChange('vault', 'tomes', 1, 'blue', 'red');
+        numberChange('vault', 'tome', 1, 'blue', 'red');
         eventBox('images/eventImages/leng.jpg', 'Men of Leng', 'Dangerous looking men invite West to a feast. As he dines, they share stories of secrets buried in the desert. West is so invigorated by the repast he asks for the recipe. They happily oblige and he awakens with a Tome in hands. (Cultes des Goules in West tab, Desert Expedition Unlocked)');
     }
 }
@@ -691,8 +1066,8 @@ function xura(){
         dreamEx.xura.purchased = true;
         flashFade('xuraWrap');
         eventBox("images/dreamEx/xura.jpg", "Xura", "In the land of pleasures unattained, they smoke a strange oil to forget the pains of life. (Smoke effectiveness greatly increased.)");
-        madActions.smoke.cost*=44;
-        madActions.smoke.benefit*=222;
+        madActions.smoke.cost*=8;
+        madActions.smoke.benefit*=22;
         document.getElementById('smokeCost').innerHTML= madActions.smoke.cost;
         document.getElementById('smokeBenefit').innerHTML= " Benefit: -" +madActions.smoke.benefit + " Madness";
     }
@@ -734,7 +1109,7 @@ function kla(){
     //mountain peak, nub and yig,
 }
 function basalt(){
-    if(stats.radiance.current>=dreamEx.basalt.cost && stats.vision.current >= dreamEx.basalt.visionCost  && madMin(5)){
+    if(stats.radiance.current>=dreamEx.basalt.cost && stats.vision.current >= dreamEx.basalt.visionCost  && madMin(555)){
         //choice of ship
         eventBox("images/dreamEx/basalt.jpg", "A Choice", "Black Ship option costs 88 extra Radiance");
         let parent = document.getElementById('eventBox');
@@ -761,7 +1136,7 @@ function basalt(){
         if(dreamChoices.blackShip.unlocked!==true){
             document.getElementById('black').style.backgroundColor="grey";
             document.getElementById('black').style.pointerEvents = "none";
-            document.getElementById('white').style.cursor = "default";
+            document.getElementById('black').style.cursor = "default";
         }
     }
 }
@@ -791,7 +1166,7 @@ function basaltWhiteNo(){
     closeEventBox();
     dreamChoices.whiteShip.unlocked=false;
     document.getElementById('whiteShipChoice').style.display='none';
-    comment("Radiance wasted, White Ship destroyed.");
+    comment("Waking in a cold sweat, West feels defeated, a sliver of white wood clutched tightly. (Radiance wasted, White Ship destroyed.)");
 }
 function basaltBlack(){
         numberChange('stats', 'radiance', -(dreamEx.basalt.cost + 88), 'blue', 'red');
@@ -811,6 +1186,7 @@ function moon(){
         numberChange('stats', 'vision', -dreamEx.moon.visionCost, 'blue', 'red');
         dreamEx.moon.purchased = true;
         flashFade('moonWrap');
+        comment("nothing here, probably gonna sell rubies.");
     }
 }
 
@@ -822,7 +1198,6 @@ function kadath(){
         flashFade('kadathWrap');
         eventBox("images/dreamEx/kadath.jpg", "Kadath", "Congrats! Here are all the gods. Sorry, not implemented yet");
     }
-    
 }
 
 function throne(){

@@ -1,5 +1,5 @@
 function test(){
-    nyar();
+      nyarReset();
 }
 function eventBox(imageSource, title, text){
     let box = document.getElementById('eventBox');
@@ -29,7 +29,6 @@ function eventBox(imageSource, title, text){
     button.textContent = "X"; 
     // Clear the existing content of 'eventBox'
     box.innerHTML = '';
-
     // Append the new elements to 'eventBox'
     box.appendChild(button);
     box.appendChild(image);
@@ -56,26 +55,50 @@ function openEventBox(){
 	// putting eventlisteners on after everything else
 	//=========================================
 function eventListeners1(){
-document.addEventListener("contextmenu", (event) => event.preventDefault());// disable rightclick from tablets
-
+  //localStorage.clear();
+//document.addEventListener("contextmenu", (event) => event.preventDefault());// disable rightclick from tablets add back in for release
     // scroll listeners
-const scrollDivs = ["commentary", "world", "dreamEx"];
-function setupMouseWheelListeners() {
-    scrollDivs.forEach((scrollDivId) => {
-        const scrollDivElement = document.getElementById(scrollDivId);
- 
-        // Add event listeners for each element
-        scrollDivElement.addEventListener("pointerenter", function() {
-            addMouseWheelListener(scrollDivElement);
+    function setupScrollActions(element) {
+      let lastY = 0, velocity = 0, isDown = false;
+      element.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        element.scrollTop += e.deltaY;
+      }, { passive: false });
+      element.addEventListener("pointerdown", e => {
+        isDown = true;
+        lastY = e.clientY;
+        velocity = 0;
+      });
+      element.addEventListener("pointermove", e => {
+        if (!isDown) return;
+        velocity = lastY - e.clientY;
+        element.scrollTop += velocity;
+        lastY = e.clientY;
+        e.preventDefault();
+      }, { passive: false });
+      element.addEventListener("pointerup", () => {
+        isDown = false;
+        requestAnimationFrame(function momentum() {
+          if (Math.abs(velocity) > 0.1) {
+            element.scrollTop += velocity;
+            velocity *= 0.95;
+            requestAnimationFrame(momentum);
+          }
         });
-        scrollDivElement.addEventListener("pointerleave", function() {
-            removeMouseWheelListener(scrollDivElement);
-        });
+      });
+    }
+    const scrollDivs = ["commentary", "preachColumn", "vault", "world", "dreamEx", "sacLeft", "gods", "godsAppeased", "relics", "divinityLeft", "divinityRight"];
+    scrollDivs.forEach((divId) => {
+      const scrollDivElement = document.getElementById(divId);
+      if (scrollDivElement) {
+        setupScrollActions(scrollDivElement);
+      }
     });
-}
-// Call the function to set up the listeners
-setupMouseWheelListeners();
-
+    //vault scroll
+    const craftBoxes = document.getElementsByClassName("craftBox");
+    for (var i = 0; i < craftBoxes.length; i++) {
+      setupScrollActions(craftBoxes[i]);
+    }
     //Action Upgrades
     for (i=0;i<upgradeKeys.length; i++){
         let actionColumn = upgradeKeys[i];
@@ -84,9 +107,7 @@ setupMouseWheelListeners();
             document.getElementById(upgrades[j] + 'Wrap').addEventListener('pointerdown', actionUpgrades[actionColumn][upgrades[j]].func);
         };
     };
- 
     document.getElementById('sacToggle').addEventListener('pointerdown', () => toggleSacrificeTypes());
-
 var sacTypes = document.querySelectorAll('.sacrificeType');
     sacrificeKeys = Array.from(sacTypes).map(sacTypes => sacTypes.id);
     sacrificeKeys.forEach(key => {
@@ -100,7 +121,6 @@ var sacTypes = document.querySelectorAll('.sacrificeType');
     });
   });
       document.getElementById('altarToggle').addEventListener('pointerdown', toggleAltarOptions);
-
   var altarOptions = document.querySelectorAll('.altarOptionWraps');
     altarKeyDivs = Array.from(altarOptions).map(altarOptions => altarOptions.id);
     altarKeyDivs.forEach(key => {
@@ -114,7 +134,11 @@ var sacTypes = document.querySelectorAll('.sacrificeType');
     });
   });
     for(i=0;i<worldKeys.length;i++){
+        if(world[worldKeys[i]].permanent===true){
         document.getElementById(worldKeys[i] + "Wrap").addEventListener('pointerdown', world[worldKeys[i]].func);
+        }else{
+        document.getElementById(worldKeys[i] + "OneOff").addEventListener('pointerdown', world[worldKeys[i]].func);
+        }
     }
      for(i=0;i<dreamExKeys.length;i++){
         document.getElementById(dreamExKeys[i] + "Wrap").addEventListener('pointerdown', dreamEx[dreamExKeys[i]].func);
@@ -122,41 +146,28 @@ var sacTypes = document.querySelectorAll('.sacrificeType');
 
 }
 function eventListeners2(){
-    //vault scroll
-    var craftBoxes = document.getElementsByClassName("craftBox");
-    for (var i = 0; i < craftBoxes.length; i++) {
-        let element = craftBoxes[i];
-        element.addEventListener("pointerenter", function() {
-        addMouseWheelListener(element);
-      });
-      element.addEventListener("pointerleave", function() {
-        removeMouseWheelListener(element);
-      });
-    }
-            //test buttons schTogFunc()
-document.addEventListener("visibilitychange", function () { //should fix off screen weirdness
-    if (document.hidden) {
-        afkStamp = performance.now();
-       timeOff();
-    } else {
-        afk();
-       timeOn();
-    }    
-});//
 
-document.getElementById('gear').addEventListener('pointerdown',  () =>toggleMenu());
-document.getElementById('reset').addEventListener('pointerdown',  () =>resetGame());
-document.getElementById('test').addEventListener('pointerdown',   () => test());  //top buttons
-document.getElementById('mute').addEventListener('pointerdown',  () =>  muteToggle());
-document.getElementById('save').addEventListener('pointerdown',  () =>  saveToLocalStorage());
-document.getElementById('load').addEventListener('pointerdown',  () => loadpointerdown());
-    //main actions and their unlocks
+            //test buttons schTogFunc()
+    document.addEventListener("visibilitychange", function () { //should fix off screen weirdness
+        if (document.hidden) {
+            afkStamp = performance.now();
+           timeOff();
+        } else {
+            afk();
+           timeOn();
+        }    
+    });
+    document.getElementById('gear').addEventListener('pointerdown',  () =>toggleMenu());
+    document.getElementById('reset').addEventListener('pointerdown',  () =>resetGame());
+    //document.getElementById('test').addEventListener('pointerdown',   () => test());  //top buttons
+    document.getElementById('mute').addEventListener('pointerdown',  () =>  muteToggle());
+    document.getElementById('save').addEventListener('pointerdown',  () =>  saveToLocalStorage());
+    document.getElementById('load').addEventListener('pointerdown',  () => loadpointerdown());
     document.getElementById('chantLock').addEventListener('pointerdown',  () => unlock('chant', 'actions'));
     document.getElementById('dreamLock').addEventListener('pointerdown',  () => unlock('dream', 'actions'));
     document.getElementById('preachLock').addEventListener('pointerdown',  () => unlock('preach', 'actions'));
-
     document.getElementById('studyWrap').addEventListener('pointerdown',  study);
-    document.getElementById('chantWrap').addEventListener('pointerenter', chantTimer);
+    document.getElementById('chantWrap').addEventListener('pointerover', chantTimer);
     document.getElementById('dreamWrap').addEventListener("pointerdown", startDreamTimer);
     document.getElementById('preachWrap').addEventListener('pointerdown', preach);
     //mad actions
@@ -165,31 +176,42 @@ document.getElementById('load').addEventListener('pointerdown',  () => loadpoint
         document.getElementById(temp + 'Wrap').addEventListener('pointerdown', () => startMadActLoop(temp));
         document.getElementById(temp + 'Wrap').addEventListener('pointerdown', () => executeMadAction(temp) );
     };
+    for(i=0;i<madUpsKeys.length;i++){
+        let temp = madUpsKeys[i];
+        document.getElementById(temp + 'OneOff').addEventListener('pointerdown', madUps[madUpsKeys[i]].func);
+    };
     //vault button presses
     document.getElementById('altarRoomTab').addEventListener('pointerdown',  () => changeTab('altarRoom'));
-
     for(i=0;i<vaultKeys.length; i++){
         let temp = vaultKeys[i];
-        document.getElementById(temp + "Wrap").addEventListener('pointerdown', () => changeCraftBox(temp));
+        document.getElementById(temp + "Wrap").addEventListener('pointerdown', () => changeCraftBox(temp + "Crafts"));
     }
-    for(let j=0; j<craftKeys.length; j++){
-        let key = craftKeys[j];
-        for(let k=0; k<key.length; k++){
-        let craft = craftTypeKeys[j][key[k]];
+    let craftTypeKeys = [loveCrafts, terrorCrafts, goldCrafts, fleshCrafts, tomeCrafts, ichorCrafts, tyogCrafts];
+    for (let i = 0; i < craftKeys.length; i++) {
+        for (let j = 0; j < craftKeys[i].length; j++) {
+            let key = craftKeys[i][j];
+            let craft = craftTypeKeys[i][key];
+                if(craft.unlockText){
+                    document.getElementById(key+ "Lock").addEventListener('pointerdown', () => unlock(key, craftStringKeys[i]));   
+                }
             if(craft.permanent === true){
                             // Determine if this should use vaultConversion
                 if (craft.func === 'vaultConversion') {
-                    document.getElementById(key[k] + "Wrap").addEventListener('pointerdown', () => vaultConversionLoop(craft));
-                    document.getElementById(key[k] + "Wrap").addEventListener('pointerdown', () => executeVaultConversion(craft) );
-                } else {
-                    document.getElementById(key[k] + "Wrap").addEventListener('pointerdown', craft.func);
-                }
-                if(craftTypeKeys[j][key[k]].unlockText){
-                    document.getElementById(key[k]+ "Lock").addEventListener('pointerdown', () => unlock(key[k], craftStringKeys[j]));   
+                    document.getElementById(key + "Wrap").addEventListener('pointerdown', () => vaultConversionLoop(craft));
+                    document.getElementById(key + "Wrap").addEventListener('pointerdown', () => executeVaultConversion(craft));
+                } else if(key === "pagesDiv"){
+                }else{
+                    document.getElementById(key + "Wrap").addEventListener('pointerdown', craft.func);
                 }
             }
-            if(craftTypeKeys[j][key[k]].permanent=== false){
-                document.getElementById(key[k]+ "OneOff").addEventListener('pointerdown', craftTypeKeys[j][key[k]].func);  
+            if(craft.permanent === false){
+                if(craft.func === cultistUpgrade){
+                    document.getElementById(key + "OneOff").addEventListener('pointerdown', function() {
+                        cultistUpgrade(craft.callString);
+                    });
+                }else{
+                document.getElementById(key + "OneOff").addEventListener('pointerdown', craft.func);  
+                }
             }
         }
     }
@@ -200,22 +222,47 @@ document.getElementById('load').addEventListener('pointerdown',  () => loadpoint
     //altar room
     addPegEvents();
     document.getElementById('clearGrid').addEventListener('pointerdown',  () =>  clearGrid());
-
-    //divinity
-Object.keys(shardBuys.shardDoublers).forEach(actionKey => {//actionKey is doubler or reducer objects
-    document.getElementById(actionKey + 'ShardBuyWrap').addEventListener('pointerdown', function() {
-       shardActionDouble(actionKey);
+    // Iterate over all categories in shardBuys
+    Object.keys(shardBuys).forEach(category => {
+        const categoryItems = shardBuys[category];
+        Object.keys(categoryItems).forEach(actionKey => {
+            const item = categoryItems[actionKey];
+            const elementSuffix = item.permanent === true ? 'ShardBuyWrap' : 'ShardBuyOneOff';
+            const elementId = actionKey + elementSuffix;
+            const element = document.getElementById(elementId);
+            if (element) {
+                let eventHandler;
+                switch (category) {
+                    case 'actions':
+                        eventHandler = function() {
+                            shardActionMultiplier(actionKey, false);
+                        };
+                        break;
+                    case 'madReducers':
+                        eventHandler = function() {
+                            madReducer(actionKey, false);
+                        };
+                        break;
+                    case 'cultists':
+                        if (item.func) {
+                            if (actionKey.startsWith('shardFaithfulMultiplier')) {
+                                const index = actionKey.replace('shardFaithfulMultiplier', '');
+                                eventHandler = function() {
+                                    shardFaithfulMultiplier(parseInt(index), false);
+                                };
+                            } else {
+                                eventHandler = function() { item.func(false);};
+                            }
+                        }
+                        break;
+                    default:
+                       eventHandler = function() { item.func(false);};
+                        break;
+                }
+                element.addEventListener('pointerdown', eventHandler);
+            }
+        });
     });
-});
-Object.keys(shardBuys.madReducers).forEach(actionKey => {
-    document.getElementById(actionKey + 'ShardBuyWrap').addEventListener('pointerdown', function() {
-       madReducer(actionKey);
-    });
-});
-Object.keys(shardBuys.others).forEach(actionKey => {
-    document.getElementById(actionKey + 'ShardBuyWrap').addEventListener('pointerdown',  shardBuys.others[actionKey].func);
-});
-        //    document.getElementById('divinityTab').style.display = 'block'; //temp
 }
 
     //code for description hovers
@@ -223,16 +270,27 @@ function addCommentsToButtons(setArray) {
     setArray.forEach(singleSet => {
         const setKeys = Object.keys(singleSet);  
         setKeys.forEach(function (setKey) {
-            const parent = document.getElementById(setKey +'Wrap'); // Find button by ID using the key
+            const box = document.getElementById(setKey +'Box'); // Find button by ID using the key
+            const wraps = document.getElementById(setKey +'Wrap'); // Find button by ID using the key
             const OneOff = document.getElementById(setKey +'OneOff');
             const locks = document.getElementById(setKey +'Lock');
             const choices = document.getElementById(setKey + 'Choice');
-            const shardbuyTemp = document.getElementById(setKey + 'ShardBuyWrap');
-            const container = shardbuyTemp || parent || OneOff || choices;
+            const shardBuyP = document.getElementById(setKey + 'ShardBuyWrap');
+            const shardBuyT = document.getElementById(setKey + 'ShardBuyOneOff');
+            const container = shardBuyP || shardBuyT || box || wraps || OneOff || choices;
             if (container) {
                 const descriptionBox = document.createElement('div'); //main description
                 descriptionBox.classList.add('descriptionBox');
-
+                if(singleSet === stats){
+                    descriptionBox.classList.add('statDescriptions');
+                };
+                const targetSets = [actions, actionUpgrades.study, actionUpgrades.chant, actionUpgrades.dream, actionUpgrades.preach, dreamChoices];
+                if (targetSets.includes(singleSet)) {
+                    descriptionBox.classList.add('actionDescriptions');
+                }
+                if(singleSet === cult){
+                    descriptionBox.classList.add('cultDescription');
+                };
                 if ([loveCrafts, terrorCrafts, goldCrafts, fleshCrafts, tomeCrafts, ichorCrafts, tyogCrafts].includes(singleSet)) {
                     descriptionBox.classList.add('craftDescription');
                 };
@@ -242,15 +300,19 @@ function addCommentsToButtons(setArray) {
                 if(singleSet === world){
                     descriptionBox.classList.add('worldDescription');
                 };
+                if(singleSet === gods){
+                    descriptionBox.classList.add('godsDescription');
+                };
+                if(singleSet === relics){
+                    descriptionBox.classList.add('relicsDescription');
+                };
                 container.appendChild(descriptionBox);
-
                 const description = document.createElement('p');
                 description.textContent = singleSet[setKey].description[0];
                 description.classList.add('desc'); 
                 const Id = setKey + 'Desc'; 
                 description.id = Id; 
                 descriptionBox.appendChild(description);
-
                 if(singleSet[setKey].description[3]){ //adding terror mins
                     const terror = document.createElement('span');
                     terror.textContent = singleSet[setKey].description[3];
@@ -308,12 +370,10 @@ function addCommentsToButtons(setArray) {
     });
 }
 
-
 function commentListeners() {
-    const descParents = document.querySelectorAll(".actionWraps, .dreamChoice, .actionUpgradeWraps, .madActionWraps, .cultWraps, .craftWraps, .craftLocks, .craftOneOff, .worldWraps, .dreamExWraps, .godsWraps, .relicWraps, .altarOptionWraps, .shardBuyWraps");
-    descParents.forEach(function (container) {
-        const parent = container;
-        const descriptionBox = container.querySelector(".descriptionBox");
+    const descParents = document.querySelectorAll(".westStatBox, .actionWraps, .dreamChoice, .actionUpgradeWraps, .madActionWraps, .madUps, .cultWraps, .craftWraps, .craftLocks, .craftOneOffs, .worldWraps, .dreamExWraps, .godsWraps, .godsAppeasedWraps, .relicWraps, .altarOptionWraps, .shardBuyWraps, .shardBuyOneOffs, .achievementsWraps");
+    descParents.forEach(function (parent) {
+        const descriptionBox = parent.querySelector(".descriptionBox");
         let showTimeout, hideTimeout;
         let isHovering = false;
         parent.addEventListener("pointerenter", function () {
@@ -321,7 +381,7 @@ function commentListeners() {
             clearTimeout(hideTimeout); // Prevent hiding if it was scheduled
             showTimeout = setTimeout(function () {
                 descriptionBox.classList.add("show");
-            }, 500);
+            }, 400);
         });
         parent.addEventListener("pointerleave", function () {
             isHovering = false;
@@ -330,141 +390,117 @@ function commentListeners() {
                 if (!isHovering) {
                     descriptionBox.classList.remove("show");
                 }
-            }, 500);
+            }, 800);
         });
+       //console.log(parent);
         descriptionBox.addEventListener("pointerenter", function () {
             isHovering = true; // Prevent hiding when re-entering the descriptionBox
             clearTimeout(hideTimeout);
         });
-        descriptionBox.addEventListener("pointerleave", function () {
+         descriptionBox.addEventListener("pointerleave", function (e) {
+            // same parent dont hide
+            if (e.relatedTarget && parent.contains(e.relatedTarget)) {
+                isHovering = true;
+                return;
+            }
             isHovering = false;
             hideTimeout = setTimeout(function () {
-                if (!isHovering) {
-                    descriptionBox.classList.remove("show");
-                }
-            }, 500);
-        });    
+                if (!isHovering) descriptionBox.classList.remove("show");
+            }, 800);
+        });
     });
-} 
+}
+
+//single use description adds
+function addDesc(targetDiv, descriptionText) {
+    targetDiv = document.getElementById(targetDiv);
+    const descriptionBox = document.createElement('div');
+    descriptionBox.classList.add('descriptionBox');
+    targetDiv.appendChild(descriptionBox);
+    const description = document.createElement('p');
+    description.textContent = descriptionText;
+    description.classList.add('desc');
+    descriptionBox.appendChild(description);
+    let showTimeout, hideTimeout;
+    let isHovering = false;
+    targetDiv.addEventListener("pointerenter", function () {
+        isHovering = true;
+        clearTimeout(hideTimeout);
+        showTimeout = setTimeout(function () {
+            descriptionBox.classList.add("show");
+        }, 500);
+    });
+    targetDiv.addEventListener("pointerleave", function () {
+        isHovering = false;
+        clearTimeout(showTimeout);
+        hideTimeout = setTimeout(function () {
+            if (!isHovering) {
+                descriptionBox.classList.remove("show");
+            }
+        }, 500);
+    });
+    descriptionBox.addEventListener("pointerenter", function () {
+        isHovering = true;
+        clearTimeout(hideTimeout);
+    });
+    descriptionBox.addEventListener("pointerleave", function () {
+        isHovering = false;
+        hideTimeout = setTimeout(function () {
+            if (!isHovering) {
+                descriptionBox.classList.remove("show");
+            }
+        }, 500);
+    });
+}
 
 document.addEventListener("DOMContentLoaded", function () {  //start of page after init and before load
-//localStorage.clear();
+    //localStorage.clear();
     totalTime.timeInit = Date.now();
     shadows();
-    addCommentsToButtons([actions, actionUpgrades.study, actionUpgrades.chant, actionUpgrades.preach, dreamChoices, madActions, cult, vault, dreamEx, world, gods, relics, loveCrafts, terrorCrafts, goldCrafts, fleshCrafts, tomeCrafts, ichorCrafts, tyogCrafts, altars, shardBuys.shardDoublers, shardBuys.madReducers, shardBuys.others]);
-    document.getElementById('visionBox').style.display='block';
-    document.getElementById('healthBox').style.display='block';
-    document.getElementById('menuBox').style.display='none';
-    document.getElementById('studyWrap').style.display='block';
-    document.getElementById('studyColumn').style.display='block';
-    document.getElementById('westTab').style.display='block';
-    var saveTest = localStorage.getItem("savedDomUnlocks");  //save test
-    var resetRunStats = localStorage.getItem("resetRunStats");  //save test
-    var nyarTest = localStorage.getItem('savedNyarStats'); //saved only in nyar resets
-    var mistTest = localStorage.getItem('savedMistStats'); //saved only in mist resets
+    addCommentsToButtons([stats, actions, actionUpgrades.study, actionUpgrades.chant, actionUpgrades.dream, actionUpgrades.preach, dreamChoices, madActions, madUps, cult, vault, dreamEx, world, gods, godsAppeased, relics, loveCrafts, terrorCrafts, goldCrafts, fleshCrafts, tomeCrafts, ichorCrafts, tyogCrafts, altars, shardBuys.stats, shardBuys.actions, shardBuys.madActions, shardBuys.madReducers, shardBuys.cultists, shardBuys.altarRoom, achievements.west, achievements.cult, achievements.vault, achievements.relics, achievements.gods]);
+    if(localStorage.getItem("savedPermanentChanges")){
+        let savedPermanentChanges = localStorage.getItem("savedPermanentChanges");
+        permanentChanges = JSON.parse(savedPermanentChanges); 
+    }
     commentListeners();
+    addDesc("pagesDiv", 'Pages can be found during several expeditions, which can be repeated at ever increasing costs.');
     eventListeners1();
     eventListeners2();
     window.console.log("loading...");
-    if (saveTest !== null) {
-        window.console.log("V " +domUnlocks.versionNumber );
-        window.console.log("save found");
-        loadFromLocalStorage();
-        window.console.log('loaded');
-        //after load on return to page run offlineProgress
-        if(domUnlocks.versionNumber !== null && domUnlocks.versionNumber === currentVersionNumber){
-            window.console.log("Version current, loading offline");
-            offlineProgress();
+    if(permanentChanges.resetting===false){
+        let savedStats = localStorage.getItem("savedStats");
+        if (savedStats) {
+            window.console.log("V " +domUnlocks.versionNumber );
+            window.console.log("save found");
+            loadFromLocalStorage();
+            window.console.log('loaded');
+            //after load on return to page run offlineProgress
+            if(domUnlocks.versionNumber !== null && domUnlocks.versionNumber === currentVersionNumber){
+                window.console.log("Version current, loading offline");
+                offlineProgress();
+                totalTime.timeSession=0; //reset session time after offline
+            }else{
+            domUnlocks.versionNumber = 0.55;
+            window.console.log("updated version to " + domUnlocks.versionNumber );
+            }
         }else{
-        domUnlocks.versionNumber = 0.55;
-        window.console.log("updated version to " + domUnlocks.versionNumber );
+            eventBox("images/eventImages/opener.jpg", "A beginning...", "Waking as if out of a dream, dream West stands alone in a darkened alley, hands feverishly clutching an ancient manuscript. A soothing voice in his mind calmly hints at future greatness.");
         }
-    }else if (resetRunStats !== null){
-        window.console.log('resetRun');
-        resetRunPost();//in time
-        localStorage.removeItem('resetRunStats');
-    }else if (nyarTest !== null){
+    }else if (permanentChanges.lastReset === "restart") {
+        window.console.log('restartRun');
+        basePostReset();
+        closeEventBox();
+    }else if (permanentChanges.lastReset==="nyar"){
         window.console.log('nyarload');
         nyarPostReset();
-        localStorage.removeItem('savedNyarStats');
-    }else if(mistTest !== null){
+    }else if(permanentChanges.lastReset==="mist"){
         mistPostReset();
-        localStorage.removeItem('savedMistStats');
-    }else{
-        eventBox("images/eventImages/opener.jpg", "A beginning...", "Waking as if out of a dream, dream West stands alone in a darkened alley, hands feverishly clutching an ancient manuscript. A soothing voice in his mind calmly hints at future greatness.");
+    }else if(permanentChanges.lastReset==="devourer"){
+        console.log("devoured?");
+        darkDevourerPostReset();
     }
-window.addEventListener("beforeunload", saveToLocalStorage);
-
+    permanentChanges.resetting=false;
+    window.addEventListener("beforeunload", saveToLocalStorage);  
 });
 
 
-        	//=========================================
-	// Locks
-	//========================================= 
-
-        	//=========================================
-	// Unlocks and updates
-	//========================================= 
-
-let ticCounterForUnlock = 1;
-let ticCounter = 0;
-function checkUnlockCounter(tics){
-    if((ticCounter + tics) >= ticCounterForUnlock){
-        ticCounter += tics;
-        ticCounter -= ticCounterForUnlock;
-        checkUnlocks();
-    }else{
-        ticCounter += tics;
-    }
-}
-
-function checkUnlocks(){
-    for(i=0;i<statKeys.length; i++){ ///main stats
-        if(stats[statKeys[i]].unlocked === false ){
-            let unlockStat = stats[statKeys[i]].unlock[0];
-            let unlockNum = stats[statKeys[i]].unlock[1];
-            if(stats[unlockStat].current >= unlockNum){
-                stats[statKeys[i]].unlocked = true; 
-                document.getElementById(statKeys[i] + 'Box').style.display='block';
-            }
-        }
-    }
-///action locks
-    if(stats.vision.current >= 2 && actions.chant.unlocked === false && actions.chant.purchased === false){
-        document.getElementById('chantLock').style.display='block';
-        actions.chant.unlocked === true;
-    }
-    if(stats.vision.current >= (8) && actions.dream.unlocked === false && actions.dream.purchased === false){
-        document.getElementById('dreamLock').style.display='block';
-    }
-    if(stats.charm.current >=4 && actions.preach.unlocked === false && actions.preach.purchased === false){
-        document.getElementById('preachLock').style.display='block';
-    }
-    if(stats.madness.current >= 32 &&  stats.madness.madActionBoxUnlocked === false){
-        stats.madness.madActionBoxUnlocked = true;
-        comment("Excess won't solve your problems forever. (Madness Mitigation available)", 'lavender');
-        document.getElementById('madActionBox').style.display='block';
-        document.getElementById('drinkWrap').style.display='block';
-        document.getElementById('smokeWrap').style.display='block';
-    }
-    for(i=0;i<madKeys.length; i++){ ///mad actions
-        if(madActions[madKeys[i]].unlocked === false ){
-            let unlockStat = madActions[madKeys[i]].unlock[0];
-            let unlockNum = madActions[madKeys[i]].unlock[1];
-            if(madActions[madKeys[i]].costStat === 'health'  && stats.health.current  <= 20 ){
-                document.getElementById(madKeys[i] + 'Wrap').style.display='block';
-                madActions[madKeys[i]].unlocked = true;
-            }else if(unlockStat === 'love' && vault.love.current  >= unlockNum||unlockStat === 'terror' && vault[unlockStat].current  >= unlockNum){
-                document.getElementById(madKeys[i] + 'Wrap').style.display='block';
-                madActions[madKeys[i]].unlocked = true;
-            }
-        }
-    }
-}
-window.onload = function() {
-  const images = document.getElementsByTagName("img");
-  for (let img of images) {
-    if (img.src.endsWith(".jpg")) {
-    }
-  }
-};

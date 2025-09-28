@@ -20,21 +20,25 @@
             <img id='title' src="images/Title.png " alt="?"/>
         </div>
         <div id='statBox'>
-            <h2 id='name'>Dr. Enoch West</h2>
+            <h2 id='name'>Prof. West</h2>
         </div>
             <img id='gear' src="images/gear.jpg" alt="menu"/>
             <div id='menuBox'></div>
             <div id='commentBox'>
-                <img id='topNyar' src="images/gods/nyar.jpg" alt="alt"/>
+                <img id='topNyar' src="images/godsAppeased/nyarAppeased.jpg" alt="alt"/>
                 <h3 id='commentaryTitle'>Whispers in the Darkness</h3>
                 <div id='commentary'></div>
             </div>
             <div id='tabRow'>
-                <button class='tabs' id ="westTab" onpointerdown="changeTab('west')"> Professor West</button>
+                <button class='tabs' id ="westTab" onpointerdown="changeTab('west')"> Prof. West</button>
                 <button class='tabs' id ="cultTab" onpointerdown="changeTab('cult')">Cult</button>
                 <button class='tabs' id ="expeditionsTab" onpointerdown="changeTab('expeditions')">Expeditions</button>
                 <button class='tabs' id ="sacrariumTab" onpointerdown="changeTab('sacrarium')">Sacrarium</button>
                 <button class='tabs' id ="divinityTab" onpointerdown="changeTab('divinity')">Divinity</button>
+                <button class='tabs' id ="achievementsTab" onpointerdown="changeTab('achievements')">
+                    <span>Achievements</span>
+                    <span id="achPing">&#x26A1;&#xFE0E;</span>
+                </button>
             </div>
         </div>
         <div id="mainWrapper">
@@ -46,7 +50,7 @@
                     <div><span id='meeting'>Meeting at: </span><button id="altarRoomTab">Moonlit Grove</button></div>
                 </div>
                 <div id='center'>
-                    <h2>The Obsidian Vault</h2>
+                    <div id="vaultTitle">The Obsidian Vault</div>
                     <div id='vault'></div>
                 </div>
                 <div id='right'></div>
@@ -59,8 +63,40 @@
                     <h1 id="theDreaming">The Dreaming</h1>
                 </div>
                 </div>
-            <div class="bigBox" id="sacrarium"></div>
-            <div class="bigBox" id="divinity"></div>
+            <div class="bigBox" id="sacrarium">
+                <div id='sacLeft'>  
+                    <h2 class='godHeader'>Invoke the Old Ones</h2>  
+                    <div id='gods'></div>
+                        <h2 class='godHeader'>Gods appeased</h2>  
+                        <div id='godsAppeased'></div>
+                </div>
+                <div id='sacRight'>  
+                    <h2 id='relicTitle'>Relics obtained</h2>  
+                    <div id='relics'></div>
+                </div>
+            </div>
+            <div class="bigBox" id="divinity">
+                <div id="divinityTitle">Divinity</div>
+                    <div id="divinityLeft">
+                        <div class="shardCatBoxes" id="shardStatsBox">
+                            <div class="shardBoxTitles">West:</div>
+                        </div>
+                        <div class="shardCatBoxes" id="shardActionsBox">
+                            <div class="shardBoxTitles">West's Actions</div>
+                        </div>
+                        <div class="shardCatBoxes" id="shardMadActionsBox">
+                            <div class="shardBoxTitles">Madness Mitigation</div>
+                        </div>
+                    </div>
+                    <div id="divinityRight">
+                        <div class="shardCatBoxes" id="shardCultistsBox">
+                            <div class="shardBoxTitles">The Cult</div>
+                        </div>
+                        <div class="shardCatBoxes" id="shardAltarRoomBox">
+                            <div class="shardBoxTitles">Altar Room</div>
+                        </div>
+                    </div>
+                </div>
             <div class="bigBox" id='altarRoom'>
                 <span id='altarRoomTitle'>Moonlit Grove</span>
                 <div id="altarLeft">
@@ -79,12 +115,19 @@
                             <div>Love: <span id="loveBonus">0</span></div>
                             <div>Terror: <span id="terrorBonus">0</span></div>
                             <div>Gold: <span id="goldBonus">0</span></div>
+                            <div>Charm: <span id="charmBonus">0</span></div>
+                            <div>Madness: <span id="madnessBonus">0</span></div>
+                            <div>pages: <span id="pagesBonus">0</span></div>
                         </div>
                         <button id="clearGrid">Clear <br>Grid</button>
                     </div>
                     <div id="pegPool"></div>
                 </div>
                 <div id="gridFlex"><div id="activeAltarGrid"></div></div>
+            </div>
+            <div class="bigBox" id="achievements">
+                <div id="achievementsTitle">Achievements</div>
+                <div id="achievementsFlex"></div>
             </div>
         </div>
         <div id="footer"><a href="help.html" target="_blank" rel="noopener noreferrer">Lost? Help page.</a></div> 
@@ -94,10 +137,13 @@
         <script src="js/cult.js"></script>   
         <script src="js/expeditions.js"></script>   
         <script src="js/sacrarium.js"></script>   
+        <script src="js/resets.js"></script>   
         <script src="js/divinity.js"></script>  
         <script src="js/penalties.js"></script> 
         <script src="js/madness.js"></script> 
         <script src="js/room.js"></script> 
+        <script src="js/achievements.js"></script> 
+        <script src="js/unlockTiming.js"></script> 
         <script src="js/time.js"></script> 
         <script src="js/events.js"></script> 
         <script src="js/save.js"></script> 

@@ -11,14 +11,20 @@ body {
     max-height: 100dvh;
     position: fixed; 
     box-sizing: border-box;
-    font-family: "Bookman Old Style", sans-serif; ;
+    font-family: "Bookman Old Style", sans-serif;
     background-color: black;
     color: #ebebeb;
     overflow: hidden;
 }
+body.mushroom-mode, body.mushroom-mode * {
+  cursor: url("../images/jelly.png") 8 8, auto !important;
+}
 .rotate-message{
     width: 50dvw;  /* Half the width of the viewport */
     height: 50dvw; /* Half the height of the viewport */
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
     transform: translate(50%, 50%); /* Center it using offset */
     padding: 4dvw;
     border: 0.4dvw groove white;
@@ -60,7 +66,7 @@ span{
 }
 ul{
     list-style: none;
-  padding: 0;
+    padding: 0;
 }
 button {
   display: inline-block;
@@ -77,7 +83,6 @@ button {
   border-radius: 0.5dvw;
   background-color: black;
   color: white;
-  user-select: none;
   white-space: nowrap;
   transition: transform 0.2s;
 }                                           
@@ -93,7 +98,6 @@ button:not(:active){
 #mainWrapper{
     border: 0.1dvw solid transparent;
     border-image:  url(../images/border6.png) 30% round;
-    
     border-image-width: 30% 8%;
     padding-top: 2.9dvh;
     padding-left: 1dvw;
@@ -106,46 +110,103 @@ button:not(:active){
     height: 69dvh;
 }
 
-
 .descriptionBox {
     display: none;  
-    pointer-events: none;
     position: absolute;
     top: 100%;
     left: 10%;
-    background-color: #FAF9F6;
-    color: black;
+    background-color: #F0EFEC;
     padding: 0.1dvw;
     width: 15dvw;
-    font-size: 1.25dvw;
-    line-height: 3dvh;
+    font-size: 2dvh;
+    line-height: 2.4dvh;
     text-align: center;
     z-index: 50;
     white-space: normal;
+    border: 0.1dvh groove black;
+    border-radius: 8px;
+}
+
+.statDescriptions{
+    top: 48%;
+    left: 80%;
+    width: 16dvw;
+}
+.actionDescriptions{
+    width: 12dvw;
+    left: 0;
+}
+.cultDescription{
+    width: 20dvw;
+    left: 1dvw;
 }
 .craftDescription{
     top: 100%;
-    left: 0%;
-    width: 28dvw;
+    left: 2dvw;
+    width: 24dvw;
 }
-    .madDescription {
-        width: 10dvw;
-        left: 0;
-    }
+.worldDescription{
+    top: 100%;
+    left: 10%;
+}
+.relicsDescription{
+    width: 12dvw;
+    left: -10%;
+}
+.madDescription {
+    width: 10dvw;
+    left: -1dvw;
+}
 .lockDesc{
+    color: black;
+    font-family: "Bookman Old Style", sans-serif;
+    font-style: normal;
+    font-weight: normal;
     width: 10dvw;
 }
     .descriptionBox.show {
         display: block;
     }
     .desc{
+        color: black;
+        font-family: "Bookman Old Style", sans-serif;
+        font-style: normal;
+        font-weight: normal;
         min-width: 10dvw;
         clear: left;
     }
     .costs{
+        color: black;
+        font-family: "Bookman Old Style", sans-serif;
+        font-style: normal;
+        font-weight: normal;
         min-width: 3dvw;
     }
-    
+    .godsDescription{
+        width: 20dvw;
+    }
+@keyframes pulse {
+    0% {
+            box-shadow: 0 0 0 0 #8258FA inset;
+    }
+    70% {
+            box-shadow: 0 0 0 28px #210B61 inset;
+    }
+    100% {
+            box-shadow: 0 0 0 0 #210B61 inset;
+    }
+}
+@keyframes buttonPress {
+    0% {
+            box-shadow: 0 0 0 0 #8258FA inset;
+    }
+    70% {
+            box-shadow: 0 0 0 12px #210B61 inset;
+    }
+    100% {
+            box-shadow: 0 0 0 0 #210B61 inset;
+    }
+}
     @keyframes flash {
     0% { background-color: black; }
     50% { background-color: white; }
@@ -188,8 +249,8 @@ button:not(:active){
     #eventBoxText{
         text-indent: 20px;
         margin: 2dvw;
-        font-size: 1.25dvw;
-        line-height: 1.5dvw;
+        font-size: 2.4dvh;
+        line-height: 2.8dvh;
         width: 28dvw;
         clear: left;
         color: #ebebeb;
@@ -240,8 +301,6 @@ button:not(:active){
   }
 }
 
-.groovy-border {
-}
     .eventButtonsLeft{
         position: absolute;
         bottom: 4%;
@@ -287,7 +346,6 @@ button:not(:active){
    
 #footer{
     position: fixed;
-    float: right;
     bottom: 5dvh;
     right: 5dvw;
     width: 10dvw;

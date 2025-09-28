@@ -65,10 +65,6 @@
             height: 4dvh;
             font-weight: bold;
         }
-        .worldDescription{
-            top: 10%;
-            left: 90%;
-        }
     #dreamEx{
         overflow: hidden;
         margin: 1dvw;
@@ -126,8 +122,18 @@
             height: 4dvh; /* Set height to 10dvh for the text */
             font-weight: bold;
         }
+.pulsingDarkness{
+    animation: lightning 4s infinite;
+}
 
-        
+@keyframes lightning {
+    2% { background: #fff; } /* Quick flash */
+    2.5% { background: #000; }
+    3% { background: #fff; } /* Double quick flash */
+    3.5% { background: #000; }
+    50% { background: #ddeeff; } /* Slower, softer flash */
+    52% { background: #000; }
+}
                                                                                /*------Sacrarium-----*/
 #sacrarium{
         display: none;
@@ -135,7 +141,347 @@
     #sacLeft{
         float: left;
         width: 46dvw;
+        height: 67dvh;
     }
+        .godHeader{
+            margin-top: 2dvh;
+            margin-bottom: 1dvh;
+            line-height: 4dvh;
+            font-size: 2dvw;
+            width: 46dvw;
+            font-weight: bold;
+            text-decoration: underline;
+            font-family: "Papyrus", "Arial", sans-serif;
+        }
+        #gods{
+            width: 46dvw;
+            height: 26dvh;
+            background-color: transparent;
+            overflow: hidden;
+        }
+        .godsWraps{
+            border: 0.1dvw solid white;
+            display: none;
+            box-sizing: border-box;
+            min-width: 12dvw;
+            height: 4dvh;
+            margin-bottom: 1dvw;
+            margin-left: 2dvw;
+            position: relative;
+        }
+        .godTitles{
+            font-family: "Papyrus", "Arial", sans-serif;
+            font-size: 2.4dvh;
+            line-height: 4dvh;
+        }
+        #godsAppeased{
+            width: 46dvw;
+            height: 28dvh;
+            background-color: transparent;
+            overflow: hidden;
+        }
+        
+        .godsAppeasedWraps{
+            display: none;
+            float: left;
+            border: 0.1dvw solid white;
+            border-radius: 0.5dvw;
+            font-family: "Papyrus", "Arial", sans-serif;
+            font-weight: bold;
+            text-align: center;
+            width: 12dvw;
+            height: 12dvw;
+            margin: 1dvw;
+            position: relative;
+        }
+
+        .godsAppeasedImage{
+            width: 100%;
+            border-top-left-radius: 0.5dvw;
+            border-top-right-radius: 0.5dvw;
+            height:8dvw;
+            position: absolute;
+            top: 0%; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .godsAppeasedText{
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: absolute;
+            bottom: 0; 
+            width: 100%; 
+            height: 6dvh; 
+            font-weight: bold;
+            font-size: 1.5dvw;
+            line-height: 2dvw;
+        }
+    #sacRight{
+        float: right;
+        width: 48dvw;
+    }
+    #relicTitle{
+        line-height: 8dvh;
+        font-size: 2dvw;
+        width: 48dvw;
+        font-weight: bold;
+        text-decoration: underline;
+        font-family: "Papyrus", "Arial", sans-serif;
+    }   
+    #relics{
+        display: flex;
+        flex-wrap: wrap; 
+        align-content: flex-start; 
+        width: 48dvw;
+        height: 61dvh;
+        background-color: transparent;
+        overflow: hidden;
+    }
+        .relicWraps{
+            display: none;
+            border: 0.1dvw solid white;
+            border-radius: 0.5dvw;
+            font-family: "Papyrus", "Arial", sans-serif;
+            font-weight: bold;
+            text-align: center;
+            width: 10dvw;
+            height: 10dvw;
+            margin: 0.8dvw;
+            position: relative;
+        }
+
+        .relicImg{
+            width: 100%;
+            border-top-left-radius: 0.5dvw;
+            border-top-right-radius: 0.5dvw;
+            height:8dvw;
+            position: absolute;
+            top: 0%; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .relicTxt{
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: absolute;
+            bottom: 0; 
+            width: 100%; 
+            height: 4dvh; 
+            font-weight: bold;
+            font-size: 1dvw;
+            line-height: 2dvw;
+        }
+        
+        /* Divinity */
+#divinity {
+    overflow: hidden;
+    height: 69dvh;
+    width: 97dvw;
+}
+
+#divinityTitle {
+    text-align: center;
+    width: 97dvw;
+    font-size: 6dvh;
+    line-height: 9dvh;
+}
+#divinityLeft {
+    float: left;
+    overflow: hidden;
+    height: 60dvh;
+    width: 48.4dvw;
+}
+#divinityRight {
+    float: right;
+    overflow: hidden;
+    height: 60dvh;
+    width: 48.4dvw;
+}
+.shardCatBoxes{
+    flex: 0 0 48dvw;
+    justify-content: space-between;
+    width: 48dvw;
+    max-width: 48dvw;
+    min-height: 18dvh;
+    box-sizing: border-box;
+}
+.shardBoxTitles{
+    width: 48dvw;
+    padding-left: 1dvw;
+    font-size: 4dvh;
+    line-height: 4.8dvh;
+    text-decoration: underline;
+}
+.shardBuyWraps {
+    position: relative;
+    width: 14dvw;
+    margin: 0.8dvw;
+    height: 12dvh;
+    font-size: 2dvh;
+    line-height: 2.4dvh;
+    cursor: pointer;
+    border: 0.1dvh groove white;
+    border-radius: 1dvh;
+}
+.shardBuyOneOffs {
+    position: relative;
+    width: 14dvw;
+    margin: 0.8dvw;
+    height: 12dvh;
+    font-size: 2dvh;
+    line-height: 2.4dvh;
+    cursor: pointer;
+    border: 0.1dvh groove white;
+    border-radius: 1dvh;
+}
+.shardBuyTitle{
+    position: absolute;
+    top: 10%;
+    font-size: 2.8dvh;
+    line-height: 4dvh;
+    left: 4%;
+}
+.shardBuyCost{
+    position: absolute;
+    top: 44%;
+    left: 8%;
+}
+.shardLvlTxt{
+    position: absolute;
+    top: 66%;
+    left: 8%;
+}
+.shardBuyLevel{
+    position: absolute;
+    top: 66%;
+    left: 28%;
+}
+
+.madSliderBoxes {
+    vertical-align: top;
+    position: relative;
+    width: 14dvw;
+    margin: 0.8dvw;
+    height: 12dvh;
+    font-size: 2dvh;
+    line-height: 2.4dvh;
+    border: 0.1dvh groove white;
+    border-radius: 1dvh;
+    display: none;
+}
+.madSliderTitles {
+    font-size: 2.8dvh;
+    line-height: 4dvh;
+    text-align: center;
+    margin: 1dvh;
+}
+.slideInfoRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.madSliderNums{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4dvw;
+}
+.madSliders{
+    width: 98%;
+    margin: 1%;
+}
+
+#achPing{
+    display:none;
+    position: absolute;
+    left: 88%;
+    z-index: 2;
+    color: #00bfff;
+    font-size: 4dvh;
+    line-height: 3.6dvh;
+}
+
+@keyframes achFlash {
+    0%, 100% { color: #00bfff; }
+    50% { color: #ffffff; } 
+}
+
+#achievementsPage{
+    display: none;
+    height: 67dvh;
+    width: 97dvw;
+    margin: 1dvw;
+    background-color: transparent;
+    box-sizing: content-box; 
+}
+#achievementsTitle {
+    text-align: center;
+    width: 97dvw;
+    font-size: 6dvh;
+    line-height: 9dvh;
+}
+#achievementsFlex{
+    height: 57dvh;
+    width: 97dvw;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-content: flex-start; 
+    background-color: transparent;
+    box-sizing: content-box; 
+}
+
+.achBox{
+    height: 57dvh;
+    width: 16dvw;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-content: flex-start; 
+    background-color: transparent;
+    box-sizing: content-box; 
+}
+.achCategories{
+    width: 16dvw;
+    padding-left: 1dvw;
+    font-size: 4dvh;
+    line-height: 4.8dvh;
+    text-decoration: underline;
+}
+.achievementsWraps{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 14dvw;
+    margin: 0.4dvw;
+    height: 4dvh;
+    border: 0.1dvh groove white;
+}
+.achievementsText{
+    width: 100%;
+    text-shadow:
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+    font-size: 2.8dvh;
+    line-height: 4dvh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+}
+#achievementsTab{
+    /*display: block;*/
+}
+
 #bookshelf {
   width: 46dvw;
   height: 28dvh;
@@ -175,139 +521,4 @@
   color: black;
   font-family: serif;
   white-space: normal;
-}
-
-#godTitle{
-    line-height: 6dvh;
-    font-size: 2dvw;
-    width: 46dvw;
-    font-weight: bold;
-    text-decoration: underline;
-    font-family: "Papyrus", "Arial", sans-serif;
-}
-    #gods{
-        width: 46dvw;
-        height: 34dvh;
-        background-color: transparent;
-        overflow-y: auto;
-    }
-        .godsWraps{
-            border: 0.1dvw solid white;
-            display: none;
-            box-sizing: border-box;
-            min-width: 18dvw;
-            height: 6dvh;
-            margin: 0.4dvw;
-            position: relative;
-        }
-        .godTitles{
-            font-family: "Papyrus", "Arial", sans-serif;
-            font-size: 2.4dvh;
-            line-height: 4dvh;
-        }
-
-
-        #sacRight{
-            float: right;
-            width: 48dvw;
-        }
-    #relicTitle{
-        line-height: 8dvh;
-        font-size: 2dvw;
-        width: 48dvw;
-        font-weight: bold;
-        text-decoration: underline;
-        font-family: "Papyrus", "Arial", sans-serif;
-    }   
-    #relics{
-        display: flex;
-        flex-wrap: wrap; 
-        align-content: flex-start; 
-        width: 48dvw;
-        height: 61dvh;
-        background-color: transparent;
-        overflow-y: auto;
-    }
-        .relicWraps{
-            display: none;
-            border: 0.1dvw solid white;
-            border-radius: 0.5dvw;
-            font-family: "Papyrus", "Arial", sans-serif;
-            font-weight: bold;
-            text-align: center;
-            width: 12dvw;
-            height: 12dvw;
-            margin: 1dvw;
-            position: relative;
-        }
-
-        .relicImg{
-            width: 100%;
-            border-top-left-radius: 0.5dvw;
-            border-top-right-radius: 0.5dvw;
-            height:8dvw;
-            position: absolute;
-            top: 0%; 
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .relicTxt{
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Optionally center text horizontally */
-    text-align: center; /* Ensures multi-line text is centered */
-            position: absolute;
-            bottom: 0; 
-            width: 100%; 
-            height: 6dvh; 
-            font-weight: bold;
-            font-size: 1.5dvw;
-            line-height: 2dvw;
-        }
-#divinity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#divinityTitle {
-    text-align: center;
-    width: 90dvw;
-    font-size: 8dvh;
-    line-height: 10dvh;
-    margin: 3dvh;
-}
-
-.shardBuyBox {
-    width: 97dvw;
-    height: 58dvh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.shardBuyWraps {
-    width: 15dvw;
-    height: 10dvh;
-    margin: 1dvh 3dvw;
-    position: relative;
-    font-size: 3dvh;
-    line-height: 4dvh;
-    cursor: pointer;
-    border: 0.1dvh groove white;
-    border-radius: 1dvh;
-}
-.shardBuy:hover {
-}
-.shardBuyText{
-    width: 100%;
-}
-.shardLvlTxt{
-    width: 9dvw;
-    float: left;
-}
-.shardBuyLevel{
-    width: 5dvw;
-    float: left;
 }

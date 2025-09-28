@@ -1,109 +1,73 @@
 let totalTime = {
     total: 0,
     timeInit: 0,
-    timeFinal: 0
+    timeFinal: 0,
+    timeSession: 0
 };
 
 function timeSpent() {
     const currentTime = Date.now();
     const timeDifference = (currentTime - totalTime.timeInit) / 60000;
     totalTime.total += timeDifference;
+    totalTime.timeSession += currentTime - totalTime.timeInit;
     totalTime.timeInit = currentTime;
     comment("We have stolen " + Math.floor(totalTime.total)+ " minutes of your life.");
 }
-function resetGame(){
-    eventBox("images/world/crypt.jpg", "Reset Game", "Left Button resets this run only. Permanent gains kept. Right Button resets all progress.");
-     let parent = document.getElementById('eventBox');
-        let restartRun =  document.createElement('button');
-        restartRun.className = 'eventButtonsLeft';
-        restartRun.id = "restartRun";
-        restartRun.innerHTML = 'Restart Run';
-        parent.appendChild(restartRun);
-        let resetGame =  document.createElement('button');
-        resetGame.className = 'eventButtonsRight'; 
-        resetGame.id = "resetGame";
-        resetGame.innerHTML = 'Reset Game';
-        parent.appendChild(resetGame);
-        document.getElementById('restartRun').addEventListener('pointerdown', () => {
-            window.removeEventListener("beforeunload", saveToLocalStorage);
-            localStorage.clear();
-            localStorage.setItem("resetRunStats", JSON.stringify(stats)); //stats
-            localStorage.setItem("savedPermanentChanges", JSON.stringify(permanentChanges)); 
-            localStorage.setItem("savedPermanentMadness", JSON.stringify(permanentMadness)); 
-            localStorage.setItem("savedShardBuys", JSON.stringify(shardBuys)); 
-            localStorage.setItem("savedTime", JSON.stringify(totalTime)); 
-            location.reload();
-        }); 
-        document.getElementById('resetGame').addEventListener('pointerdown',   () => {
-            window.removeEventListener("beforeunload", saveToLocalStorage);
-            localStorage.clear();
-            location.reload();
-        }); 
-}
-function resetRunPost(){
-    let savedStats = localStorage.getItem("resetRunStats");
-    let statsTemp =  JSON.parse(savedStats);
-    let savedPermanentChanges = localStorage.getItem("savedPermanentChanges");
-    permanentChanges = JSON.parse(savedPermanentChanges); 
-    if(permanentChanges.immortality === true){ //immortality code block moved to immortality()
-         immortality(statsTemp);
-    }else{
-        window.console.log('dead');   
-        stats.shards.current = statsTemp.shards.current;
-    }
-    if(statsTemp.shards.unlocked === true){
-        stats.shards.unlocked === true;
-        document.getElementById('shards').innerHTML = stats.shards.current;
-        document.getElementById('shardsBox').style.display='block';
-        stats.health.max -= stats.shards.current;
-        stats.health.current -= stats.shards.current;
-        document.getElementById('health').innerHTML = stats.health.current;
-        shardsBoughtLoad();                                
-        domUnlocks.divinity = true;
-        document.getElementById('divinityTab').style.display='block';
-    }
-    let storedTime = localStorage.getItem("savedTime"); 
-    totalTime = JSON.parse(storedTime); 
-    window.console.log('Run reset');
-    closeEventBox();
-    saveToLocalStorage();
-}
+
 
    	//=========================================
 	// follower actions
 	//=========================================
 
-function faithful(tics){    
+function faithful(tics) {
     cult.faithful.ticCounter[0] += tics;
-    if(cult.faithful.ticCounter[0] >= cult.faithful.ticCounter[1]){
+    if (cult.faithful.ticCounter[0] >= cult.faithful.ticCounter[1]) {
         cult.faithful.ticCounter[0] -= cult.faithful.ticCounter[1];
-        let outputTypes = ['love', 'terror', 'gold'];
-        let outputKeys = Object.keys(outputTypes);
-        let outputKey = Math.floor(Math.random() * outputKeys.length);//choice made for type
-        const currentValue = vault[outputTypes[outputKey]].current;//current 
-        let outputTotal = Math.max((cult.faithful.current + cult.hybrids.current)* cult.faithful.outMultipliers[outputKey], 0);
-        if(outputTypes[outputKey] === 'love'){
-            const loveChange = applySoftcap('faithful', 'love', outputTotal, 16);
-            numberChange('vault', outputTypes[outputKey], loveChange, '#FF559D', 'red');
-        }else if(outputTypes[outputKey] === 'terror'){
-            if(madBools[0] === true){
-                outputTotal += Math.sqrt(Math.max(1, cult.faithful.current));// scaling of terror to current madness
+        const totalFollowers = cult.faithful.current + cult.hybrids.current + cult.brined.current;
+        const baseOutput = Math.max(totalFollowers, 0);
+        const resources = [
+            { type: 'love', multiplierIndex: 0, color: '#FF559D', bgColor: 'red' },
+            { type: 'terror', multiplierIndex: 1, color: 'red', bgColor: 'red' },
+            { type: 'gold', multiplierIndex: 2, color: 'yellow', bgColor: 'red' }
+        ];
+        const basePerResource = Math.floor(baseOutput / 3);
+        const remainder = baseOutput % 3;
+        resources.forEach((resource, index) => {
+            let amount = basePerResource + (index < remainder ? 1 : 0);
+            amount *= cult.faithful.outMultipliers[resource.multiplierIndex];
+            if (resource.type === 'love') {
+                if (tyogCrafts.festival.active) amount *= 2;
+                if (tyogCrafts.snakeHandling.active) amount *= 2;
+            } else if (resource.type === 'terror') {
+                if (tyogCrafts.invokeYog.active) amount *= 4;
+                if (tyogCrafts.snakeHandling.active) amount *= 2;
+                if (tyogCrafts.festival.active) amount /= 2;
+            } else if (resource.type === 'gold') {
+                if (tyogCrafts.festival.active) amount *= 2;
             }
-            outputTotal = applySoftcap('faithful', 'terror', outputTotal, 16);
-            numberChange('vault', outputTypes[outputKey], outputTotal, 'red', 'red');
-        }
-        if(outputTypes[outputKey] === 'gold'){
-            numberChange('vault', outputTypes[outputKey], outputTotal, 'yellow', 'red');
-        }
+            let hasActiveCrafts = false;
+            if (resource.type === 'love') {
+                hasActiveCrafts = tyogCrafts.festival.active || tyogCrafts.snakeHandling.active;
+            } else if (resource.type === 'terror') {
+                hasActiveCrafts = tyogCrafts.invokeYog.active || tyogCrafts.snakeHandling.active;
+            }
+            if (!hasActiveCrafts && resource.type!=="gold") {
+                amount = applySoftcap('faithful', resource.type, amount);
+            }
+            if (amount > 0) {
+                numberChange('vault', resource.type, amount, resource.color, resource.bgColor);
+            }
+        });
     }
 }
 
-function applySoftcap(pegType, resource, potentialIncrease, baseMultiplier) {
+
+function applySoftcap(pegType, resource, potentialIncrease) {
     let softcap = 0;
     if(pegType === "faithful"){
-            softcap = (cult.faithful.current + cult.hybrids.current) * 16;
+            softcap =  Math.ceil(Math.pow(cult.faithful.current + cult.hybrids.current + cult.brined.current, cult.faithful.capMultiplier) + 88);
     }else{
-        softcap = (cult[pegType].current * (cult.faithful.current + cult.hybrids.current)) * baseMultiplier;
+        softcap = (cult[pegType].current * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult[pegType].capMultiplier;
     }
     const currentResource = vault[resource].current; // Current value in vault (love, terror, or gold)
     const remainingCapacity = softcap - currentResource;
@@ -119,7 +83,7 @@ function applySoftcap(pegType, resource, potentialIncrease, baseMultiplier) {
         diminishingFactor = 1 - excess / effectiveCapacity; // Linearly reduce from 1 to 0
     }
     const delta = potentialIncrease * Math.max(diminishingFactor, 0); // Ensure no negative values
-    return Math.min(Math.floor(delta), remainingCapacity);
+    return Math.min(Math.ceil(delta), remainingCapacity);
 
 }
 
@@ -130,13 +94,11 @@ function chanters(tics) {
             cult.chanters.ticCounter[0] -= cult.chanters.ticCounter[1];
             let loveBump = 0;
             let charmBump = 0;
-            loveBump += cult.chanters.outMultiplier * (cult.chanters.current + (cult.faithful.current + cult.hybrids.current)/4);
-            charmBump += cult.chanters.outMultiplier * (cult.chanters.current +  (cult.faithful.current + cult.hybrids.current)/4);
-            const loveChange = applySoftcap('chanters', 'love', loveBump, 16);
+            loveBump += cult.chanters.outMultiplier * (cult.chanters.current + cult.faithful.current + cult.hybrids.current + cult.brined.current);
+            charmBump += cult.chanters.outMultiplier * (cult.chanters.current + cult.faithful.current + cult.hybrids.current + cult.brined.current)/4;
+            const loveChange = applySoftcap('chanters', 'love', loveBump);
             numberChange('vault', 'love', loveChange, '#FF559D', 'red');
-            if(tics !== 4){
-                numberChange('stats', 'charm', charmBump, '#FFFF00', 'red');
-            }
+            numberChange('stats', 'charm', charmBump, '#FFFF00', 'red');
         }
     }
 }
@@ -147,18 +109,31 @@ function sentinels(tics) {
         if (cult.sentinels.ticCounter[0] >= cult.sentinels.ticCounter[1]) {
             cult.sentinels.ticCounter[0] -= cult.sentinels.ticCounter[1];
             const terrorBump = cult.sentinels.outMultiplier * (cult.sentinels.current + cult.hybrids.current + cult.faithful.current + cult.hybrids.current); 
-            const terrorChange = applySoftcap('sentinels', 'terror', terrorBump, 16);
-            numberChange('vault', 'terror', terrorChange, 'red', 'blue');
+            if(tyogCrafts.invokeYog.active===true){
+                numberChange('vault', 'terror', terrorBump*4, 'red', 'blue');
+            }else{
+                const terrorChange = applySoftcap('sentinels', 'terror', terrorBump);
+                numberChange('vault', 'terror', terrorChange, 'red', 'blue');
+            }
         }
     }
 }
 function scribes(tics) {
     cult.scribes.ticCounter[0] += tics;
-    window.console.log(tics,  cult.scribes.ticCounter);
     if (cult.scribes.ticCounter[0] >= cult.scribes.ticCounter[1]) {
         cult.scribes.ticCounter[0] -= cult.scribes.ticCounter[1];
-        vault.tomes.pageCounter += cult.scribes.current;
-        document.getElementById('pages').innerHTML = Math.floor(vault.tomes.pageCounter);
+        vault.tome.pageCounter += cult.scribes.current * 4;
+        document.getElementById('pages').innerHTML = Math.floor(vault.tome.pageCounter);
+    }
+}
+
+function apprentices(tics) {
+    cult.apprentices.ticCounter[0] += tics;
+    if (cult.apprentices.ticCounter[0] >= cult.apprentices.ticCounter[1]) {
+        cult.apprentices.ticCounter[0] -= cult.apprentices.ticCounter[1];
+        vault.tome.pageCounter -= cult.apprentices.current;
+        document.getElementById('pages').innerHTML = Math.floor(vault.tome.pageCounter);
+        numberChange("stats", "vision", (cult.apprentices.current *16), "green", "");
     }
 }
 
@@ -173,7 +148,11 @@ function healthCheck(){
     }else{
         ticC.healthCounter[0] = 0;
         if(stats.health.current < stats.health.max - 1){
-            numberChange('stats', 'health', 1, 'blue', 'red');
+            if(actionUpgrades.chant.perfection.purchased===true){
+                numberChange("stats", "health", 8, "blue", "");
+            }else{
+                numberChange('stats', 'health', 1, 'blue', 'red');
+            }
         }else if(stats.health.current > stats.health.max + 1){
             numberChange('stats', 'health', -1, 'blue', 'red');
         }
@@ -211,25 +190,47 @@ function pitsOn(tics){//breeding pits 40 counter/level
             terrorCrafts.breedingPits.counter[0] += tics * terrorCrafts.breedingPits.level;
         }else{
             terrorCrafts.breedingPits.counter[0] = 0;
+            let inns = terrorCrafts.breedingPits.baseOutput;
+            if(tyogCrafts.riteSpring.active === true){
+                inns*=2;
+            }
             if(terrorCrafts.breedingPits.shub === true){
-                numberChange('cult', 'innocents', 4, 'blue', '');
-                comment('Iä! New lives join the fold...  (+4 Innocents come up from the Pits, Terror +88)', 'red');
+                numberChange('cult', 'innocents', (inns * 4), 'blue', '');
+                comment("Iä! New lives join the fold...  (+" + (inns * 4) + " Innocents come up from the Pits, Terror +88)", 'red');
                 numberChange('vault', 'terror', 88, 'red', '');
             }else{
-                numberChange('cult', 'innocents', 1, 'blue', '');
-                comment('a new life joins the fold...  (+1 Innocent comes up from the Pits, Terror +44)', 'red');
+                numberChange('cult', 'innocents', inns, 'blue', '');
+                comment("new life joins the fold...  (+" + inns + " Innocent comes up from the Pits, Terror +44)", 'red');
                 numberChange('vault', 'terror', 44, 'red', '');
-
             }
         }
     }
 }
+
+function shoggothFarmOn(tics){
+    if( fleshCrafts.shoggothFarm.level > 0){
+         fleshCrafts.shoggothFarm.counter[0] += tics;
+        if( fleshCrafts.shoggothFarm.counter[0] <  fleshCrafts.shoggothFarm.counter[1]){
+        }else{
+            fleshCrafts.shoggothFarm.counter[0] = 0;
+            if(vault.flesh.current>= (fleshCrafts.shoggothFarm.level*4)){
+                numberChange('vault', 'flesh', -(fleshCrafts.shoggothFarm.level*4), '', 'red');
+                numberChange("vault", "ichor", fleshCrafts.shoggothFarm.level, "red", "");
+                comment("The stench is astounding. ( -" + fleshCrafts.shoggothFarm.level*4 + " Flesh, +" + fleshCrafts.shoggothFarm.level + " Ichor from Shoggoth harvest.", 'red');
+            }else {
+                comment("The Shoggoth roars and beats itself against the walls in search of Flesh. (+444 Terror", 'red');
+                numberChange("vault", "terror", 444, "red", "");
+            }
+        }
+    }
+}
+
 function  gridTime(tics){
-        if(ticC.gridCounter[0] < ticC.gridCounter[1]){
-        ticC.gridCounter[0] += tics;
-    }else{
+    ticC.gridCounter[0] += tics;
+    if(ticC.gridCounter[0]>=ticC.gridCounter[1]){
         ticC.gridCounter[0] -= ticC.gridCounter[1];
         checkAdjacencyAndApplyBonuses('time');
+     //   plays(bell);
     }
 }
 
@@ -248,17 +249,26 @@ function performOneTic(tics){
     healthCheck();
     loveTerrorChecks();
     loopMadness(tics);
-    checkUnlockCounter(tics);
-    if(deadBool === false){
-        dyingCheck();
-        madCheck();
-    }else{
-        shardDeadCheck();
-    }
+    checkUnlocks();
+    dyingCheck();
+    madCheck();
     if(actions.chant.toggle === true){
         autoChant(tics);
     }
-    if(cult.faithful.current >0){
+    if(actionUpgrades.chant.choir.purchased===true){
+         choirSing();
+    }
+    if(actionUpgrades.chant.bodyTheft.purchased===true){
+         actions.chant.theftTicCounter[0] +=tics;
+         if(actions.chant.theftTicCounter[0] >=actions.chant.theftTicCounter[1]){
+             actions.chant.theftTicCounter[0]=0;
+             numberChange("stats", "charm", 4, "blue", "");
+             if(actionUpgrades.chant.perfection.purchased===true){
+                 numberChange("stats", "charm", 8, "blue", "");
+             }
+         }
+    }
+    if(cult.faithful.current >0 ||cult.hybrids.current>=1 || cult.brined.current>=1){
         faithful(tics);
     }
     if(cult.chanters.current >0){
@@ -267,26 +277,72 @@ function performOneTic(tics){
     if(cult.sentinels.current >0){
         sentinels(tics);
     }
+    if(goldCrafts.mortuary.active===true){
+        mortuaryLoop(tics);
+    }
     if(cult.priests.current >0){
         priests(tics);
     }
     if(cult.scribes.current >0){
         scribes(tics);
     }
-    if(goldCrafts.tithe.toggle === true){
-        tithe();
+    if(cult.apprentices.current >0){
+        apprentices(tics);
     }
-    gridTime(tics);
-    tulu();
+    if(goldCrafts.tithe.toggle === true){
+        tithe(tics);
+    }
+    if(ichorCrafts.resonator.toggle === true){
+        resonate(tics);
+    }
+    if(ichorCrafts.whateley.telepathyBool===true){
+        whateleyTelepathy(tics);
+    }
+    //rites
+    if(tyogCrafts.riteSpring.active === true){
+        tyogCrafts.riteSpring.counter[0] +=tics;
+        if( tyogCrafts.riteSpring.counter[0] >=tyogCrafts.riteSpring.counter[1]){
+            tyogCrafts.riteSpring.active = false;
+        }
+    }
+    if(tyogCrafts.festival.active === true){
+        tyogCrafts.festival.counter[0] +=tics;
+        if( tyogCrafts.festival.counter[0] >=tyogCrafts.festival.counter[1]){
+            tyogCrafts.festival.active = false;
+        }
+    }
+    if(tyogCrafts.invokeYog.active === true){
+        tyogCrafts.invokeYog.counter[0] +=tics;
+        if( tyogCrafts.invokeYog.counter[0] >=tyogCrafts.invokeYog.counter[1]){
+            tyogCrafts.invokeYog.active = false;
+        }
+    }
+    tulu(tics);
     pitsOn(tics);
-    relicsTic(); 
+    shoggothFarmOn(tics);
+    gridTime(tics);
+    godsTic(tics);
+    relicsTic(tics);
+    if(madUps.alcoholism.active === true){
+        madUps.alcoholism.counter[0]+=tics;
+        if(madUps.alcoholism.counter[0] >= madUps.alcoholism.counter[1]){
+            madUps.alcoholism.counter[0]=0;
+            autoMadAction("drink");
+        }
+    }
+    if(madUps.addiction.active === true){
+        madUps.addiction.counter[0]+=tics;
+        if(madUps.addiction.counter[0] >= madUps.addiction.counter[1]){
+            madUps.addiction.counter[0]=0;
+            autoMadAction("smoke");
+        }
+    }
 };
 
 let previousTimestamp = 0;
 let partialTics = 0;
 let ticDuration = 800;
 let tics = 0;
-let stamp;
 function gameTimer(timestamp) {
     //calculate tics
     let timeDifference = timestamp - previousTimestamp;
@@ -330,50 +386,70 @@ function afk(){
     let tics = timePassed/800;
     //window.console.log("tics ", tics);
     let afks={
-        madness:0,
         love:0,
         terror:0,
-        gold:0
+        gold:0,
+        madness:0
     };
     if(tics >=8){
         for (let i = 1; i < tics; i +=4) {//4tics for almost everything
             // Faithful Output (Love, Terror, Gold)
-            if(cult.faithful.current >0){
-                faithful(2);
-                faithful(2);
+            if(cult.faithful.current >=1 ||cult.hybrids.current>=1 || cult.brined.current>=1){
+                faithful(4);
             }
             if(cult.chanters.current >0){
                 chanters(4);
-                afks.love += adjacentNumbers.chantersTotal;
-                afks.love = applySoftcap('chanters', 'love', afks.love, 16);
             }    
             if(cult.sentinels.current >0){
                 sentinels(4);
-                afks.terror += adjacentNumbers.sentinelsTotal;
-                afks.terror = applySoftcap('sentinels', 'terror', afks.terror, 16);
             }  
-            afks.gold += adjacentNumbers.priestsTotal;
-            if(cult.priests.vaultAction && cult.priests.vaultActions === true && cult.priests.current >0){
-                const choice = cult.priests.vaultAction;
-                // Split the choice at the "-" to get first and second assets
-                const [firstAsset, secondAsset] = choice.split('-');
-                const firstAssetAmount = vault[firstAsset].current + afks[firstAsset];
-                if(firstAssetAmount >= 16){
-                    const priestCount = cult.priests.current;
-                    let loss =  firstAssetAmount/8;
-                    let gain =  loss/(16/(1 + priestCount));
-                    afks[firstAsset] -= loss; //1/8th
-                    afks[secondAsset] = gain; 
+            if(cult.priests.current >0){
+                priests(4);
+            }
+            if(cult.scribes.current >0){
+                scribes(4);
+            }
+            if(cult.apprentices.current >0){
+                apprentices(4);
+            }
+            if(goldCrafts.mortuary.active===true){
+                mortuaryLoop(4);
+            }
+            if(goldCrafts.tithe.toggle === true){
+                tithe(4);
+            }
+            if(ichorCrafts.resonator.toggle === true){
+                resonate(4);
+            }
+            if(ichorCrafts.whateley.telepathyBool===true){
+                whateleyTelepathy(4);
+            }
+            //rites
+            if(tyogCrafts.riteSpring.active === true){
+                tyogCrafts.riteSpring.counter[0]+=tics;
+                if( tyogCrafts.riteSpring.counter[0] >=tyogCrafts.riteSpring.counter[1]){
+                    tyogCrafts.riteSpring.active = false;
                 }
             }
-            if(goldCrafts.tithe.toggle === true &&  (vault.love.current + afks.love) >= 16){
-                let loss = (vault.love.current + afks.love)/8;
-                afks.love -= loss;
-                afks.gold += loss/8;
-                window.console.log(loss, "loss");
+            if(tyogCrafts.festival.active === true){
+                tyogCrafts.festival.counter[0]+=tics;
+                if( tyogCrafts.festival.counter[0] >=tyogCrafts.festival.counter[1]){
+                    tyogCrafts.festival.active = false;
+                }
             }
+            if(tyogCrafts.invokeYog.active === true){
+                tyogCrafts.invokeYog.counter[0]+=tics;
+                if( tyogCrafts.invokeYog.counter[0] >=tyogCrafts.invokeYog.counter[1]){
+                    tyogCrafts.invokeYog.active = false;
+                }
+            }
+            tulu(4);
+            pitsOn(4);
+            shoggothFarmOn(4);
+            gridTime(4);
             //sacrarium gods and such
             if(domUnlocks.sacrarium === true){//relics all set to 4 tics at current
+                    godsTic(4);
                     relicsTic(4);
             }
             //shards madness
@@ -383,13 +459,14 @@ function afk(){
         }
         //math for time
         let timeAfk = Math.floor(timePassed / 60000);
-        comment("West was idle for " + timeAfk + " minutes but the Cult remained active. (West stats do not change, toggles deactivated.)");
-        //end updates
+        if(timeAfk>=4){
+            eventBox("images/meeple/west.jpg", "West Returns", "West was idle for " + timeAfk + " minutes but the Cult remained active and the Gods hunger. (West does not act but is still affected by permanent Madness and Relics.)");
+        }
+            //end updates
         numberChange("stats", "madness", afks.madness, "blue", "");
         numberChange('vault', 'love', afks.love, '#FF559D', 'red');
         numberChange('vault', 'terror', afks.terror, 'red', 'blue');
         numberChange('vault', 'gold', afks.gold, 'yellow', 'red');
-        window.console.log(tics, "tics", afks);
     }
 }
 // off time recorded in save
@@ -399,10 +476,8 @@ function offlineProgress(){
     ? JSON.parse(localStorage.getItem("savedOfflineTimestamp")) 
     : performance.now();
     let currentTimestamp = Date.now();
-    let timePassed = currentTimestamp - lastOffline; // Time in ms
-    // Cap offline duration at 88 minutes (88 * 75 * 1000 ms) and calculate tics
-    let tics = Math.min(timePassed / 1000, 44 * 75); // Cap tics at equivalent of 88 minutes
-    let decayRate = 0.04; // 4% decay every 75 tics
+    let timePassed = Math.min((totalTime.timeSession*4), (currentTimestamp - lastOffline)); // Minimize to 4 times session length
+    let tics = Math.min(timePassed / 800, 44 * 75, 88); // Cap tics at equivalent of 88 minutes
     let offlineOutput = {
         love: 0,
         terror: 0,
@@ -411,41 +486,68 @@ function offlineProgress(){
     // Loop through each 75-tic chunk
     if(tics >= 75){
         for (let i = 0; i < tics; i += 75) {
-            // Calculate decay for each 75-tic interval
-            let decayMultiplier = Math.exp(-decayRate * Math.floor(i / 75));
             // Faithful Output (Love, Terror, Gold)
-            if (cult.faithful.current >= 1) {
-                if((vault.love.current + offlineOutput.love) <= ((cult.faithful.current +cult.hybrids.current) * 16)){
-                    offlineOutput.love += cult.faithful.current * cult.faithful.outMultipliers[0] / 6 * 75 * decayMultiplier;
+            if (cult.faithful.current >= 1 ||cult.hybrids.current>=1 || cult.brined.current>=1) {
+                let faithfulCap = Math.pow(cult.faithful.current + cult.hybrids.current + cult.brined.current, cult.faithful.capMultiplier) + 88;
+                if((vault.love.current + offlineOutput.love) <= faithfulCap){
+                    offlineOutput.love += (cult.faithful.current + cult.hybrids.current + cult.brined.current) * cult.faithful.outMultipliers[0] * 9;
+                }else{
+                    let remainingCapacity = faithfulCap - (vault.love.current + offlineOutput.love);
+                    if(remainingCapacity > 0){
+                        offlineOutput.love += remainingCapacity;
+                    }
                 }
-                if((vault.terror.current + offlineOutput.terror) <= ((cult.faithful.current +cult.hybrids.current) * 16)){
-                    offlineOutput.terror += cult.faithful.current * cult.faithful.outMultipliers[1] / 6 * 75 * decayMultiplier;
+                if((vault.terror.current + offlineOutput.terror) <= faithfulCap){
+                    offlineOutput.terror += (cult.faithful.current + cult.hybrids.current + cult.brined.current) * cult.faithful.outMultipliers[1] * 9;
+                }else{
+                    let remainingCapacity = faithfulCap - (vault.terror.current + offlineOutput.terror);
+                    if(remainingCapacity > 0){
+                        offlineOutput.terror += remainingCapacity;
+                    }
                 }
-                    offlineOutput.gold += cult.faithful.current * cult.faithful.outMultipliers[2] / 6 * 75 * decayMultiplier;
-                }
+                offlineOutput.gold += (cult.faithful.current + cult.hybrids.current + cult.brined.current) * cult.faithful.outMultipliers[2] * 9;
+            }
             // Chanters Output (Love)
             if (cult.chanters.current >= 1) {
-                if((vault.love.current + offlineOutput.love) <= (cult.chanters.current *(cult.faithful.current +cult.hybrids.current) * 16)){
-                    offlineOutput.love += adjacentNumbers.chantersTotal * tics/4 * decayMultiplier;
-                    let chanterBase = cult.chanters.outMultiplier * (cult.chanters.current + (cult.faithful.current + cult.hybrids.current) / 4);
-                    offlineOutput.love += chanterBase * 1 / 8 * 75 * decayMultiplier;
+                if((vault.love.current + offlineOutput.love) <= (cult.chanters.current * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.chanters.capMultiplier){
+                    offlineOutput.love += adjacentNumbers.chantersTotal * 75/8  ;
+                    let chanterBase = cult.chanters.outMultiplier * (cult.chanters.current + (cult.faithful.current + cult.hybrids.current + cult.brined.current) / 4);
+                    offlineOutput.love += chanterBase * 9  ;
+                }else{
+                    let remainingCapacity = ((cult.chanters.current * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.chanters.capMultiplier) - (vault.love.current + offlineOutput.love);
+                    if(remainingCapacity > 0){
+                        offlineOutput.love += remainingCapacity;
+                    }
                 }
             }
             // Sentinels Output (Terror)
             if (cult.sentinels.current >= 1) {
-                if((vault.terror.current + offlineOutput.terror) <= (cult.sentinels.current *(cult.faithful.current +cult.hybrids.current) * 16)){
-                    offlineOutput.terror += adjacentNumbers.sentinelsTotal * tics/4 * decayMultiplier;
-                    let sentinelBase = cult.sentinels.outMultiplier * (cult.sentinels.current + (cult.faithful.current + cult.hybrids.current) / 4);
-                    offlineOutput.terror += sentinelBase * 1 / 8 * 75 * decayMultiplier;
+                if((vault.terror.current + offlineOutput.terror) <= ((cult.sentinels.current + cult.hybrids.current) * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.sentinels.capMultiplier){
+                    offlineOutput.terror += adjacentNumbers.sentinelsTotal * 9 ;
+                    let sentinelBase = cult.sentinels.outMultiplier * (cult.sentinels.current + (cult.faithful.current + cult.hybrids.current + cult.brined.current) / 4);
+                    offlineOutput.terror += sentinelBase * 9;
+                }else{
+                    let remainingCapacity = ((cult.sentinels.current + cult.hybrids.current) * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.sentinels.capMultiplier - (vault.terror.current + offlineOutput.terror);
+                    if(remainingCapacity > 0){
+                        offlineOutput.terror += remainingCapacity;
+                    }
                 }
             }
-            offlineOutput.gold += adjacentNumbers.priestsTotal * tics/4 * decayMultiplier;
-            offlineOutput.love = applySoftcap('chanters', 'love', offlineOutput.love, 16);
-            offlineOutput.terror = applySoftcap('sentinels', 'terror', offlineOutput.terror, 16);
+            offlineOutput.gold += adjacentNumbers.priestsTotal * 9;
+            if(cult.scribes.current >0){
+                vault.tome.pageCounter += cult.scribes.current * 36;//4 pages per tic
+                document.getElementById('pages').innerHTML = Math.floor(vault.tome.pageCounter);
+            }
+            if(cult.apprentices.current >0 && vault.tome.pageCounter >= (cult.apprentices.current * 9)){
+                vault.tome.pageCounter -= cult.apprentices.current * 9;
+                document.getElementById('pages').innerHTML = Math.floor(vault.tome.pageCounter);
+                numberChange("stats", "vision", (cult.apprentices.current *16 * 9), "green", "");
+            }
         }
     }
     numberChange('vault', 'love', offlineOutput.love, '#FF559D', 'red');
     numberChange('vault', 'terror', offlineOutput.terror, 'red', 'blue');
     numberChange('vault', 'gold', offlineOutput.gold, 'yellow', 'red');
-    eventBox("images/eventImages/opener.jpg", "Welcome Back", "As soon as West left, the Priests grew indolent, the Chanters voices' fell and the Sentinels relaxed. Without West, the Sacrarium darkened and the Gods slept. (While offline, West's stats do not change. Priests stop all activities and tithing ceases. Cultist output diminishes over 88 minutes to zero. The Gods do not feed and occult objects lie dormant.) ");
+    console.log(offlineOutput);
+    eventBox("images/meeple/west.jpg", "West Returns", "After West left, the Priests grew indolent, the Sacrarium darkened and the Gods slept once more. Only the cult remains active. (Offline time = " + Math.floor(timePassed/60000) + " minutes ~ 4x last session up to 88 min.)");
 }

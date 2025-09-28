@@ -3,7 +3,7 @@
 //top tabs
 function toggleMenu(){
 let menu = document.getElementById("menuBox");
-    if(menu.style.display === 'none'){
+    if(getComputedStyle(menu).display === 'none'){
         menu.style.display = 'flex';
     }else{
          menu.style.display = 'none';
@@ -23,7 +23,6 @@ function changeTab(temp){
             document.getElementById(tabName).style.backgroundColor = 'black'; // Active tab
         }else if( elementName !== 'altarRoom'){
             document.getElementById(tabName).style.backgroundColor = '#424242'; // Inactive tabs
-
         }
     }
     document.getElementById(temp).style.display = 'block';
@@ -42,15 +41,15 @@ function changeCraftBox(temp){
 //flash
 var flashingElements = {};
 function flash(div, startC, endColor){
-if (!flashingElements[div]) {
-    flashingElements[div] = true;
-    document.getElementById(div).style.color = startC;
-    function temp() {
-      document.getElementById(div).style.color = endColor;
-      flashingElements[div] = false;
-  }
-  setTimeout(temp, 500);
-  }
+    if (!flashingElements[div]) {
+        flashingElements[div] = true;
+        document.getElementById(div).style.color = startC;
+        function tempF() {
+            document.getElementById(div).style.color = endColor;
+            flashingElements[div] = false;
+        }
+        setTimeout(tempF, 500);
+    }
 }
 
 function numberChange(parent, stat, change, pColor, nColor) {
@@ -60,25 +59,26 @@ function numberChange(parent, stat, change, pColor, nColor) {
         //shard- health ratio
         if(stat === 'shards'){
             stats.health.max -= change;
+            document.getElementById("healthDesc").innerHTML= "Health will drift up or down toward West's base Health, currently: " + Math.floor(stats.health.max);
         }
     } else if (parent === 'cult') {
-        cult[stat].current += change;
+        cult[stat].current += Math.floor(change);
         document.getElementById(stat).innerHTML = cult[stat].current;
         //reset costs
-        if(stat === "faithful"){
+        if(stat === "faithful" && change>0){
             cult.faithful.purchased++;//grid
         }
-        actions.preach.cost = Math.max((cult.faithful.current * actions.preach.multiplier) + cult.faithful.purchased, 8);
+        actions.preach.cost = Math.floor(Math.max((((Math.pow(cult.faithful.current, 1.4) * actions.preach.multiplier) + (2 * cult.faithful.purchased) ) * actions.preach.shardDiscount), 8));
         document.getElementById('preachCost').innerHTML = actions.preach.cost;
         document.getElementById('preachWrapCost').innerHTML = actions.preach.cost;
-        loveCrafts.convertChanter.cost =  Math.max(cult.chanters.current * loveCrafts.convertChanter.multiplier, 24);
+        loveCrafts.convertChanter.cost =  Math.floor(Math.max(cult.chanters.current * loveCrafts.convertChanter.costMultiplier * loveCrafts.convertChanter.shardDiscount, 24));
         document.getElementById('convertChanterCost').innerHTML =  loveCrafts.convertChanter.cost;
-        terrorCrafts.convertsentinel.cost = Math.max(cult.sentinels.current * terrorCrafts.convertsentinel.multiplier, 48);
-        document.getElementById('convertsentinelCost').innerHTML =  terrorCrafts.convertsentinel.cost;
+        terrorCrafts.convertSentinel.cost = Math.floor(Math.max(cult.sentinels.current * terrorCrafts.convertSentinel.costMultiplier *  terrorCrafts.convertSentinel.shardDiscount, 48));
+        document.getElementById('convertSentinelCost').innerHTML =  terrorCrafts.convertSentinel.cost; 
         //adding capacities
-        document.getElementById('faithfulDesc').innerHTML = cult.faithful.description + "Faithful Love and Terror Capacity: " + (cult.faithful.current + cult.hybrids.current) * 16;
-        document.getElementById('chantersDesc').innerHTML = cult.chanters.description + "Chanter Love Capacity: " + (cult.chanters.current * (cult.faithful.current + cult.hybrids.current)) * 16;
-        document.getElementById('sentinelsDesc').innerHTML = cult.sentinels.description + "Sentinels Terror Capacity: " + (cult.sentinels.current * (cult.faithful.current + cult.hybrids.current)) * 16;
+        document.getElementById('faithfulDesc').innerHTML = cult.faithful.description + "Faithful Love and Terror Capacity: " + Math.ceil(Math.pow(cult.faithful.current + cult.hybrids.current + cult.brined.current, cult.faithful.capMultiplier) + 88);
+        document.getElementById('chantersDesc').innerHTML = cult.chanters.description + "Chanter Love Capacity: " + (cult.chanters.current * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.chanters.capMultiplier;
+        document.getElementById('sentinelsDesc').innerHTML = cult.sentinels.description + "Sentinels Terror Capacity: " + ((cult.sentinels.current + cult.hybrids.current) * (cult.faithful.current + cult.hybrids.current + cult.brined.current)) * cult.sentinels.capMultiplier;
 
         // Call the new peg logic function
         numberChangePeg(stat, change);
@@ -98,6 +98,7 @@ function numberChange(parent, stat, change, pColor, nColor) {
     if(stat === "madness"){
     checkMadnessValue();
     }
+    checkAchievements(parent, stat);
 }
 
 function numberChangePeg(stat, change) {//check in numberChange for peg counts
@@ -139,7 +140,7 @@ var chanting = new Audio("audio/chant.mp3");
 var studying = new Audio("audio/studying.mp3");
 var preaching = new Audio("audio/preaching.mp3");
 var dreaming = new Audio("audio/dreaming.mp3");
-
+var bell = new Audio("audio/bell.mp3");
  function plays(x){
          if(mute === false){
          if(x === chanting || x === dreaming){
@@ -246,7 +247,8 @@ function unlock(button, parent){
         ['goldCrafts', goldCrafts],
         ['fleshCrafts', fleshCrafts],
         ['tomeCrafts', tomeCrafts],
-        ['ichorCrafts', ichorCrafts]
+        ['ichorCrafts', ichorCrafts],
+        ['tyogCrafts', tyogCrafts]
     ];
     // Convert to an object for quick lookup
     const craftMap = Object.fromEntries(craftPairs);
@@ -255,7 +257,7 @@ function unlock(button, parent){
             stats.vision.current -= actions[button]['unlockCost']; 
             document.getElementById('vision').innerHTML= Math.floor(stats.vision.current);
             flashFade(button + 'Lock');
-            setTimeout(() => {document.getElementById(button + 'Wrap').style.display='block';}, 1500);
+            setTimeout(() => {document.getElementById(button + 'Wrap').style.display='block';}, 800);
             if(actions[button]['comment']){
                 comment(actions[button]['comment']);
             }
@@ -263,13 +265,25 @@ function unlock(button, parent){
         }
     }else{
     const craftGroup = craftMap[parent]; // Lookup the object using the string
-        if (craftGroup && stats.vision.current >= craftGroup[button]['unlockCost']) {
-            numberChange('stats', 'vision', -craftGroup[button]['unlockCost'], '', 'red' );
-            
+    let pagesCost = craftGroup[button].pagesCost;
+        if (craftGroup && stats.vision.current >= craftGroup[button].unlockCost) {
+            if(pagesCost && vault.tome.pageCounter[0] < pagesCost){
+                return;
+            }else if (pagesCost){
+                 vault.tome.pageCounter[0]-=pagesCost;
+                 document.getElementById("pages").innerHTML = vault.tome.pageCounter[0];
+            }
+            numberChange('stats', 'vision', -craftGroup[button].unlockCost, '', 'red' );
             flashFade(button + 'Lock');
-            setTimeout(() => {
-                document.getElementById(button + 'Wrap').style.display = 'block';
-            }, 1500);
+            if(craftGroup[button].permanent===true){
+                setTimeout(() => {
+                    document.getElementById(button + 'Wrap').style.display = 'block';
+                }, 800);
+            }else{
+                setTimeout(() => {
+                    document.getElementById(button + 'OneOff').style.display = 'block';
+                }, 800);
+            }
             craftGroup[button].purchased = true;
             //extras
             if(button ===  'convertChanter'){
@@ -278,14 +292,20 @@ function unlock(button, parent){
                 document.getElementById('chantersPeg').style.display= 'block';
                 comment('What a lovely voice.', 'lightgreen', 'ch');
                 }
-            if(button === 'convertsentinel'){
+            if(button === 'convertSentinel'){
                 cult.sentinels.unlocked = true;
-                comment('Perhaps you could save the leftovers for a soup?', 'lightred', 'sent');
+                comment('Perhaps you could save the leftovers for a soup?', 'lightcoral', 'sent');
                 document.getElementById('sentinelsWrap').style.display= 'block';
                 document.getElementById('sentinelsPeg').style.display= 'block';
             }
             if(button === 'tithe'){
                     document.getElementById('titheToggle').style.display='block';
+            }
+            if(button === 'reanimate'){
+                cult.reanimated.unlocked = true;
+                comment('Perhaps you could save the leftovers for a soup?', 'lightred', 'sent');
+                document.getElementById('reanimatedWrap').style.display= 'block';
+                document.getElementById('reanimatedPeg').style.display= 'block';
             }
         }
     }
@@ -293,43 +313,30 @@ function unlock(button, parent){
 
 function flashFade(div){
     div = document.getElementById(div);
+    if (div.style.pointerEvents === 'none') {//might work to prevent quick clicks executing the code multiple times.
+        return;
+    }
     div.style.pointerEvents='none';
-        // Apply CSS animations to the provided div
     div.style.backgroundImage = 'none';
-    div.style.animation = "flash 0.5s alternate 2";
-    
-    // After the flash animation, add a fade-out animation
+    div.style.animation = "flash 0.8s alternate 2"; // 800ms total
     setTimeout(() => {
-        div.style.animation = "fade-out 1s";
-        
-        // After the fade-out animation, hide the div
-        setTimeout(() => {
-            div.style.display = "none";
-        }, 500); // Adjust the time according to your preference
-    }, 1000); // Adjust the time according to your preference
+        div.style.display = "none";
+    }, 800);
 }
-
+function buttonGlow(button){
+    button = document.getElementById(button);
+    button.style.animation = 'buttonPress 0.8s ease-out';
+    button.style.boxShadow = '0 0 0 0 #3A01DF inset';
+    setTimeout(() => {
+        button.style.animation = '';
+        button.style.boxShadow = '';
+    }, 800);
+}
  
 // Prevent default behavior when interacting with the dropdown button
 function preventButtonDrag(e) {
     e.preventDefault();
 }
-//invisible scroll on commentary
-
-function addMouseWheelListener(element) {
-  element.addEventListener("wheel", function(event){ scrollDiv(event, element)}, { passive: false });
-}
-
-function removeMouseWheelListener(element) {
-  element.removeEventListener("wheel", scrollDiv);
-}
-
-function scrollDiv(event, element) {
-  event.preventDefault();
-  const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-  element.scrollTop -= delta * 8; // Adjust the scrolling speed as needed
-}
-
 
 var shakeAnimationId;
 function shakeBody() {

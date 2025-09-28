@@ -47,9 +47,10 @@
                 transform: translateX(-50%);
                 }   
         #visionBox{
+            display: block;
             background-color: #00008b;
         }
-        .visionText{
+        #visionText{
             font-size: 1.5dvw;
             line-height: 4dvh;
             font-family: "Papyrus", "Arial", sans-serif;
@@ -57,15 +58,16 @@
         #charmBox{
             background-color: #6e0a1e;
         }
-        .charmText{
+        #charmText{
             font-size: 1.5dvw;
             line-height: 4dvh;
             font-family: "Papyrus", "Arial", sans-serif;
         }
         #healthBox{
+            display: block;
             background-color: #004000;
         }
-        .healthText{
+        #healthText{
             font-size: 1.5dvw;
             line-height: 4dvh;
             font-family: "Papyrus", "Arial", sans-serif;
@@ -73,7 +75,7 @@
         #radianceBox{
             background-color:#105954;
         }
-        .radianceText{
+        #radianceText{
             font-size: 1.5dvw;
             line-height: 4dvh;
             font-family: "Papyrus", "Arial", sans-serif;
@@ -96,13 +98,12 @@
         #madnessBox.dragging {
             cursor: grabbing;
         }
-        .madnessText{
+        #madnessText{
             margin-top: 0.5dvh;
             font-size: 3dvh;
             line-height: 3dvh;
             font-family: "Papyrus", "Arial", sans-serif;
         }
-
         #gear{
             position: absolute;
             cursor: pointer;
@@ -116,9 +117,8 @@
         margin-top: 4dvh;
         width: 12dvw;
         height: 12dvh;
+        flex-wrap: wrap; 
         display: none;
-        gap: 0.5dvw; 
-        flex-wrap: wrap;
     }
  .menuItem{
     clear: both;
@@ -172,11 +172,10 @@
         .tabs{
             display: none;
             padding-top: 0.25dvh;
-            float: left;
             min-width: 15dvw;
             min-height: 4dvh;
             font-size: 1.5dvw;
-            line-height: 1.5dvw;
+            line-height: 4dvh;
             text-align: center;
             border: 0.2dvw solid white;
             border-radius: 5px 0 0 0;
@@ -185,5 +184,6 @@
             z-index: 30;
         }
         #westTab{
+            display: block;
             background-color: black;
         }

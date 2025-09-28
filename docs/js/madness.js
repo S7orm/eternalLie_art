@@ -32,13 +32,13 @@ let initialTop = 11;
 let countTo1 = 0;
 // Function to update the position of the madnessBox
 function updateMadnessBoxPosition(moveAmountX, moveAmountY) {
-    let madWidth = madnessBox.style.width;
-    let madHeight = madnessBox.style.height;
+    let madWidth = parseFloat(madnessBox.style.width) || 8;
+    let madHeight = parseFloat(madnessBox.style.height) || 7;
     let currentRect = madnessBox.getBoundingClientRect();
     let currentLeftdvw = (currentRect.left / window.innerWidth) * 100;
     let currentTopdvh = (currentRect.top / window.innerHeight) * 100;
-    const maxLeft = 100 - parseFloat(madWidth);
-    const maxTop = 100 - parseFloat(madHeight);
+    const maxLeft = 92 - madWidth;
+    const maxTop = 93 - madHeight;
     const updatedLeftdvw = currentLeftdvw + moveAmountX;
     const updatedTopdvh = currentTopdvh + moveAmountY;
     const newLeftdvw = Math.min(Math.max(updatedLeftdvw, 0), maxLeft);
@@ -78,7 +78,7 @@ function checkMadnessValue() {
         'Comic Sans MS, cursive'
     ];
     if(madDelta< 0){ // If the madness goes up by 1, generate positive and negative random movement
-        if (stats.madness.current > (stats.madness.madCap/2)) {
+        if (stats.madness.current > (stats.madness.madCap* 0.66)) {
             moveAmountX = (Math.random() * 2 - 1) *  (stats.madness.current * 0.08) * (88/stats.madness.madCap);
             moveAmountY = (Math.random() * 2 - 1) *  (stats.madness.current * 0.08) * (88/stats.madness.madCap);
             updateMadnessBoxPosition(moveAmountX, moveAmountY);                            
@@ -86,18 +86,25 @@ function checkMadnessValue() {
             let madWidth = ((stats.madness.current /6 ) * (88/stats.madness.madCap) )+ 'dvw';
             document.getElementById('madnessBox').style.width=madWidth;
             let madHeight = ((stats.madness.current /6) * (88/stats.madness.madCap)) + 'dvh';
-            document.getElementById('madnessBox').style.height=madHeight;           
-            const madnessTextElements = document.querySelectorAll('.madnessText');
-            madnessTextElements.forEach(element => {
-                const currentFont = getComputedStyle(element).fontFamily; // Get the current font
-                let randomFont;
-                    do {
-                    randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                    } while (randomFont === currentFont); // Keep generating until a different font is selected
-                element.style.fontFamily = randomFont;
-                element.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
-                element.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
-            });
+            document.getElementById('madnessBox').style.height=madHeight;   
+            //font and text size
+            let madText = document.getElementById("madnessText");
+            const currentFont = getComputedStyle(madText).fontFamily; // Get the current font
+            let randomFont;
+            do{
+                randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                } while (randomFont === currentFont); // Keep generating until a different font is selected
+            let madNum = document.getElementById("madness");
+            madText.style.fontFamily = randomFont;
+            madText.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madNum.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madText.style.lineHeight = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madNum.style.lineHeight = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madText.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
+            madNum.style.fontFamily = randomFont;
+            madNum.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madNum.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
+
         }
             document.getElementById("madnessBox").style.backgroundColor="#8000FF"; 
             setTimeout(() => { document.getElementById("madnessBox").style.backgroundColor="#240048"; }, 100); //color flash
@@ -130,20 +137,24 @@ function checkMadnessValue() {
             document.getElementById('madnessBox').style.width = 8 + 'dvw';
             document.getElementById('madnessBox').style.height = 7 + 'dvh';
         }
-        const madnessTextElements = document.querySelectorAll('.madnessText');
-        madnessTextElements.forEach(element => {
-            if(parseFloat(document.getElementById('madness').style.fontSize) > 3){
-                const madnessTextElements = document.querySelectorAll('.madnessText');
-                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                element.style.fontFamily = randomFont;
-                element.style.fontSize =((stats.madness.current/20) * (88/stats.madness.madCap) )  + 'dvh';
-                element.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
-            }else{
-            element.style.fontFamily =  "Papyrus", "Arial", 'sans-serif';
-            element.style.lineHeight = 3 + 'dvh';
-            element.style.fontSize  = 3  + 'dvh';
-            }
-        });
+        let madText = document.getElementById("madnessText");
+        let madNum = document.getElementById("madness");
+        if(parseFloat(document.getElementById('madness').style.fontSize) > 3){
+            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            madText.style.fontFamily = randomFont;
+            madText.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madText.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
+            madNum.style.fontFamily = randomFont;
+            madNum.style.fontSize = ((stats.madness.current/20) * (88/stats.madness.madCap))  + 'dvh';
+            madNum.style.lineHeight = ((stats.madness.current/20 + 1) * (88/stats.madness.madCap)) + 'dvh';
+        }else{
+            madText.style.fontFamily =  "Papyrus", "Arial", 'sans-serif';
+            madText.style.fontSize = 3 + 'dvh';
+            madText.style.lineHeight = 3 + 'dvh';
+            madNum.style.fontFamily = "Papyrus", "Arial", 'sans-serif';
+            madNum.style.fontSize = 3 + 'dvh';
+            madNum.style.lineHeight = 3 + 'dvh';
+        }
     }                                             
     // Update the last checked value
     lastCheckedValue = currentValue;
@@ -203,6 +214,7 @@ document.getElementById("divinityTab").classList.add("disable-events");
 document.getElementById("studyWrap").classList.add("disable-events");
 document.getElementById("chantWrap").classList.add("disable-events");
 document.getElementById("preachWrap").classList.add("disable-events");
+document.getElementById("fictionWrap").classList.add("disable-events");
 madBools[1] = true;
 }
 function madUnlock(){
@@ -214,6 +226,7 @@ function madUnlock(){
     document.getElementById("studyWrap").classList.remove("disable-events");
     document.getElementById("chantWrap").classList.remove("disable-events");
     document.getElementById("preachWrap").classList.remove("disable-events");
+    document.getElementById("fictionWrap").classList.remove("disable-events");
     madBools[1] = false;
 }
 
@@ -224,15 +237,14 @@ function madCheck(){
         madCheckCounter[0] += 1;
     }else{
         madCheckCounter[0] = 0;
-        if( madBools[1]=== false){//bool 1 for 1/2
+    
+        if( madBools[1]=== false){//bool 1 for 2/3
             if(stats.madness.current >= (stats.madness.madCap * 2/3) && madBools[0] === false){
                 madBools[0] = true;
-                comment('Do not listen to the fools who say you must keep your Madness in check. (high Madness increases Madness and Terror)', 'pink');
+                comment('Do not listen to the fools who say you must keep your Madness in check. (high Madness causes Terror in the Faithful )', 'pink');
             }else if(stats.madness.current >= (stats.madness.madCap * 2/3) && madBools[0] === true){
-                    let tempMad = (stats.madness.current  - (2/3) * stats.madness.madCap) * 0.12;// scaling of madness to current madness
-                    let tempTerror = Math.min(1, tempMad * cult.faithful.current / 4);
-                    numberChange("stats", "madness", tempMad, "red");
-                    numberChange("vault", "terror", tempTerror, "red");
+                let tempTerror = Math.sqrt(stats.madness.current * cult.faithful.current) / 8;//supposed to scale from 1-400
+                numberChange("vault", "terror", tempTerror, "red");
             }else if(stats.madness.current < (stats.madness.madCap /2) && madBools[0] === true){
                 madBools[0] = false;
             }

@@ -55,7 +55,6 @@
     border: 0.1dvw groove white;
     position: absolute;
     bottom: 0;
-    float: left;
     display: flex;
     justify-content: center; /* Centers horizontally */
     align-items: center;     /* Centers vertically */
@@ -176,6 +175,9 @@
 #faithfulPeg{
     display: block;
 }
+#westPeg{
+    display: block;
+}
 .peg-image {
     height: 80%;
     width: 80%;
@@ -209,7 +211,13 @@ width: 19%;
   grid-template-rows: repeat(4, 15dvh); /* Adjust number of rows */
   width:66dvh;
 }
-
+.draggingClone{
+width: 4.8dvw;
+height:4.8dvw;
+position: absolute;
+z-index: 1000;
+opacity: 0.8;
+}
 .hole {
   border:  0.1dvh groove darkslategrey;
   width: 15dvh;
@@ -221,7 +229,7 @@ width: 19%;
 }
 .hole.blocked {
     background-color: darkslategrey;
-    opacity: 100; /* Shows blocked holes as black */
+    opacity: 1; /* Shows blocked holes as black */
     cursor: not-allowed;
 }
 .pegInHole{
