@@ -467,6 +467,7 @@ document.addEventListener("DOMContentLoaded", function () {  //start of page aft
     eventListeners1();
     eventListeners2();
     window.console.log("loading...");
+    console.log(domUnlocks.versionNumber, permanentChanges.resetting);
     if (!domUnlocks.versionNumber || permanentChanges.resetting===false) {
         window.console.log("V " +domUnlocks.versionNumber );
         loadFromLocalStorage();
@@ -485,6 +486,8 @@ document.addEventListener("DOMContentLoaded", function () {  //start of page aft
     }else if(permanentChanges.lastReset==="devourer"){
         console.log("devoured?");
         darkDevourerPostReset();
+    }else{
+        console.log("why!!!!");
     }
     permanentChanges.resetting=false;
     window.addEventListener("beforeunload", saveToLocalStorage);  
