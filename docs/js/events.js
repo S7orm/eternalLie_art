@@ -1,5 +1,6 @@
 function test(){
-      nyarReset();
+      domUnlocks.versionNumber=0.2;
+      console.log(domUnlocks);
 }
 function eventBox(imageSource, title, text){
     let box = document.getElementById('eventBox');
@@ -467,9 +468,14 @@ document.addEventListener("DOMContentLoaded", function () {  //start of page aft
     eventListeners1();
     eventListeners2();
     window.console.log("loading...");
-    window.console.log(domUnlocks.versionNumber, permanentChanges.resetting);
-    if (!domUnlocks.versionNumber || permanentChanges.resetting===false) {
-        window.console.log("V " +domUnlocks.versionNumber );
+    let storedDomUnlocks = localStorage.getItem("savedDomUnlocks"); 
+    if (storedDomUnlocks) {
+        domUnlocks = JSON.parse(storedDomUnlocks); //replace dom
+    }
+    if(!domUnlocks.versionNumber || domUnlocks.versionNumber < currentVersionNumber){//old versions keep the essential bits
+        loadFromLocalStorage();
+        window.console.log('version updated');
+    }else if(permanentChanges.resetting===false){
         loadFromLocalStorage();
         window.console.log('loaded');
         offlineProgress();
@@ -486,8 +492,6 @@ document.addEventListener("DOMContentLoaded", function () {  //start of page aft
     }else if(permanentChanges.lastReset==="devourer"){
         console.log("devoured?");
         darkDevourerPostReset();
-    }else{
-        console.log("why!!!!");
     }
     permanentChanges.resetting=false;
     window.addEventListener("beforeunload", saveToLocalStorage);  

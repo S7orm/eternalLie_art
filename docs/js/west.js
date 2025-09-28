@@ -1567,7 +1567,7 @@ function west(){
             "<button class='menuItem' id='save'>Save</button>" +
             "<button class='menuItem' id='load'>Load</button>" +
             "<button class='menuItem' id='reset'>Reset</button>";
-           // "<button class='menuItem' id='test'>Test</button>";
+          //"<button class='menuItem' id='test'>Test</button>";
     document.getElementById('west').innerHTML =    
             "<div id='actionBox' >" +
             "</div>" +
