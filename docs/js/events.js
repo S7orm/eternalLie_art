@@ -467,25 +467,12 @@ document.addEventListener("DOMContentLoaded", function () {  //start of page aft
     eventListeners1();
     eventListeners2();
     window.console.log("loading...");
-    if(permanentChanges.resetting===false){
-        let savedStats = localStorage.getItem("savedStats");
-        if (savedStats) {
-            window.console.log("V " +domUnlocks.versionNumber );
-            window.console.log("save found");
-            loadFromLocalStorage();
-            window.console.log('loaded');
-            //after load on return to page run offlineProgress
-            if(domUnlocks.versionNumber !== null && domUnlocks.versionNumber === currentVersionNumber){
-                window.console.log("Version current, loading offline");
-                offlineProgress();
-                totalTime.timeSession=0; //reset session time after offline
-            }else{
-            domUnlocks.versionNumber = 0.55;
-            window.console.log("updated version to " + domUnlocks.versionNumber );
-            }
-        }else{
-            eventBox("images/eventImages/opener.jpg", "A beginning...", "Waking as if out of a dream, dream West stands alone in a darkened alley, hands feverishly clutching an ancient manuscript. A soothing voice in his mind calmly hints at future greatness.");
-        }
+    if (!domUnlocks.versionNumber || permanentChanges.resetting===false) {
+        window.console.log("V " +domUnlocks.versionNumber );
+        loadFromLocalStorage();
+        window.console.log('loaded');
+        offlineProgress();
+        totalTime.timeSession=0; //reset session time after offline
     }else if (permanentChanges.lastReset === "restart") {
         window.console.log('restartRun');
         basePostReset();
