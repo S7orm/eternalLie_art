@@ -87,7 +87,7 @@ function loadFromLocalStorage() {
             }
         }
     }
-if(domUnlocks.versionNumber === null || domUnlocks.versionNumber < currentVersionNumber){//old versions keep the essential bits
+if(!domUnlocks.versionNumber || domUnlocks.versionNumber < currentVersionNumber){//old versions keep the essential bits
         let savedPermanentChanges = localStorage.getItem("savedPermanentChanges");
         permanentChanges = JSON.parse(savedPermanentChanges); 
         if(permanentChanges.immortality === true){ 
