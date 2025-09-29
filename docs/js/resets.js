@@ -138,9 +138,11 @@ function basePostReset() {
         stats.shards.current = statsTemp.shards.current;
     }
     // Shards UI setup
+    if(permanentChanges.totalShards>0){
     stats.shards.unlocked = true;
     document.getElementById('shards').innerHTML = stats.shards.current;
     document.getElementById('shardsBox').style.display = 'block';
+    }
     // Health adjustments
     stats.health.max -= stats.shards.current;
     document.getElementById("healthDesc").innerHTML = 
