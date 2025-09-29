@@ -142,7 +142,11 @@ function basePostReset() {
     stats.shards.unlocked = true;
     document.getElementById('shards').innerHTML = stats.shards.current;
     document.getElementById('shardsBox').style.display = 'block';
-    }
+    // Divinity tab unlock
+    domUnlocks.divinity = true;
+    document.getElementById('divinityTab').style.display = 'block';
+    // Load shard purchases
+    shardsBoughtLoad();
     // Health adjustments
     stats.health.max -= stats.shards.current;
     document.getElementById("healthDesc").innerHTML = 
@@ -150,19 +154,17 @@ function basePostReset() {
         Math.floor(stats.health.max);
     stats.health.current -= stats.shards.current;
     document.getElementById('health').innerHTML = stats.health.current;
-    // Divinity tab unlock
-    domUnlocks.divinity = true;
-    document.getElementById('divinityTab').style.display = 'block';
-    // Load shard purchases
-    shardsBoughtLoad();
+    comment(stats.shards.current + " Unspent Shards depleting West's maximum health.", 'red');
+    }
     // Time reload
     let storedTime = localStorage.getItem("savedTime");
     totalTime = JSON.parse(storedTime);
     // Permanent madness reload
     let savedPermanentMadness = localStorage.getItem("savedPermanentMadness");
     permanentMadness = JSON.parse(savedPermanentMadness);
-    // Common shards comment
-    comment(stats.shards.current + " Unspent Shards depleting West's maximum health.", 'red');
+    if(permanentChanges.lastReset=== "restart" && permanentMadness.level>0 ){
+        comment("Permanent Madness takes its toll, Total: " + permanentMadness.level + ")", '#9A2EFE');
+    }
 }
                                                                                
 function nyarPostReset() {
