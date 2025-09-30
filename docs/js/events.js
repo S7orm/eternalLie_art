@@ -57,7 +57,7 @@ function openEventBox(){
 	//=========================================
 function eventListeners1(){
   //localStorage.clear();
-//document.addEventListener("contextmenu", (event) => event.preventDefault());// disable rightclick from tablets add back in for release
+document.addEventListener("contextmenu", (event) => event.preventDefault());// disable rightclick from tablets add back in for release
     // scroll listeners
     function setupScrollActions(element) {
       let lastY = 0, velocity = 0, isDown = false;
