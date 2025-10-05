@@ -168,8 +168,9 @@ function generateGrid() {
         }
     }
 }
-
-
+function altarRoomImg(){
+    document.getElementById("altarRoom").style.backgroundImage = "url('images/rooms/" + gridChosen + ".jpg')";
+}
                                                         //=========================================
                                                                                                // The Pegs
                                                         //=========================================
@@ -250,6 +251,7 @@ function initializeRoom() {
     const unplacedPegs = updatePegsOnGridChange(); // Adjust pegs for new grid %%
     initializeGridState();
     generateGrid();
+    altarRoomImg();
     // CHANGE: Place default pegs after generating grid
     placeDefaultPegs();
     updateGridConfig();
@@ -548,6 +550,7 @@ function updateGridConfig() {
                                                         //=========================================
 function replaceGrid(newGridConfig) { // %% New function to replace the grid
     gridChosen = newGridConfig;
+    altarRoomImg();
     const grid = document.getElementById("activeAltarGrid"); // %% Get the active grid element
     // Store current pegs before clearing the grid
     const existingPegs = {}; // %% Object to hold current pegs

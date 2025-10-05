@@ -570,7 +570,7 @@ if(!domUnlocks.versionNumber || domUnlocks.versionNumber < currentVersionNumber)
         altarOptionClick(currentAltar + "Wrap");
         toggleAltarOptions();
     }
-
+    altarRoomImg();
     // Only run adjacency check if we restored anything
     if (savedGridChosen || storedAltar) {
         checkAdjacencyAndApplyBonuses();
