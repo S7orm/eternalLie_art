@@ -129,30 +129,17 @@ let actions = {
 	//                      West Action Functions
 	//=========================================
 function study(){
-  plays(studying);
-  var element = document.getElementById("studyProgress");   
-  var width = 1;
-  var identity = setInterval(study, 5);
+  plays(studying); 
      let temp =  document.getElementById('studyWrap');
      temp.classList.add("studyPulse");
      let tempTimer = 444;
      setTimeout(()=>{temp.classList.remove("studyPulse");}, tempTimer);
-  function study() {
-    if (width >= 100) {
-        let madChance = Math.random();   
-        if(madChance <= actions.study.madnessChance){
-             numberChange('stats', 'madness', actions.study.level , '#FE2EF7', 'blue');  
-            }
-         numberChange('stats', 'vision', actions.study.level , '#40E0D0', 'red'); 
-         numberChange('stats', 'health',  -1 , 'blue', 'red');  
-        clearInterval(identity); 
-        width = 0; 
-        element.style.width = width + '%'; 
-        } else {
-      width++; 
-      element.style.width = width + '%'; 
-      }
-  }
+    let madChance = Math.random();   
+    if(madChance <= actions.study.madnessChance){
+         numberChange('stats', 'madness', actions.study.level , '#FE2EF7', 'blue');  
+    }
+     numberChange('stats', 'vision', actions.study.level , '#40E0D0', 'red'); 
+     numberChange('stats', 'health',  -1 , 'blue', 'red');  
 }
 
 function chant(){
