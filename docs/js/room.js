@@ -712,6 +712,7 @@ function altarOptionClick(optionChosen) {
     optionChosen = optionChosen.slice(0, -4);
      let temp = altars[optionChosen].string;
     document.getElementById("currentAltarDiv").innerHTML = temp;
+    document.getElementById("altarImage").src = "images/altar/" + optionChosen + ".jpg";
     Object.values(altars).forEach(child => {
     child.current = false;
     });
